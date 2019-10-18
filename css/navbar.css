@@ -1,0 +1,77 @@
+/**
+* The main navbar style
+*/
+
+.navbar {
+		width: 100%;
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		background-color: #e5e4e4;
+		border-top: 1px solid #c1c0c0;
+		border-bottom: 1px solid #c1c0c0;
+}
+
+.nav-link {
+		font-size:15px;
+		font-family: 'Jura', sans-serif;
+		padding: 3px;
+}
+
+.dropdown-content a:hover,
+.navbar-row a:hover {
+		color: #fff;
+		background-color: #333;
+		border-radius: 3px;
+		padding: 3px;
+}
+
+.nav-item {
+		list-style: none;
+}
+
+.navbar-row {
+		width: 100%;
+		font-size: 1.5em;
+		font-family: 'Jura', sans-serif;
+		margin-left: 10px;
+}
+
+.navbar-nav {
+		display: flex;
+}
+
+.dropbtn {
+	  background-color: inherit;
+	  border: none;
+}
+
+.dropdown {
+	  position: relative;
+	  display: inline-block;
+}
+
+.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f1f1f1;
+		min-width: 100px;
+		padding: 3px;
+		border-left: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+		box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+}
+
+
+.dropdown-content a {
+	  color: black;
+	  padding: 3px;
+	  text-decoration: none;
+	  display: block;
+}
+
+.dropdown:hover
+.dropdown-content {
+		display: block;
+}

@@ -1,0 +1,11 @@
+/**
+* The style loader for whole site. Add new styles below.
+*/
+@import "mainstyle.css";
+@import "navbar.css";
+@import "admin.css";
+@import "fonts.css";
+@import "todo.css";
+@import "sidebar.css";
+@import "../vendor/fontawesome-free/css/all.css";
+/* @import "../vendor/ckeditor5-build-classic/sample/css/sample.css"; */

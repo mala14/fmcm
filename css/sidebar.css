@@ -1,0 +1,12 @@
+/**
+* The sidebar style
+*/
+.sidebar {
+		width: 150px;
+		padding-left: 10px;
+}
+
+.side-lnk {
+		margin-bottom: 5px;
+		font-size: 1em;
+}
