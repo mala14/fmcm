@@ -20,7 +20,8 @@
           <div class="dropdown">
               <div class=" nav-link">Save</div>
                   <div class="dropdown-content nav-link">
-                      <tr><?= $todo->addCase() ?></tr>
+                      <tr><?= $todo->closeCase() ?></tr>
+                      <tr><?= $todo->openCase() ?></tr>
                   </div>
           </div>
         </td>

@@ -168,13 +168,12 @@ class Todo
             $stmt->execute([$contact]);
             $row = $stmt->fetch();
             $html .= "
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Title: </div><div class='usrInfo'>{$row['con_fname']} {$row['con_lname']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Name: </div><div class='usrInfo'>{$row['con_fname']} {$row['con_lname']}</div></div></div>
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Title: </div><div class='usrInfo'>{$row['con_jtitle']}</div></div></div>
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><div class='usrInfo'>{$row['con_phone']}</div></div></div>
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='usrInfo'>{$row['con_email']}</div></div></div>
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Office: </div><div class='usrInfo'>{$row['con_office']}</div></div></div>
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><div class='usrInfo'>{$row['con_address']}</div></div></div>
-                {$this->assignCaseEngineer()}
                 ";
         }
         return $html;
@@ -404,18 +403,18 @@ class Todo
     public function assignCaseEngineer()
     {
         $html = null;
-
+        $error = null;
         $sql = $this->conn->prepare("SELECT fname, lname, uname FROM fmcm_users");
         $sql->execute();
         $res = $sql->fetchAll();
         if (isset($_POST['updateCaseInfo'])) {
-          if (isset($_POST['assigned'])) {
-              $engineer = $_POST['assigned'];
-              $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
-              $sql->execute([$engineer, $this->getId()]);
-              header('Location: ' . $_SERVER['REQUEST_URI']);
-              exit;
-          }
+            if (isset($_POST['assigned'])) {
+                $engineer = $_POST['assigned'];
+                $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
+                $sql->execute([$engineer, $this->getId()]);
+                header('Location: ' . $_SERVER['REQUEST_URI']);
+                exit;
+            }
         }
 
         $html .= "
@@ -425,7 +424,6 @@ class Todo
                 <select name='assigned'>
                     <option>{$this->getAssigned()}</option>
                     <option></option>
-
         ";
         foreach ($res as $row) {
             $html .= "
@@ -435,8 +433,9 @@ class Todo
         $html .= "
                 </select>
             </div></div></div></div>
-            <input type='submit' class='right' name='updateCaseInfo' value='Save'>
+            <input type='submit' class='right' name='updateCaseInfo' value='Assign'>
         </form>
+        {$error}
     ";
         return $html;
         $pdo = null;
