@@ -18,7 +18,7 @@
         </td>
         <td class="nav-item">
           <div class="dropdown">
-              <div class=" nav-link">Save</div>
+              <div class=" nav-link">Case</div>
                   <div class="dropdown-content nav-link">
                       <tr><?= $todo->closeCase() ?></tr>
                       <tr><?= $todo->openCase() ?></tr>

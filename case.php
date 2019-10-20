@@ -13,8 +13,8 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
-        <?= $todo->getCaseInfo() ?>
-        <?= $todo->assignCaseEngineer() ?>
+          <?= $todo->getCaseInfo() ?>
+          <?= $todo->assignCaseEngineer() ?>
     </div>
     <div class="caseInfo">
         <?= $todo->updateCase() ?>
