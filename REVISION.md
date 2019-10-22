@@ -2,6 +2,11 @@ revision history
 
 ===================
 
+(2019-10-22)  
+
+Design changes in admin page and at few case related divs.  
+
+-------------------
 
 (2019-10-18)  
 
