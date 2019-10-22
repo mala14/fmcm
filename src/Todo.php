@@ -433,7 +433,7 @@ class Todo
         $html .= "
                 </select>
             </div></div></div></div>
-            <input type='submit' class='right' name='updateCaseInfo' value='Assign'>
+            <input type='submit' class='right sumitBtn' name='updateCaseInfo' value='Assign'>
         </form>
         {$error}
     ";
@@ -472,6 +472,8 @@ class Todo
             if (!empty($commtext)) {
                 $sql = $this->conn->prepare("INSERT INTO fmcm_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
                 $sql->execute([$id, $commtext, $uname, $dateStamp]);
+                // header('Location: ' . $_SERVER['REQUEST_URI']);
+                // exit;
             } else {
                 $error = "You have to leave a comment";
             }

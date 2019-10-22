@@ -4,7 +4,7 @@
 */
 $servername = "localhost";
 $username = "db user";
-$password = "db password";
+$password = "db passWord";
 $database = "casemgmt";
 $charset = "utf8mb4";
 

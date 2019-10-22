@@ -10,12 +10,10 @@
 
 td a {
   display:inline-block;
-	/* background-color: #ccc; */
 }
 
 .searchUser {
     width: 100%;
-    /* background-color: #f7f7f7; */
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -37,7 +35,6 @@ td a {
 		border-top-left-radius: 5px;
 		padding: 10px;
 		background-color: #fff;
-    display: flex;
 }
 
 .newCaseTbl {
@@ -132,54 +129,46 @@ tfoot {
     text-align: left;
 }
 
-.caseComment {
-    margin-left: 10px;
-}
-
 .caseContactInfo {
 		float: left;
-		width: 25%;
-    overflow-wrap: break-word;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 .caseInfo {
 		float: left;
-		width: 80%;
-    overflow-wrap: break-word;
+		width: 75%;
 }
 
 
 .caseInfoTitle {
-    width: 27%;
+    width: 80px;
     background-color: #e9ecef;
     border-right: 1px solid #ccc;
     padding: 5px;
-    overflow-wrap: break-word;
+    display: flex;
 }
 
 .caseFormData {
-		/* width: 30%; */
+		margin-right: 10px;
 }
 
 .formdata {
     display: flex;
     border: 1px solid #ccc;
-    width: 100%;
+    width: 430px;
     margin-bottom: 5px;
 }
 
 .usrInfo {
     padding: 5px;
-    /* border: none !important; */
-    overflow-wrap: break-word;
     width: 70%;
 }
 
 .searchUsrInfo {
     padding: 5px;
     border: none !important;
-    overflow-wrap: break-word;
-    width: 63%;
+    width: 100%;
 }
 
 .conInfo {
@@ -198,15 +187,14 @@ tfoot {
     width: 70%;
     border: 1px solid #ccc;
     margin-bottom: 5px;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
 }
 
 .caseUpdateTitle {
-    width: 10%;
+    width: 80px;
     background-color: #e9ecef;
     border-right: 1px solid #ccc;
     padding: 3px;
-    overflow-wrap: break-word;
 }
 
 .setCase {
@@ -215,7 +203,7 @@ tfoot {
 
 .updatestamp {
     background-color: #f6f6f8;
-    max-width: 10%;
+    max-width: 90px;
     border-right: 1px solid #ccc;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -290,17 +278,22 @@ tfoot {
     appearance: none;
     outline: 0;
     padding: 2px;
-    width: 100%;
+    width: 338px;
     height: 27px;
     border: 0;
 }
 
-.caseStatus {
-    width: 100px;
+.sumitBtn {
+    position: relative;
+    right: 10px;
+}
+
+.assignSubm {
+    width: 420px;
+    margin-bottom: 5px;
 }
 
 .selectInfo {
-    overflow-wrap: break-word;
     width: 70%;
 }
 

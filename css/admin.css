@@ -46,12 +46,33 @@
 		display: block;
 }
 
-.admEditUser {
+.editUserField {
+		height: 100%;
+}
+
+.editUserField select {
+		width: 340px;
+		height: 27px;
+		border: none;
+}
+
+.editUserField input[type="text"] {
+		padding-left: 5px;
+		height: 27px;
+		width: 340px;
+		border: none;
+}
+
+/* .admEditUser {
 		float: left;
 		display: inline-flex;
     overflow-wrap: break-word;
 		display: block;
-}
+} */
+
+/* .addUtbl {
+		display: flex;
+} */
 
 #admLnk a{
 	color: #E7E3B2;
@@ -96,9 +117,9 @@
 #editUs{
 	float:left;
 }
-#passwd{
+/* #passwd{
 	margin: 3px;
-}
+} */
 #mainAdmContent{
 	width:90%;
 	margin: auto;
@@ -120,12 +141,43 @@
 	width: 200px;
 }
 
-.passwordMod {
-		display: inline-table;
-		padding: 3px;
-		margin-left: 20px;
-		width: 250px;
+/* .passWord {
+		height: 27px;
+		width: 300px;
+		float: right;
+} */
+
+.changePassWord {
+		float: left;
 }
+
+.passwdBox {
+	width: 80px;
+	background-color: #e9ecef;
+	border-right: 1px solid #ccc;
+	padding: 5px;
+	/* display: flex; */
+}
+
+.passWdTbl input[type="password"] {
+		height: 27px;
+		margin: 0;
+		padding-left: 5px;
+		border: none;
+}
+
+.passWdTbl {
+		border: 1px solid #ccc;
+		margin-bottom: 5px;
+		display: flex;
+}
+
+/* .passWord input[type="password"] {
+		border: none;
+		padding: unset;
+		height: 100%;
+		margin: unset;
+} */
 
 #userEdit{
 	display: inline-table;
@@ -134,7 +186,7 @@
 /*
 * Edit link on user admin page
 */
-.uedit{
+.uedit {
 		float: right;
 }
 

@@ -16,10 +16,10 @@ body {
 		font-size: 0.9em;
 }
 
-/**
+	/**
  * responsive
  */
-@media (max-width: 1024px) {
+ @media (max-width: 1024px) {
     body {
         width: auto;
     }

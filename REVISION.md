@@ -2,12 +2,6 @@ revision history
 
 ===================
 
-(2019-10-20)
-
-Fixed navbar and assign methods.  
-Fixed update case.  
-
--------------------
 
 (2019-10-18)  
 

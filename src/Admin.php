@@ -47,15 +47,15 @@ class Admin
 				$stmt->execute(array('user' => $user));
 				$type = $stmt->fetch();
 				if($user && $type['type'] === 'admin'){
-					$html .= "
-							<div class='admLnk'>Administration</div>
-							<div class='side-lnk'>
-									<div class='adminLnks'>
-											<a href='users_adm.php' title='Users' >Add users</a>
-											<a href='list_users.php' title='Users' >Edit users</a>
-									</div>
-							</div>
-							";
+						$html .= "
+								<div class='admLnk'>Administration</div>
+								<div class='side-lnk'>
+										<div class='adminLnks'>
+												<a href='users_adm.php' title='Users' >Add users</a>
+												<a href='list_users.php' title='Users' >Edit users</a>
+										</div>
+								</div>
+						";
 				}
 			}
 			$stmt = null;
@@ -106,21 +106,16 @@ class Admin
 				$html .= "
 						<form action='' method='post'>
 								<div id='addUtbl'>
-										<div>Username:</div>
-										<div><input type='text' name='uname' placeholder='{$error}'></div>
-										<div>First name:</div>
-										<div><input type='text' name='fname' placeholder='{$error}'></div>
-										<div>Last name:</div>
-										<div><input type='text' name='lname' placeholder='{$error}'></div>
-										<div>Email:</div>
-										<div><input type='text' name='email' placeholder='{$error}'></div>
-										<div>Type:</div>
-										<div>
-												<select name='type' class='caseStatus'>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Username: </div><div class='editUserField'><input type='text' name='uname' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>First name: </div><div class='editUserField'><input type='text' name='fname' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Last name: </div><div class='editUserField'><input type='text' name='lname' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='editUserField'><input type='text' name='email' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Type: </div><div class='editUserField'>
+												<select name='type' class='editUserField'>
 														<option value='usr'>User</option>
 														<option value='admin'>Admin</option>
 												</select>
-										</div>
+										</div></div></div>
 										<div class='addUser'><input type='submit' name='addus' value='Save'><input type='reset' value='Reset'></div>
 								</div>
 						</form>
@@ -197,38 +192,31 @@ class Admin
 					}
 						$html .= "
 								<form method='post'>
-										<div>Username</div>
-										<div><input type='text' name='uname' value='{$val['uname']}' required></div>
-										<div>Last name</div>
-										<div><input type='text' name='lname' value='{$val['lname']}' required></div>
-										<div>First name</div>
-										<div><input type='text' name='fname' value='{$val['fname']}' required></div>
-										<div>Email</div>
-										<div><input type='text' name='email' value='{$val['email']}' required></div>
-										<div>Type</div>
-										<div>
-												<select name='type'>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Username: </div><div class='editUserField'><input type='text' name='uname' value='{$val['uname']}' required></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Surname: </div><div class='editUserField'><input type='text' name='lname' value='{$val['lname']}' required></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>First name: </div><div class='editUserField'><input type='text' name='fname' value='{$val['fname']}' required></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='editUserField'><input type='text'  name='email' value='{$val['email']}' required></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Type: </div><div class='editUserField'>
+												<select class='editUserField' name='type'>
 														<option value='{$val['type']}'>{$val['type']}</option>
 														<option value='admin'>Admin</option>
 														<option value='usr'>User</option>
 												</select>
-										</div>
-										<div>Status</div>
-										<div>
-												<select name='active'>
+										</div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Status: </div><div class='editUserField'>
+												<select class='editUserField' name='active'>
 														<option value='{$val['active']}'>{$val['active']}</option>
 														<option value='active'>Active</option>
 														<option value='disabled'>Disabled</option>
 												</select>
-										</div>
+										</div></div></div>
 										<div><input type='hidden' name='id' value='{$val['id_user']}'></div>
 										<div class='addUser'><input type='submit' name='update' value='Update'><input type='reset' value='Reset'></div>
 										<div>{$fail}</div>
-								</div>
 							</form>
 						";
-			return $html;
-			$pdo = null;
+				return $html;
+				$pdo = null;
 		}
 
 		/**
@@ -241,40 +229,37 @@ class Admin
 				$html = null;
 
 				if(isset($_POST['chUPwd'])){
-					if(isset($_GET['id'])){
-					$id = $_GET['id'];
-					$password = strip_tags($_POST['password']);
-					$confirmpwd = strip_tags($_POST['confirmpwd']);
-					$hash = password_hash($password, PASSWORD_BCRYPT);
-					if(empty($password)){
-						$fail = "<div>Password field can not be empty!</div>";
-					}
-					if(empty($confirmpwd)){
-						$fail = "<div>Confirm field can not be empty!</div>";
-					}
-					if(!empty($password) && !empty($confirmpwd)){
-						if($password === $confirmpwd){
-							$stmt = $this->conn->prepare("UPDATE fmcm_users SET passwd = :hash WHERE id_user = :id LIMIT 1");
-							$stmt->execute([$hash, $id]);
-							$success = 'Password has been changed!';
-							$pdo = null;
+						if(isset($_GET['id'])){
+						$id = $_GET['id'];
+						$password = strip_tags($_POST['password']);
+						$confirmpwd = strip_tags($_POST['confirmpwd']);
+						$hash = password_hash($password, PASSWORD_BCRYPT);
+						if(empty($password)){
+								$fail = "<div>Password field can not be empty!</div>";
 						}
-						else{
-						$fail = 'Passwords do not match!';
-					}
-					}
-					}
+						if(empty($confirmpwd)){
+								$fail = "<div>Confirm field can not be empty!</div>";
+						}
+						if(!empty($password) && !empty($confirmpwd)){
+								if($password === $confirmpwd){
+										$stmt = $this->conn->prepare("UPDATE fmcm_users SET passwd = :hash WHERE id_user = :id LIMIT 1");
+										$stmt->execute([$hash, $id]);
+										$success = 'Password has been changed!';
+										$pdo = null;
+								}
+								else{
+										$fail = 'Passwords do not match!';
+								}
+						}
+						}
 				}
 				$html .= "
-					<div class='passwordMod'>
-						<div>Change password: </div>
-						<form action='' method='post'>
-							<div id='passwd'>Password: <input type='password' name='password' value='' placeholder='Password' autocomplete='off' /></div>
-							<div id='passwd'>Confirm:	<input type='password' name='confirmpwd' value='' placeholder='Confirm password' autocomplete='off' /></div>
+						<form method='post'>
+							<div class='passWdTbl'><div class='passwdBox'>Password: </div><input type='password' name='password' value='' placeholder='Password' autocomplete='off' /></div>
+							<div class='passWdTbl'><div class='passwdBox'>Confirm: </div><input type='password' name='confirmpwd' value='' placeholder='Confirm password' autocomplete='off' /></div>
 							<div>{$fail}</div>
 							<div class=''><input type='submit' name='chUPwd' value='Change'/> <input type='reset' value='Reset'></div>
 						</form>
-					</div>
 				";
 				return $html;
 		}
