@@ -69,10 +69,6 @@ td a {
     border-bottom: 1px solid #ccc;
 }
 
-.caseComment {
-    /* width: 70%; */
-}
-
 .saveCase {
     border: none;
     background-color: inherit;
@@ -177,7 +173,6 @@ tfoot {
     width: 70%;
     border: 1px solid #ccc;
     margin-bottom: 5px;
-    /* overflow-wrap: break-word; */
 }
 
 .caseUpdateTitle {

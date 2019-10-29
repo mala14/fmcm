@@ -88,20 +88,16 @@ class Todo
   		}
 
   		$html .= "
-      <div class='caseComment'>
-    			<div class='setCase'>
-      				<form action='' method='post'>
-        					<div class='contactinfo'>
-          						<div class='caseUpdate'><div class='caseUpdateTitle'>Title: </div><input type='text' class='issueTitle' name='issuetitle' placeholder='Case title'></div>
-          						<div class='caseLabel'><label>Description:</label></div>
-                      <textarea type='text' id='editor' class='messArea' name='commtext' /></textarea><br>
-                      <input type='hidden' name='addContact' value='{$this->getIdContact()}'>
-          						<div class='caseBtn'><input type='submit' class='submitBtn' name='sendCase' value='Save' /></div>
-        					</div>
-      				</form>
-      				<div>{$error}</div>
-    			</div>
-      </div>
+  				<form action='' method='post'>
+  						<div class='caseUpdate'><div class='caseUpdateTitle'>Title: </div><input type='text' class='issueTitle' name='issuetitle' placeholder='Case title'></div>
+  						<div class='caseLabel'><label>Description:</label></div>
+              <div class='setCase'>
+                  <textarea type='text' id='editor' class='messArea' name='commtext' /></textarea><br>
+                  <input type='hidden' name='addContact' value='{$this->getIdContact()}'>
+      						<div class='caseBtn'><input type='submit' class='submitBtn' name='sendCase' value='Save' /></div>
+              </div>
+  				</form>
+  				<div>{$error}</div>
   		";
       $pdo = null;
   		return $html;
@@ -480,17 +476,15 @@ class Todo
         }
 
      		$html = "
-            <div class='caseComment'>
-                <div class='caseUpdate'><div class='caseUpdateTitle'>Case title: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
-                <div class='caseUpdate'><div class='caseUpdateTitle'>Issue: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
-        				Add comment
-                <form method='post' class='setCase'>
-                    <input type='hidden' name='id' value='{$id}'>
-                		<textarea type='text' id='editor' class='messArea' name='commtext' placeholder='{$error}'/></textarea><br>
-            				<input type='submit' class='submitBtn' name='comment' value='Update'> {$this->caseStatus()}
-                </form>
-                {$this->getComment()}
-            </div>
+            <div class='caseUpdate'><div class='caseUpdateTitle'>Case title: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
+            <div class='caseUpdate'><div class='caseUpdateTitle'>Issue: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
+    				Add comment
+            <form method='post' class='setCase'>
+                <input type='hidden' name='id' value='{$id}'>
+            		<textarea type='text' id='editor' class='messArea' name='commtext' placeholder='{$error}'/></textarea><br>
+        				<input type='submit' class='submitBtn' name='comment' value='Update'> {$this->caseStatus()}
+            </form>
+            {$this->getComment()}
     		";
         $pdo = null;
         return $html;
