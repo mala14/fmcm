@@ -13,15 +13,14 @@ td a {
 }
 
 .searchUser {
-    width: 100%;
+    width: 91%;
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     border-right: 1px solid #ccc;
-    padding-bottom: 10px;
 }
 
 .usrInfoTbl {
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 
 .flex {
@@ -29,21 +28,10 @@ td a {
 }
 
 .caseTbl {
-		width: 100%;
-		border-top: 1px solid #ccc;
-		border-left: 1px solid #ccc;
-		border-top-left-radius: 5px;
-		padding: 10px;
-		background-color: #fff;
-}
-
-.newCaseTbl {
-    width: 100%;
-    border-top: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-top-left-radius: 5px;
+		width: 93%;
     padding: 10px;
-    background-color: #fff;
+		background-color: #fff;
+    margin: 0 auto;
 }
 
 .tableCase {
@@ -79,6 +67,10 @@ td a {
 		background-color: #f3f4f6;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+}
+
+.caseComment {
+    /* width: 70%; */
 }
 
 .saveCase {
@@ -130,14 +122,17 @@ tfoot {
 }
 
 .caseContactInfo {
-		float: left;
+    float: left;
+    width: 360px;
+    margin-top: 0;
     margin-right: 10px;
     margin-bottom: 5px;
 }
 
 .caseInfo {
 		float: left;
-		width: 75%;
+    width: 75%;
+    min-width: 400px;
 }
 
 
@@ -149,26 +144,21 @@ tfoot {
     display: flex;
 }
 
-.caseFormData {
-		margin-right: 10px;
-}
-
 .formdata {
     display: flex;
     border: 1px solid #ccc;
-    width: 430px;
     margin-bottom: 5px;
 }
 
 .usrInfo {
     padding: 5px;
-    width: 70%;
+    width: 75%;
 }
 
 .searchUsrInfo {
     padding: 5px;
     border: none !important;
-    width: 100%;
+    width: 70%;
 }
 
 .conInfo {
@@ -251,7 +241,7 @@ tfoot {
 .listUserBtn {
     background-color: inherit;
     font-size: 1em;
-    padding: 1px;
+    padding: 3px;
     border-top: 1px solid #f3f4f6;
     border-bottom: 1px solid #f3f4f6;
 }
@@ -278,7 +268,7 @@ tfoot {
     appearance: none;
     outline: 0;
     padding: 2px;
-    width: 338px;
+    width: 100%;
     height: 27px;
     border: 0;
 }
@@ -294,7 +284,7 @@ tfoot {
 }
 
 .selectInfo {
-    width: 70%;
+    width: 75%;
 }
 
 .setengin {

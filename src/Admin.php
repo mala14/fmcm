@@ -107,8 +107,8 @@ class Admin
 						<form action='' method='post'>
 								<div id='addUtbl'>
 										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Username: </div><div class='editUserField'><input type='text' name='uname' placeholder='{$error}'></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>First name: </div><div class='editUserField'><input type='text' name='fname' placeholder='{$error}'></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Last name: </div><div class='editUserField'><input type='text' name='lname' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Name: </div><div class='editUserField'><input type='text' name='fname' placeholder='{$error}'></div></div></div>
+										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Surname: </div><div class='editUserField'><input type='text' name='lname' placeholder='{$error}'></div></div></div>
 										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='editUserField'><input type='text' name='email' placeholder='{$error}'></div></div></div>
 										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Type: </div><div class='editUserField'>
 												<select name='type' class='editUserField'>

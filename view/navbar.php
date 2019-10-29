@@ -11,8 +11,6 @@
               <div class=" nav-link">New</div>
                   <div class="dropdown-content nav-link">
                       <a href="new_contact.php">Contact</a>
-                      <a href="#">Link 2</a>
-                      <a href="#">Link 3</a>
                   </div>
           </div>
         </td>

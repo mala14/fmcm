@@ -11,7 +11,7 @@
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">
-    <div class="caseInfo">
+    <div class="userInfoAdm">
         <?= $admin->addUsers() ?>
     </div>
 </div>

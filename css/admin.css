@@ -51,7 +51,7 @@
 }
 
 .editUserField select {
-		width: 340px;
+		width: 266px;
 		height: 27px;
 		border: none;
 }
@@ -59,20 +59,18 @@
 .editUserField input[type="text"] {
 		padding-left: 5px;
 		height: 27px;
-		width: 340px;
+		width: 266px;
 		border: none;
 }
 
-/* .admEditUser {
+.admEditUser {
 		float: left;
-		display: inline-flex;
-    overflow-wrap: break-word;
 		display: block;
-} */
+}
 
-/* .addUtbl {
-		display: flex;
-} */
+.userInfoAdm {
+		width: 360px;
+}
 
 #admLnk a{
 	color: #E7E3B2;

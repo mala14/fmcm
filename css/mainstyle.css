@@ -14,12 +14,13 @@ body {
 		height:100%;
 		font-family: Arial;
 		font-size: 0.9em;
+		background-color: #fff;
 }
 
 	/**
  * responsive
  */
- @media (max-width: 1024px) {
+ @media (max-width: 500px) {
     body {
         width: auto;
     }
@@ -46,6 +47,11 @@ textarea {
 		box-sizing: border-box;
 }
 
+h1 {
+		margin-top: 0;
+		margin-bottom: 0;
+}
+
 /**
 * make the whitespace under and over the tag smaller on all <p> tags
 */
@@ -58,6 +64,12 @@ p {
 
 p.indent {
 	 padding-left: 0.5em
+}
+
+.site-title {
+		height: 55px;
+		margin-top: 15px;
+		background-color: #f3f4f6;
 }
 
 /*
@@ -195,6 +207,7 @@ p.indent {
 		border-color: #ccc;
 		padding-top: 20px;
 		margin-bottom: 20px;
+		background-color: #f3f4f6;
 }
 
 .copyright {

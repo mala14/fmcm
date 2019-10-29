@@ -10,7 +10,7 @@
 
 <?php include ("view/sidebar.php"); ?>
 
-<div class="newCaseTbl">
+<div class="caseTbl">
     <div class="caseContactInfo">
         <?= $users->addContact() ?>
     </div>

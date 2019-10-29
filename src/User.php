@@ -49,15 +49,13 @@ class User{
         }
         $html .= "
             <form action='' method='post'>
-                <div class='caseFormData'>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>First name: </div><input type='text' class='conInfo' name='fname' placeholder='{$error}'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Surname: </div><input type='text' class='conInfo' name='lname' placeholder='{$error}'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Job title: </div><input type='text' class='conInfo' name='jtitle'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><input type='text' class='conInfo' name='phone'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><input type='text' class='conInfo' name='email'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Office: </div><input type='text' class='conInfo' name='office'></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><input type='text' class='conInfo' name='address'></div></div>
-                </div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Name: </div><input type='text' class='conInfo' name='fname' placeholder='{$error}'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Surname: </div><input type='text' class='conInfo' name='lname' placeholder='{$error}'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Job title: </div><input type='text' class='conInfo' name='jtitle'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><input type='text' class='conInfo' name='phone'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><input type='text' class='conInfo' name='email'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Office: </div><input type='text' class='conInfo' name='office'></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><input type='text' class='conInfo' name='address'></div></div>
                 <input type='submit' name='add-user' value='Save'><input type='reset' value='Reset'>
             </form>
         ";

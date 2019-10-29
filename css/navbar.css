@@ -4,11 +4,10 @@
 
 .navbar {
 		width: 100%;
-		margin-bottom: 10px;
-		padding-bottom: 5px;
 		background-color: #e5e4e4;
 		border-top: 1px solid #c1c0c0;
 		border-bottom: 1px solid #c1c0c0;
+		padding-bottom: 5px;
 }
 
 .nav-link {
@@ -30,7 +29,6 @@
 }
 
 .navbar-row {
-		width: 100%;
 		font-size: 1.5em;
 		font-family: 'Jura', sans-serif;
 		margin-left: 10px;
@@ -59,10 +57,9 @@
 		border-left: 1px solid #ccc;
 		border-right: 1px solid #ccc;
 		border-bottom: 1px solid #ccc;
-		box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.2);
+		box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);
 		z-index: 1;
 }
-
 
 .dropdown-content a {
 	  color: black;

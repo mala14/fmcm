@@ -11,9 +11,11 @@ Design changes, more to bootstrap.
 Mail function to inform engineers and contacts.  
 Print function.  
 
+Pagination for cases and users
 
 Admin panel to be more extensive
 . User admin
 . Changes in site settings etc.
 . Separate admin page
-. Database dump function  
+. Database dump function
+. Contact admin

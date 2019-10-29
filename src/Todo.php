@@ -348,7 +348,7 @@ class Todo
             $created = substr($val['created'], 0, 10);
             $html .= "
         				<div class='caseFormData'>
-          					<div class='formdata'><div class='caseInfoTitle'>Case ID: </div><div class='usrInfo'>{$val['id']}</div></div>
+          					<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Case ID: </div><div class='usrInfo'>{$val['id']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Contact: </div><div class='usrInfo'>{$val['con_fname']} {$val['con_lname']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Title: </div><div class='usrInfo'>{$val['con_jtitle']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><div class='usrInfo'>{$val['con_phone']}</div></div></div>
