@@ -2,6 +2,12 @@ revision history
 
 ===================
 
+(2019-10-29)  
+
+Fixed som design flaws  
+
+-------------------
+
 (2019-10-22)  
 
 Design changes in admin page and at few case related divs.  
