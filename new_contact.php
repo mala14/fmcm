@@ -7,7 +7,6 @@
 		$login->checkLogin();
 		$login->getSessions();
 ?>
-
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">

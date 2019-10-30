@@ -43,11 +43,45 @@ class Todo
     *
     * @return
     */
-
     public function getIdContact()
     {
         $id_contact = $_POST['id_contact'] ?? null;
         return $id_contact;
+    }
+
+    /**
+    * Display navbar if logged in.
+    *
+    * @return
+    */
+    public function getNavBar()
+    {
+        $html = null;
+        if (isset($_SESSION['uname'])) {
+            $html .= "
+                <td class='nav-item'>
+                   <a class='nav-link' href='logout.php'>Logout</a>
+                </td>
+                <td class='nav-item'>
+                  <div class='dropdown'>
+                      <div class='nav-link'>New</div>
+                          <div class='dropdown-content nav-link'>
+                              <a href='new_contact.php'>Contact</a>
+                          </div>
+                  </div>
+                </td>
+                <td class='nav-item'>
+                  <div class='dropdown'>
+                      <div class='nav-link'>Case</div>
+                          <div class='dropdown-content nav-link'>
+                              <tr>{$this->closeCase()}</tr>
+                              <tr>{$this->openCase()}</tr>
+                          </div>
+                  </div>
+                </td>
+            ";
+        }
+        return $html;
     }
 
     /**

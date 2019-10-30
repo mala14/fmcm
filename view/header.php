@@ -15,4 +15,4 @@
     <div class="site-title">
         <h1>Freemasons Case Management System</h1>
     </div>
-<?php include("navbar.php"); ?>
+<?php include("view/navbar.php"); ?>

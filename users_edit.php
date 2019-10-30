@@ -13,7 +13,6 @@
 <div class="caseTbl">
     <div class="caseContactInfo">
         <?= $admin->getEditUsr() ?>
-
     </div>
     <div class="changePassWord">
         <?= $admin->changePassword() ?>
