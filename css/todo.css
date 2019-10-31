@@ -127,8 +127,8 @@ tfoot {
 
 .caseInfo {
 		float: left;
-    width: 75%;
-    min-width: 400px;
+    width: 60%;
+    min-width: 350px;
 }
 
 
@@ -170,7 +170,7 @@ tfoot {
 
 .caseUpdate {
     display: flex;
-    width: 70%;
+    width: 100%;
     border: 1px solid #ccc;
     margin-bottom: 5px;
 }
@@ -183,7 +183,7 @@ tfoot {
 }
 
 .setCase {
-    width: 70%;
+    width: 100%;
 }
 
 .updatestamp {
@@ -226,7 +226,7 @@ tfoot {
 
 .commentField {
     display: flex;
-    width: 70%;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 3px;
     margin-bottom: 10px;

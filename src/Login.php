@@ -100,7 +100,6 @@ class Login
       		}
 
   			$html .= "
-						<div class=''>FM CM logout</div>
             <button type='submit' class='loginBtn' name='logout'>Logout</button>
   			";
   			return $html;

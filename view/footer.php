@@ -1,6 +1,7 @@
 </article>
 <div class="footer">
     <div class="copyright">&copy; mala14 Freemasons.se</div>
+    <div class="copyright"><a href="https://github.com/mala14/fmcm"><i class="fab fa-github"></i></a></div>
 </div>
 
 <script>

@@ -2,6 +2,12 @@ revision history
 
 ===================
 
+(2019-10-31)  
+
+Fixed more design stuff
+
+-------------------
+
 (2019-10-30)  
 
 Fixed more design stuff
