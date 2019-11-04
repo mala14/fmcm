@@ -48,13 +48,8 @@ class Admin
 				$type = $stmt->fetch();
 				if($user && $type['type'] === 'admin'){
 						$html .= "
-								<div class='admLnk'>Administration</div>
-								<div class='side-lnk'>
-										<div class='adminLnks'>
-												<a href='users_adm.php' title='Users' >Add users</a>
-												<a href='list_users.php' title='Users' >Edit users</a>
-										</div>
-								</div>
+								<a href='users_adm.php' title='Users' ><div class='side-lnk'>Add users</div></a>
+								<a href='list_users.php' title='Users' ><div class='side-lnk'>Edit users</div></a>
 						";
 				}
 			}

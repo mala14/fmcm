@@ -11,8 +11,11 @@
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">
-    <div class="userInfoAdm">
+    <div class="caseContactInfo">
         <?= $admin->addUsers() ?>
+    </div>
+    <div class="changePassWord">
+        <?= $admin->changePassword() ?>
     </div>
 </div>
 

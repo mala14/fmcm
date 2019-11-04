@@ -33,13 +33,7 @@
 		padding-bottom: 5px;
 }
 
-.adminLnks {
-		display: inline-grid;
-		text-indent: 5px;
-}
-
 .admUsers{
-		/* width: 530px; */
 		border:1px solid;
 		border-color: #ccc;
 		text-indent: 5px;
@@ -68,9 +62,9 @@
 		display: block;
 }
 
-.userInfoAdm {
+/* .userInfoAdm {
 		width: 360px;
-}
+} */
 
 #admLnk a{
 	color: #E7E3B2;
