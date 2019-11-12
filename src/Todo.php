@@ -206,6 +206,7 @@ class Todo
                 <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><div class='usrInfo'>{$row['con_address']}</div></div></div>
                 ";
         }
+        $pdo = null;
         return $html;
     }
 
@@ -240,8 +241,8 @@ class Todo
           </tr>
           ";
         }
+      $pdo = null;
   		return $html;
-  		$stmt = null;
   	}
 
     /**
@@ -274,8 +275,8 @@ class Todo
           </tr>
           ";
       }
+        $pdo = null;
     		return $html;
-    		$pdo = null;
     }
 
     /**
@@ -502,8 +503,6 @@ class Todo
             if (!empty($commtext)) {
                 $sql = $this->conn->prepare("INSERT INTO fmcm_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
                 $sql->execute([$id, $commtext, $uname, $dateStamp]);
-                // header('Location: ' . $_SERVER['REQUEST_URI']);
-                // exit;
             } else {
                 $error = "You have to leave a comment";
             }
@@ -597,7 +596,7 @@ class Todo
                 </div>
             ";
         }
-
+        $pdo = null;
         return $status;
     }
 
@@ -612,6 +611,7 @@ class Todo
         $sql->execute([$this->getId()]);
         $res = $sql->fetch();
         return $res['issue'];
+        $pdo = null;
     }
 
     /**
@@ -634,6 +634,7 @@ class Todo
                 </div>
             ";
         }
+        $pdo = null;
         return $html;
     }
 }

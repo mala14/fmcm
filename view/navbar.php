@@ -6,4 +6,5 @@
         <?= $todo->getNavBar() ?>
     </div>
 </nav>
+<div class="nav-row"></div>
 <article class="main-data">

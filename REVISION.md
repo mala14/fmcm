@@ -2,6 +2,12 @@ revision history
 
 ===================
 
+v0.2.5 (2019-11-04)  
+
+Design changes. 
+
+-------------------
+
 (2019-11-04)  
 
 Left menu design changes

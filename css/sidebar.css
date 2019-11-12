@@ -3,16 +3,16 @@
 */
 
 .sidebar {
-		width: 150px;
+		min-width: 140px;
 		background-color: #636161;
-		border-right: 1px solid #ccc;
+		border-right: 1px solid #c1c0c0;
 }
 
 .side-lnk {
 		background-color: #636161;
 		font-size: 1em;
 		color: #fff;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #c1c0c0;
 		padding-top: 10px;
 		padding-left: 10px;
 		padding-bottom: 10px;
