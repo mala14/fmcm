@@ -2,9 +2,9 @@ revision history
 
 ===================
 
-v0.2.5 (2019-11-04)  
+v0.2.5 (2019-11-12)  
 
-Design changes. 
+Design changes.
 
 -------------------
 
