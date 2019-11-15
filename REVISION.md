@@ -2,23 +2,13 @@ revision history
 
 ===================
 
-(2019-11-04)  
+(2019-11-15)  
 
-Left menu design changes
-
--------------------
-
-(2019-10-31)  
-
-Fixed more design stuff
+Some design changes.  
+Updated a sammle code vulnerability check badge,  javascript.
 
 -------------------
 
-(2019-10-30)  
-
-Fixed more design stuff
-
--------------------
 
 (2019-10-29)  
 

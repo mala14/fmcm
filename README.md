@@ -1,5 +1,9 @@
 FreeMasons Case Management System
 ==================
+
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/mala14/fmcm.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mala14/fmcm/alerts/)  
+==================
+
 FMCM is a simple case management system. Purpose of fmcm is to register cases with follow ups and add info.
 It is not complete yet. More info in todo.md about project status and what is to be done.
 
