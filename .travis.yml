@@ -3,6 +3,5 @@ language: php
 php:
   - 7.0
   - hhvm
-
 env:
   - DB=mysql
