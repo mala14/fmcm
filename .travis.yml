@@ -1,15 +1,8 @@
 language: php
 
-jobs:
-  include:
-  - php: 7.0
-  - php: 7.1
-  - php: 7.2
-  - php: 7.3
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: master
+php:
+  - 7.0
+  - hhvm
+
+env:
+  - DB=mysql
