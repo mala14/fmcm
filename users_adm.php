@@ -14,9 +14,6 @@
     <div class="caseContactInfo">
         <?= $admin->addUsers() ?>
     </div>
-    <div class="changePassWord">
-        <?= $admin->changePassword() ?>
-    </div>
 </div>
 
 <?php include ("view/footer.php"); ?>
