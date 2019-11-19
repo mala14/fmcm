@@ -123,12 +123,12 @@ class Todo
 
   		$html .= "
   				<form action='' method='post'>
-  						<div class='caseUpdate'><div class='caseUpdateTitle'>Title: </div><input type='text' class='issueTitle' name='issuetitle' placeholder='Case title'></div>
-  						<div class='caseLabel'><label>Description:</label></div>
+  						<div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><input type='text' class='issueTitle' name='issuetitle' placeholder='{$GLOBALS['caseIssueHolder']}'></div>
+  						<div class='caseLabel'><label>{$GLOBALS['description']}:</label></div>
               <div class='setCase'>
                   <textarea type='text' id='editor' class='messArea' name='commtext' /></textarea><br>
                   <input type='hidden' name='addContact' value='{$this->getIdContact()}'>
-      						<div class='caseBtn'><input type='submit' class='submitBtn' name='sendCase' value='Save' /></div>
+      						<div class='caseBtn'><input type='submit' class='submitBtn' name='sendCase' value='{$GLOBALS['save']}' /></div>
               </div>
   				</form>
   				<div>{$error}</div>
@@ -179,7 +179,7 @@ class Todo
         $html .= "
         <div class='caseFormData'>
             <form method='post'>
-                <div class='formdata'><div class='caseInfoTitle'>Search: </div><input type='search' class='searchUsrInfo' name='searchval' placeholder='Search contact'><button type='image' name='getcontact'><i class='fas fa-search'></i></button></div>
+                <div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['search']}: </div><input type='search' class='searchUsrInfo' name='searchval' placeholder='{$GLOBALS['searchContactHolder']}'><button type='image' name='getcontact'><i class='fas fa-search'></i></button></div>
                 {$result}
             </form>
             {$this->getUserInfo()}
@@ -198,12 +198,12 @@ class Todo
             $stmt->execute([$contact]);
             $row = $stmt->fetch();
             $html .= "
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Name: </div><div class='usrInfo'>{$row['con_fname']} {$row['con_lname']}</div></div></div>
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Title: </div><div class='usrInfo'>{$row['con_jtitle']}</div></div></div>
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><div class='usrInfo'>{$row['con_phone']}</div></div></div>
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='usrInfo'>{$row['con_email']}</div></div></div>
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Office: </div><div class='usrInfo'>{$row['con_office']}</div></div></div>
-                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><div class='usrInfo'>{$row['con_address']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['name']}: </div><div class='usrInfo'>{$row['con_fname']} {$row['con_lname']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userTitle']}: </div><div class='usrInfo'>{$row['con_jtitle']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['phone']}: </div><div class='usrInfo'>{$row['con_phone']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['email']}: </div><div class='usrInfo'>{$row['con_email']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['office']}: </div><div class='usrInfo'>{$row['con_office']}</div></div></div>
+                <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['address']}: </div><div class='usrInfo'>{$row['con_address']}</div></div></div>
                 ";
         }
         $pdo = null;
@@ -450,7 +450,7 @@ class Todo
 
         $html .= "
         <form method='post'>
-            <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Assigned: </div><div class='selectInfo'>
+            <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['assigned']}: </div><div class='selectInfo'>
             <div class='selectObj'>
                 <select name='assigned'>
                     <option>{$this->getAssigned()}</option>
@@ -509,13 +509,13 @@ class Todo
         }
 
      		$html = "
-            <div class='caseUpdate'><div class='caseUpdateTitle'>Case title: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
-            <div class='caseUpdate'><div class='caseUpdateTitle'>Issue: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
+            <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
+            <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['issue']}: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
     				Add comment
             <form method='post' class='setCase'>
                 <input type='hidden' name='id' value='{$id}'>
             		<textarea type='text' id='editor' class='messArea' name='commtext' placeholder='{$error}'/></textarea><br>
-        				<input type='submit' class='submitBtn' name='comment' value='Update'> {$this->caseStatus()}
+        				<input type='submit' class='submitBtn' name='comment' value='{$GLOBALS['caseUpdate']}'> {$this->caseStatus()}
             </form>
             {$this->getComment()}
     		";
@@ -629,7 +629,7 @@ class Todo
         foreach ($res as $val) {
             $html .= "
                 <div class='commentField'>
-                    <div class='updatestamp'>Updated by: {$val['id_user']} <br /> {$val['saved']}</div>
+                    <div class='updatestamp'>{$GLOBALS['updatedBy']}: {$val['id_user']} <br /> {$val['saved']}</div>
                     <div class='comments'>{$val['comment']}</div>
                 </div>
             ";
