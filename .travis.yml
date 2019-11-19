@@ -13,3 +13,6 @@ deploy:
   keep_history: true
   on:
     branch: master
+
+before_script: composer install
+script: phpunit
