@@ -24,6 +24,7 @@ session_start();
 */
 define('MAIN_PATH', __DIR__ . '/.');
 require_once('src/Database.php');
+require_once('src/Sitevars.php');
 
 function myAutoloader($class) {
   $path = "src/{$class}.php";

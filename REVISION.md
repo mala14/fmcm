@@ -2,6 +2,14 @@ revision history
 
 ===================
 
+v0.2.6 (2019-11-19)  
+
+Added src/Sitevars.php with variables to make it easier to change titles and stuff.
+Updated latest push on default branch by Travis.
+Some changes to future projects.
+
+-------------------
+
 (2019-11-15)  
 
 Some design changes.  

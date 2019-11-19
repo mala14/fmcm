@@ -9,10 +9,10 @@
     <script src="vendor/ckeditor5-build-classic/ckeditor.js"></script>
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Freemasons Case Management System</title>
+    <title><?= $title ?></title>
 </head>
 <body>
     <div class="site-title">
-        <h1>Freemasons Case Management System</h1>
+        <h1><?= $siteTitle ?></h1>
     </div>
 <?php include("view/navbar.php"); ?>

@@ -1,9 +1,8 @@
 ### FMCM todo list.
 
 
-Add teams where engineers can be members of.
+Add teams where users can be members of.
 
-Engineer field to be searchable,
 Fix assign case when creating new case.
 
 Design changes, more to bootstrap.
@@ -14,8 +13,8 @@ Print function.
 Pagination for cases and users
 
 Admin panel to be more extensive
-. User admin
 . Changes in site settings etc.
-. Separate admin page
-. Database dump function
 . Contact admin
+
+Language configuration
+. Select language and change title, menu buttons etc to that language.
