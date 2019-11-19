@@ -196,7 +196,7 @@ class Admin
 												<select class='editUserField' name='type'>
 														<option value='{$val['type']}'>{$val['type']}</option>
 														<option value='admin'>{$GLOBALS['adminType']}</option>
-														<option value='usr'>{$GLOBALS['userType']}</option>
+														<option value='usr'>{$GLOBALS['usrType']}</option>
 												</select>
 										</div></div></div>
 										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['status']}: </div><div class='editUserField'>

@@ -85,7 +85,7 @@ $updateUser = "Update";                 // The update user button value
 $setPassWord = "Password";              // The update password title
 $confPassWord = "Confirm";              // The confirm password title
 $setPassWordHolder = "Password";        // The update password placeholder
-$confPassWordHolder = "Confirm password";// The confirm password placeholder              // The confirm password title
+$confPassWordHolder = "Confirm password";// The confirm password placeholder
 
 /**
 * The footer vars
