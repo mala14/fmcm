@@ -3,8 +3,17 @@ language: php
 php:
   - 7.2
   - 7.3
-  - 7.4snapshot
-  - nightly
 
-before-script:
+cache:
+  directories:
+    - node_modules
+    - vendor
+
+before_script:
+  - cp .env.travis .env
+  - composer self-update
   - composer install --no-interaction
+  - php artisan migrate --no-interaction -vvv
+
+script:
+  - vendor/bin/phpunit
