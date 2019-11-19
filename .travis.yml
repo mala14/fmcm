@@ -10,10 +10,8 @@ cache:
     - vendor
 
 before_script:
-  - cp .env.travis .env
-  - composer self-update
   - composer install --no-interaction
-  - php artisan migrate --no-interaction -vvv
+  - composer self-update
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --configuration phpunit.xml --coverage-text
