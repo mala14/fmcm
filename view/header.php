@@ -13,6 +13,6 @@
 </head>
 <body>
     <div class="site-title">
-        <h1><?= $siteTitle ?></h1>
+        <h1><?= $siteName ?></h1>
     </div>
 <?php include("view/navbar.php"); ?>

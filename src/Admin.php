@@ -41,6 +41,7 @@ class Admin
 		public function getAdmMenu()
 		{
 			$html = null;
+
 			if(isset($_SESSION['uname'])){
 				$user = $_SESSION['uname'];
 				$stmt = $this->conn->prepare("SELECT type FROM fmcm_users WHERE uname = :user");
@@ -48,8 +49,8 @@ class Admin
 				$type = $stmt->fetch();
 				if($user && $type['type'] === 'admin'){
 						$html .= "
-								<a href='users_adm.php' title='Users' ><div class='side-lnk'>Add users</div></a>
-								<a href='list_users.php' title='Users' ><div class='side-lnk'>Edit users</div></a>
+								<a href='users_adm.php' title='Users' ><div class='side-lnk'>{$GLOBALS['addUsers']}</div></a>
+								<a href='list_users.php' title='Users' ><div class='side-lnk'>{$GLOBALS['editUsers']}</div></a>
 						";
 				}
 			}

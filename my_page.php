@@ -13,18 +13,18 @@
         <table class="tableCase">
             <thead>
                 <tr>
-                    <th>Case id</th>
-                    <th>Created</th>
-                    <th>Case title</th>
-                    <th>Assigned to</th>
+                    <th><?= $caseId ?></th>
+                    <th><?= $created ?></th>
+                    <th><?= $caseTitle ?></th>
+                    <th><?= $assignedTo ?></th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Case id</th>
-                    <th>Created</th>
-                    <th>Case title</th>
-                    <th>Assigned to</th>
+                    <th><?= $caseId ?></th>
+                    <th><?= $created ?></th>
+                    <th><?= $caseTitle ?></th>
+                    <th><?= $assignedTo ?></th>
                 </tr>
             </tfoot>
             <tbody>

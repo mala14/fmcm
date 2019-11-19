@@ -55,12 +55,11 @@ class Login
     		}
           $html .= "
               <div class=''>
-                  <input type='text' class='form-login' name='username' placeholder='User name' required='required' autofocus='autofocus'>
+                  <input type='text' class='form-login' name='username' placeholder='{$GLOBALS['loginHolder']}' required='required' autofocus='autofocus'>
               </div>
               <div class=''>
-                  <input type='password' class='form-login' name='password' placeholder='Password' required='required'>
+                  <input type='password' class='form-login' name='password' placeholder='{$GLOBALS['loginPassHolder']}' required='required'>
               </div>
-              <button type='submit' name='login' class='loginBtn'>Submit</button>
               {$error}
           ";
     		  return $html;
@@ -100,7 +99,7 @@ class Login
       		}
 
   			$html .= "
-            <button type='submit' class='loginBtn' name='logout'>Logout</button>
+            <button type='submit' class='loginBtn' name='logout'>{$GLOBALS['logOutSubmit']}</button>
   			";
   			return $html;
   	}

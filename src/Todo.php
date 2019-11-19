@@ -379,14 +379,14 @@ class Todo
             $created = substr($val['created'], 0, 10);
             $html .= "
         				<div class='caseFormData'>
-          					<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Case ID: </div><div class='usrInfo'>{$val['id']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Contact: </div><div class='usrInfo'>{$val['con_fname']} {$val['con_lname']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Title: </div><div class='usrInfo'>{$val['con_jtitle']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Phone: </div><div class='usrInfo'>{$val['con_phone']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Email: </div><div class='usrInfo'>{$val['con_email']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Office: </div><div class='usrInfo'>{$val['con_office']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Address: </div><div class='usrInfo'>{$val['con_address']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>Created: </div><div class='usrInfo'>{$created}</div></div></div>
+          					<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['caseId']}: </div><div class='usrInfo'>{$val['id']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['contact']}: </div><div class='usrInfo'>{$val['con_fname']} {$val['con_lname']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userTitle']}: </div><div class='usrInfo'>{$val['con_jtitle']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['phone']}: </div><div class='usrInfo'>{$val['con_phone']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['email']}: </div><div class='usrInfo'>{$val['con_email']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['office']}: </div><div class='usrInfo'>{$val['con_office']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['address']}: </div><div class='usrInfo'>{$val['con_address']}</div></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userCreated']}: </div><div class='usrInfo'>{$created}</div></div></div>
         				</div>
         		";
         }

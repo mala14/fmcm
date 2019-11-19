@@ -2,6 +2,12 @@ revision history
 
 ===================
 
+v0.2.61 (2019-11-19)
+
+More globals added to src/Sitevars  
+
+------------------
+
 v0.2.6 (2019-11-19)  
 
 Added src/Sitevars.php with variables to make it easier to change titles and stuff.

@@ -13,22 +13,22 @@
         <table class="tableCase">
             <thead>
                 <tr>
-                    <th>Case id</th>
-                    <th>Case title</th>
-                    <th>Created</th>
-                    <th>Closed</th>
-                    <th>Assigned to</th>
-                    <th>Closed by</th>
+                    <th><?= $caseId ?></th>
+                    <th><?= $caseTitle ?></th>
+                    <th><?= $created ?></th>
+                    <th><?= $closed ?></th>
+                    <th><?= $assignedTo ?></th>
+                    <th><?= $closedBy ?></th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Case id</th>
-                    <th>Case title</th>
-                    <th>Created</th>
-                    <th>Closed</th>
-                    <th>Assigned to</th>
-                    <th>Closed by</th>
+                    <th><?= $caseId ?></th>
+                    <th><?= $caseTitle ?></th>
+                    <th><?= $created ?></th>
+                    <th><?= $closed ?></th>
+                    <th><?= $assignedTo ?></th>
+                    <th><?= $closedBy ?></th>
                 </tr>
             </tfoot>
             <tbody>

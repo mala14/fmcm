@@ -8,6 +8,7 @@
             <h2><?= $loginTitle ?></h2>
             <form method="post">
               <?= $login->uLogin() ?>
+              <button type="submit" name="login" class="loginBtn"><?= $loginSubmit ?></button>
             </form>
         </div>
     </div>
