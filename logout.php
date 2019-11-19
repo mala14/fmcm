@@ -6,7 +6,7 @@
 <?php include("view/header.php"); ?>
     <div class="loginTable">
         <div class="tblLogin">
-            <h2>FMCM Logout</h2>
+            <h2><?= $logoutTitle ?></h2>
             <form method="post">
               <?= $login->uLogout() ?>
             </form>

@@ -5,7 +5,7 @@
 <?php include("view/header.php"); ?>
     <div class="loginTable">
         <div class="tblLogin">
-            <h2>FMCM Login</h2>
+            <h2><?= $loginTitle ?></h2>
             <form method="post">
               <?= $login->uLogin() ?>
             </form>
