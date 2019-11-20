@@ -74,27 +74,27 @@ class Admin
 						$lname = htmlentities($_POST['lname']);
 						$fname = htmlentities($_POST['fname']);
 						$email = htmlentities($_POST['email']);
-						$active = "active";
+						$active = "disabled";
 						$timestamp = date('Y-m-d G:i:s');
 
 						if(empty($uname)){
-							$error = "Username is required";
+							$error = "{$GLOBALS['emptyUname']}";
 						}
 						if(empty($fname)){
-							$error = "First name is required";
+							$error = "{$GLOBALS['emptyFname']}";
 						}
 						if(empty($lname)){
-							$error = "Last name is required";
+							$error = "{$GLOBALS['emptyLname']}";
 						}
 						if(empty($email)){
-							$error = "Email is required";
+							$error = "{$GLOBALS['emptyEmail']}";
 						}
 
 						if(!empty($uname) && !empty($lname) && !empty($fname) && !empty($email)){
 						$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :timestamp, :active)");
 						$stmt->execute([$uname, $lname, $fname, $email, $type, $timestamp, $active]);
 						$stmt = null;
-						header('Location: users_adm.php');
+						header('Location: list_users.php');
 						exit;
 						}
 
@@ -132,9 +132,9 @@ class Admin
 			$stmt->execute();
 			foreach($stmt as $row){
 					if($row['active'] === 'active'){
-							$status = "<div class='active'>Active</div>";
+							$status = "<div class='active'>{$GLOBALS['userActive']}</div>";
 					}	else {
-							$status = "<div class='inactive'>Disabled</div>";
+							$status = "<div class='inactive'>{$GLOBALS['userDisabled']}</div>";
 					}
 					$html .= "
 								<table class='tableCase tableUser'>
@@ -145,7 +145,7 @@ class Admin
 												<td class='iduname pad-left-right' title='{$row['lname']}'>{$row['lname']}</td>
 												<td class='idtype pad-left-right' title='{$row['type']}'>{$row['type']}</td>
 												<td> {$status} </td>
-												<td class='idlast pad-left-right' title='{$row['lastlogin']}'>Last login: {$row['lastlogin']}</td>
+												<td class='idlast pad-left-right' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
 												<td class='idedit pad-left-right' title='Edit'><a class='uedit' href='users_edit.php?id={$row['id_user']}'>{$GLOBALS['userEdit']}</a></td>
 										</tr>
 								</table>
@@ -231,20 +231,20 @@ class Admin
 						$confirmpwd = strip_tags($_POST['confirmpwd']);
 						$hash = password_hash($password, PASSWORD_BCRYPT);
 						if(empty($password)){
-								$fail = "<div>Password field can not be empty!</div>";
+								$fail = "{$GLOBALS['emptyPassword']}";
 						}
 						if(empty($confirmpwd)){
-								$fail = "<div>Confirm field can not be empty!</div>";
+								$fail = "{$GLOBALS['emptyConfPassword']}";
 						}
 						if(!empty($password) && !empty($confirmpwd)){
 								if($password === $confirmpwd){
 										$stmt = $this->conn->prepare("UPDATE fmcm_users SET passwd = :hash WHERE id_user = :id LIMIT 1");
 										$stmt->execute([$hash, $id]);
-										$success = 'Password has been changed!';
+										$success = "{$GLOBALS['passwordSuccess']}";
 										$pdo = null;
 								}
 								else{
-										$fail = 'Passwords do not match!';
+										$fail = "{$GLOBALS['passwordNoMatch']}";
 								}
 						}
 						}

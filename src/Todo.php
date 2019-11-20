@@ -60,19 +60,19 @@ class Todo
         if (isset($_SESSION['uname'])) {
             $html .= "
                 <td class='nav-item'>
-                   <a class='nav-link' href='logout.php'>Logout</a>
+                   <a class='nav-link' href='logout.php'>{$GLOBALS['logOutSubmit']}</a>
                 </td>
                 <td class='nav-item'>
                   <div class='dropdown'>
-                      <div class='nav-link'>New</div>
+                      <div class='nav-link'>{$GLOBALS['navNew']}</div>
                           <div class='dropdown-content nav-link'>
-                              <a href='new_contact.php'>Contact</a>
+                              <a href='new_contact.php'>{$GLOBALS['contact']}</a>
                           </div>
                   </div>
                 </td>
                 <td class='nav-item'>
                   <div class='dropdown'>
-                      <div class='nav-link'>Case</div>
+                      <div class='nav-link'>{$GLOBALS['navCase']}</div>
                           <div class='dropdown-content nav-link'>
                               <tr>{$this->closeCase()}</tr>
                               <tr>{$this->openCase()}</tr>
@@ -103,13 +103,13 @@ class Todo
           $status = 'Active';
 
     			if (empty($title)){
-    				  $error .= "Title is required.";
+    				  $error .= "{$GLOBALS['caseEmptyTitle']}";
     			}
     			if (empty($issue)){
-    				  $error .= "Message is required.";
+    				  $error .= "{$GLOBALS['caseEmptyMessage']}";
     			}
           if (empty($contacts)) {
-              $error .= "A contact is required.";
+              $error .= "{$GLOBALS['caseEmptyContact']}";
           }
     			if(!empty($title) && !empty($issue) && !empty($contacts)){
       				$stmt = $this->conn->prepare("INSERT INTO fmcm_todo (name, title, issue, created, status, contacts) VALUES (:name, :title, :issue, :created, :status, :contacts)");
@@ -172,7 +172,7 @@ class Todo
                     }
                     $result .= "</div>";
                 } else {
-                    $result .= "Search field can not be empty";
+                    $result .= "{$GLOBALS['emptySearch']}";
                 }
             $pdo = null;
         }
@@ -237,7 +237,7 @@ class Todo
       } else {
           $html .= "
           <tr class='case-row'>
-              <td class='nodata' colspan='6'>No entries in database</td>
+              <td class='nodata' colspan='6'>{$GLOBALS['noEntriesDb']}</td>
           </tr>
           ";
         }
@@ -271,7 +271,7 @@ class Todo
       } else {
           $html .= "
           <tr class='case-row'>
-              <td class='nodata' colspan='4'>No entries in database</td>
+              <td class='nodata' colspan='4'>{$GLOBALS['noEntriesDb']}</td>
           </tr>
           ";
       }
@@ -321,7 +321,7 @@ class Todo
         } else {
                $html .= "
                <tr class='case-row'>
-                   <td class='nodata' colspan='4'>No entries in database</td>
+                   <td class='nodata' colspan='4'>{$GLOBALS['noEntriesDb']}</td>
                </tr>
                ";
             }
@@ -504,7 +504,7 @@ class Todo
                 $sql = $this->conn->prepare("INSERT INTO fmcm_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
                 $sql->execute([$id, $commtext, $uname, $dateStamp]);
             } else {
-                $error = "You have to leave a comment";
+                $error = "{$GLOBALS['noComment']}";
             }
         }
 
@@ -541,7 +541,7 @@ class Todo
 
         $html .= "
             <form method='post'>
-                <button type='submit' name='closeCase' class='saveCase nav-link'>Close case</button>
+                <button type='submit' name='closeCase' class='saveCase nav-link'>{$GLOBALS['closeCase']}</button>
             </form>
         ";
         $pdo = null;
@@ -566,7 +566,7 @@ class Todo
 
         $html .= "
             <form method='post'>
-                <input type='submit' name='openCase' class='saveCase nav-link' value='Open case'>
+                <input type='submit' name='openCase' class='saveCase nav-link' value='{$GLOBALS['openCase']}'>
             </form>
         ";
         $pdo = null;

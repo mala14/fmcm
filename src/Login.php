@@ -47,7 +47,7 @@ class Login
     				header('Location: my_page.php');
     				exit;
   			} else {
-            $_SESSION['login-error'] = "<p class='loginErr'>Wrong User Name or password</p>";
+            $_SESSION['login-error'] = "<p class='loginErr'>{$GLOBALS['errorLogin']}</p>";
             $error = $_SESSION['login-error'];
             unset($_SESSION['login-error']);
   			  }
