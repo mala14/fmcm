@@ -2,6 +2,11 @@ revision history
 
 ===================
 
+v0.2.66 (2019-11-20)
+
+Can now set a password when creating new user. 
+
+------------------
 v0.2.65 (2019-11-20)
 
 And update of revision (forget to often).

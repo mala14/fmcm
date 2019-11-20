@@ -11,6 +11,7 @@ class Admin
 		{
 				$this->conn = $pdo;
 		}
+
 		/**
 		*  Check that user is admin
 		*
@@ -30,7 +31,7 @@ class Admin
 							exit;
 						}
 				}
-			$stmt = null;
+			$pdo = null;
 		}
 
 		/**
@@ -54,7 +55,7 @@ class Admin
 						";
 				}
 			}
-			$stmt = null;
+			$pdo = null;
 			return $html;
 		}
 
@@ -67,6 +68,7 @@ class Admin
 		{
 				$html = null;
 				$error = null;
+				$fail = null;
 
 				if(isset($_POST['addus'])){
 						$uname = htmlentities($_POST['uname']);
@@ -76,28 +78,40 @@ class Admin
 						$email = htmlentities($_POST['email']);
 						$active = "disabled";
 						$timestamp = date('Y-m-d G:i:s');
+						$password = strip_tags($_POST['password']);
+						$confirmpwd = strip_tags($_POST['confirmpwd']);
+						$hash = password_hash($password, PASSWORD_BCRYPT);
 
 						if(empty($uname)){
-							$error = "{$GLOBALS['emptyUname']}";
+								$error = "{$GLOBALS['emptyUname']}";
 						}
 						if(empty($fname)){
-							$error = "{$GLOBALS['emptyFname']}";
+								$error = "{$GLOBALS['emptyFname']}";
 						}
 						if(empty($lname)){
-							$error = "{$GLOBALS['emptyLname']}";
+								$error = "{$GLOBALS['emptyLname']}";
 						}
 						if(empty($email)){
-							$error = "{$GLOBALS['emptyEmail']}";
+								$error = "{$GLOBALS['emptyEmail']}";
+						}
+						if(empty($password)){
+								$fail = "{$GLOBALS['emptyPassword']}";
+						}
+						if(empty($confirmpwd)){
+								$fail = "{$GLOBALS['emptyConfPassword']}";
 						}
 
-						if(!empty($uname) && !empty($lname) && !empty($fname) && !empty($email)){
-						$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :timestamp, :active)");
-						$stmt->execute([$uname, $lname, $fname, $email, $type, $timestamp, $active]);
-						$stmt = null;
-						header('Location: list_users.php');
-						exit;
+						if(!empty($uname) && !empty($lname) && !empty($fname) && !empty($email) && !empty($password) && !empty($confirmpwd)) {
+								if($password === $confirmpwd){
+										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timestamp, :active)");
+										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timestamp, $active]);
+										$pdo = null;
+										header('Location: list_users.php');
+										exit;
+								}	else {
+											$fail = "{$GLOBALS['passwordNoMatch']}";
+									}
 						}
-
 				}
 				$html .= "
 						<form action='' method='post'>
@@ -112,6 +126,9 @@ class Admin
 														<option value='admin'>{$GLOBALS['adminType']}</option>
 												</select>
 										</div></div></div>
+										<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['setPassWord']}: </div><input type='password' name='password' value='' placeholder='Password' autocomplete='off' /></div>
+										<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['confPassWord']}: </div><input type='password' name='confirmpwd' value='' placeholder='Confirm password' autocomplete='off' /></div>
+										<div>{$error}</div>
 										<div class='addUser'><input type='submit' name='addus' value='{$GLOBALS['save']}'><input type='reset' value='{$GLOBALS['reset']}'></div>
 								</div>
 						</form>
@@ -149,10 +166,9 @@ class Admin
 												<td class='idedit pad-left-right' title='Edit'><a class='uedit' href='users_edit.php?id={$row['id_user']}'>{$GLOBALS['userEdit']}</a></td>
 										</tr>
 								</table>
-
 					";
 			}
-			$stmt = null;
+			$pdo = null;
 			return $html;
 		}
 
@@ -181,7 +197,7 @@ class Admin
 						$active = $_POST['active'];
 						$stmt = $this->conn->prepare("UPDATE fmcm_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
 						$stmt->execute([$uname, $type, $lname, $fname, $email, $active, $id]);
-						$stmt = null;
+						$pdo = null;
 						var_dump($stmt);
 						header('Location: list_users.php');
 						exit;
