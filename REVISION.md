@@ -2,6 +2,19 @@ revision history
 
 ===================
 
+v0.2.65 (2019-11-20)
+
+And update of revision (forget to often).
+
+------------------
+
+v0.2.64 (2019-11-20)
+
+Fixed add user error
+More globals added to src/Sitevars
+
+------------------
+
 v0.2.61 (2019-11-19)
 
 More globals added to src/Sitevars  
