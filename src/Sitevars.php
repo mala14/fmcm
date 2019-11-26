@@ -120,4 +120,4 @@ $noComment = "You have to leave a comment"; // The empty comment error message
 *
 */
 $copyright = "&copy; mala14 www.freemasons.se"; // The creator
-$github = "<a href='https://github.com/mala14/fmcm'><i class='fab fa-github'></i></a>"; // FMCM GitHub repo
+$github = "<a href='https://github.com/mala14/fmcm'><i class='fab fa-github fa-2x'></i></a>"; // FMCM GitHub repo

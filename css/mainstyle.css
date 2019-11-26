@@ -1,7 +1,11 @@
 /*
 * Stylesheet for the site. Change main layout here.
 */
-html {overflow-y:scroll;background-color: #f3f4f6;} /* Always display the scrollbar, avoid flipping pages & bg img prop*/
+html {
+		font-size: 100%;
+		overflow-y:scroll;
+		background-color: #f3f4f6;
+}
 
 header,footer,nav,article,section,aside,figure,figcaption{display:block;}
 a:link {text-decoration:none; color:#333;}
@@ -20,10 +24,11 @@ body {
 	/**
  * responsive
  */
- @media (max-width: 500px) {
+ @media (max-width: 31.25em) {
     body {
         width: auto;
     }
+
 }
 
 input[type="text"] {
@@ -180,7 +185,7 @@ p.indent {
 }
 
 .loginBtn {
-		border: 1px solid #ccc;
+		border: 1px solid #B8B7B7;
 		border-radius: 5px;
 		box-shadow: none;
 		width: 200px;
@@ -215,7 +220,16 @@ p.indent {
 		margin: 0 auto;
 		text-align: center;
 }
-
+/*
 .copyright a {
 		text-decoration: underline;
+} */
+
+.copyright:hover {
+		color: #ccc;
+}
+
+
+.fa-github:hover {
+		color: #ccc;
 }
