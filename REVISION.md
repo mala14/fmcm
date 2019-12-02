@@ -2,18 +2,9 @@ revision history
 
 ===================
 
-v0.2.67 (2019-11-26)
-
-Minor design fixes.  
-Edit on sitevars.  
-Todo changes.  
-
-------------------
-
-
 v0.2.66 (2019-11-20)
 
-Can now set a password when creating new user.
+Can now set a password when creating new user. 
 
 ------------------
 v0.2.65 (2019-11-20)

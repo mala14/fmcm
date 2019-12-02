@@ -17,4 +17,5 @@ Admin panel to be more extensive
 . User admin
 . Changes in site settings etc.
 . Separate admin page
+. Database dump function
 . Contact admin

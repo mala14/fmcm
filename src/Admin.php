@@ -64,6 +64,16 @@ class Admin
     *
   	* @return
   	*/
+		public function createUname()
+		{
+				
+		}
+
+		/**
+  	* Add users to system
+    *
+  	* @return
+  	*/
 		public function addUsers()
 		{
 				$html = null;
