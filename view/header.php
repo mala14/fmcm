@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="FreeMasons Case Management system">
@@ -8,7 +8,6 @@
     <script src="js/href.js"></script>
     <script src="vendor/ckeditor5-build-classic/ckeditor.js"></script>
     <link rel="stylesheet" href="css/style.css">
-
     <title><?= $title ?></title>
 </head>
 <body>

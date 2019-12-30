@@ -116,8 +116,8 @@ class Todo
       				$stmt->execute([$name, $title, $issue, $created, $status, $contacts]);
       				$saved .= "Message saved";
       				$stmt = null;
-      				header('Location: new_case.php');
-      				exit;
+              echo "<script>location.href = 'new_case.php'</script>";
+              exit;
     			}
   		}
 
@@ -443,7 +443,7 @@ class Todo
                 $engineer = $_POST['assigned'];
                 $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
                 $sql->execute([$engineer, $this->getId()]);
-                header('Location: ' . $_SERVER['REQUEST_URI']);
+                echo "<script>location.href = ''</script>";
                 exit;
             }
         }

@@ -27,7 +27,7 @@ class Admin
 						if($user && $type['type'] === 'admin'){
 
 						}	else {
-							header('Location: dashboard.php');
+							header('Location: my_page.php');
 							exit;
 						}
 				}
@@ -64,16 +64,6 @@ class Admin
     *
   	* @return
   	*/
-		public function createUname()
-		{
-				
-		}
-
-		/**
-  	* Add users to system
-    *
-  	* @return
-  	*/
 		public function addUsers()
 		{
 				$html = null;
@@ -103,7 +93,7 @@ class Admin
 										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timestamp, :active)");
 										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timestamp, $active]);
 										$pdo = null;
-										header('Location: list_users.php');
+										echo "<script>location.href = 'list_users.php';</script>";
 										exit;
 								}	else {
 											$fail = "{$GLOBALS['passwordNoMatch']}";
@@ -195,8 +185,7 @@ class Admin
 						$stmt = $this->conn->prepare("UPDATE fmcm_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
 						$stmt->execute([$uname, $type, $lname, $fname, $email, $active, $id]);
 						$pdo = null;
-						var_dump($stmt);
-						header('Location: list_users.php');
+						echo "<script>location.href = 'list_users.php'</script>";
 						exit;
 					}
 						$html .= "

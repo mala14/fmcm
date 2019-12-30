@@ -2,7 +2,8 @@
 /**
 * Class for users
 */
-class User{
+class User
+{
 
     /* Properties */
     private $conn;
@@ -43,8 +44,7 @@ class User{
                 $stmt = $this->conn->prepare("INSERT INTO fmcm_contacts (con_fname, con_lname, con_jtitle, con_phone, con_email, con_office, con_address) VALUES (:fname, :lname, :jtitle, :phone, :email, :office, :address)");
                 $stmt->execute([$fname, $lname, $jtitle, $phone, $email, $office, $address]);
                 $stmt = null;
-                header('Location: my_page.php');
-                exit;
+                $html .= "<script>location.href = 'my_page.php'</script>";
             }
         }
         $html .= "
@@ -67,7 +67,6 @@ class User{
   * Get username and present it on page
   *
   */
-
   	public function getName(){
     		$html = null;
     		$html .= "{$_SESSION['uname']}";

@@ -11,6 +11,7 @@
 */
 $title = "FreeMasons Case Management system"; // The html title
 $siteName = "FMCM"; // Site name.
+$lang = "en"; // The language setting
 
 /**
 * The main content variables

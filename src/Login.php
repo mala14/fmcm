@@ -1,13 +1,11 @@
 <?php
+
 /**
 * Class for login
 */
 class Login
 {
-    /**
-     *
-     */
-    /* Properties */
+		/* Properties */
     private $conn;
 
     /* Get database access */
@@ -20,10 +18,14 @@ class Login
     public function checkLogin()
     {
         $user = isset($_SESSION['uname']) ? $_SESSION['uname'] : null;
-        isset($user) or die (header('Location: index.php'));
+				isset($user) or die("<script>location.href = 'index.php'</script>");
 	  }
 
-  	/* login form */
+		/**
+  	* The login method
+  	*
+  	* @return
+  	*/
   	public function uLogin()
     {
     		$error = null;
@@ -36,71 +38,64 @@ class Login
       			$stmt->execute([$username]);
       			$user = $stmt->fetch();
 
-  			if($user && password_verify($password, $user['passwd'])){
-    				$_SESSION['uname'] = $username;
-    				$_SESSION['time'] = time();
-    				$ltime = time();
-    				$status = 1;
-    				$timestp = date('Y-m-d G:i:s');
-    				$sql = $this->conn->prepare("UPDATE fmcm_users SET lastlogin = :timestp, status = :status, time = :ltime WHERE uname = :username");
-    				$sql->execute([$timestp, $status, $ltime, $username]);
-    				header('Location: my_page.php');
-    				exit;
-  			} else {
-            $_SESSION['login-error'] = "<p class='loginErr'>{$GLOBALS['errorLogin']}</p>";
-            $error = $_SESSION['login-error'];
-            unset($_SESSION['login-error']);
-  			  }
+      			if($user && password_verify($password, $user['passwd'])){
+        				$_SESSION['uname'] = $username;
+        				$_SESSION['time'] = time();
+        				$ltime = time();
+        				$status = 1;
+        				$timestp = date('Y-m-d G:i:s');
+        				$sql = $this->conn->prepare("UPDATE fmcm_users SET lastlogin = :timestp, status = :status, time = :ltime WHERE uname = :username");
+        				$sql->execute([$timestp, $status, $ltime, $username]);
+								echo "<script>location.href = 'my_page.php'</script>";
+      			}
     				$pdo = null;
+            exit;
     		}
-          $html .= "
-              <div class=''>
-                  <input type='text' class='form-login' name='username' placeholder='{$GLOBALS['loginHolder']}' required='required' autofocus='autofocus'>
-              </div>
-              <div class=''>
-                  <input type='password' class='form-login' name='password' placeholder='{$GLOBALS['loginPassHolder']}' required='required'>
-              </div>
-              {$error}
-          ";
+          $html .= "{$error}";
     		  return $html;
   	}
-    // Set login time and make account inactive/signed out after time has ended.
+
+		/**
+  	* Set login time and make account inactive/signed out after time has ended.
+  	*
+  	* @return
+  	*/
   	public function getSessions()
     {
     		if(isset($_SESSION['uname'])){
       			$mySession = $_SESSION['uname'];
-          			if(time() - $_SESSION['time'] > 18000){
-            				$stmt = $this->conn->prepare("UPDATE fmcm_users SET time = NULL WHERE uname = :mySession");
-            				$stmt->execute([$mySession]);
-            				$stmt = null;
-            				session_destroy();
-            				unset($_SESSION['uname']);
-          			}
+      			if(time() - $_SESSION['time'] > 18000){
+        				$stmt = $this->conn->prepare("UPDATE fmcm_users SET time = NULL WHERE uname = :mySession");
+        				$stmt->execute([$mySession]);
+        				$stmt = null;
+        				session_destroy();
+        				unset($_SESSION['uname']);
+      			}
     		}
   	}
-    /**
-    * The logout method
-    */
+
+		/**
+  	* The log out method
+  	*
+  	* @return
+  	*/
   	public function uLogout()
     {
-    		$html = null;
-      		if(isset($_POST['logout'])){
-        			if(isset($_SESSION['uname'])){
-        				$status = 0;
-        				$mySession = $_SESSION['uname'];
-        				$stmt = $this->conn->prepare("UPDATE fmcm_users SET status = :status, time = NULL WHERE uname = :mySession");
-        				$stmt->execute([$mySession, $status]);
-        				$pdo = null;
-        			}
-        			session_destroy();
-        			unset($_SESSION['uname']);
-        			header('Location: index.php');
-        			exit;
-      		}
-
-  			$html .= "
-            <button type='submit' class='loginBtn' name='logout'>{$GLOBALS['logOutSubmit']}</button>
-  			";
-  			return $html;
+				$html = null;
+				if(isset($_POST['logout'])){
+						if(isset($_SESSION['uname'])){
+								$status = 0;
+								$mySession = $_SESSION['uname'];
+								$stmt = $this->conn->prepare("UPDATE fmcm_users SET status = :status, time = NULL WHERE uname = :mySession");
+								$stmt->execute([$mySession, $status]);
+								$pdo = null;
+								session_destroy();
+								unset($_SESSION['uname']);
+						}
+						echo "<script>location.href = 'index.php'</script>";
+            exit;
+				}
+				$html .= "<button type='submit' class='loginBtn' name='logout'>{$GLOBALS['logOutSubmit']}</button>";
+				return $html;
   	}
 }
