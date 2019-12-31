@@ -75,6 +75,7 @@ class Admin
 						$lname = htmlentities($_POST['lname']);
 						$fname = htmlentities($_POST['fname']);
 						$email = htmlentities($_POST['email']);
+						$active = null;
 
 						$timestamp = date('Y-m-d G:i:s');
 						$password = strip_tags($_POST['password']);
@@ -101,24 +102,7 @@ class Admin
 						}
 				}
 				$html .= "
-						<form action='' method='post'>
-								<div id='addUtbl'>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['username']}: </div><div class='editUserField'><input type='text' name='uname' required /></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['name']}: </div><div class='editUserField'><input type='text' name='fname' required /></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['surname']}: </div><div class='editUserField'><input type='text' name='lname' required /></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['email']}: </div><div class='editUserField'><input type='text' name='email' required /></div></div></div>
-										<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['type']}: </div><div class='editUserField'>
-												<select name='type' class='editUserField'>
-														<option value='usr'>{$GLOBALS['usrType']}</option>
-														<option value='admin'>{$GLOBALS['adminType']}</option>
-												</select>
-										</div></div></div>
-										<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['setPassWord']}: </div><input type='password' name='password' value='' placeholder='Password' autocomplete='off' required /></div>
-										<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['confPassWord']}: </div><input type='password' name='confirmpwd' value='' placeholder='Confirm password' autocomplete='off' required /></div>
-										<div>{$fail}</div>
-										<div class='addUser'><input type='submit' name='addus' value='{$GLOBALS['save']}'><input type='reset' value='{$GLOBALS['reset']}'></div>
-								</div>
-						</form>
+						<div>{$fail}</div>
 				";
 				return $html;
 		}
@@ -252,12 +236,7 @@ class Admin
 						}
 				}
 				$html .= "
-						<form method='post'>
-							<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['setPassWord']}: </div><input type='password' name='password' value='' placeholder='Password' autocomplete='off' /></div>
-							<div class='passWdTbl'><div class='passwdBox'>{$GLOBALS['confPassWord']}: </div><input type='password' name='confirmpwd' value='' placeholder='Confirm password' autocomplete='off' /></div>
-							<div>{$fail}</div>
-							<div class=''><input type='submit' name='chUPwd' value='{$GLOBALS['save']}'/> <input type='reset' value='{$GLOBALS['reset']}'></div>
-						</form>
+						<div>{$fail}</div>
 				";
 				return $html;
 		}

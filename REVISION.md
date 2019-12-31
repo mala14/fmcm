@@ -2,6 +2,11 @@ revision history
 
 ===================
 
+v0.2.69 (2019-12-31)
+
+Cleaning some HTML from methods and moved it into front controllers.
+
+------------------
 v0.2.68 (2019-12-30)
 
 Fixed headers already sent error.

@@ -15,6 +15,15 @@
         <?= $todo->searchUserForm() ?>
     </div>
     <div class="caseInfo">
+        <form method="post">
+            <div class="caseUpdate"><div class="caseUpdateTitle"><?= $caseTitle ?>: </div><input type="text" class="issueTitle" name="issuetitle" placeholder="<?= $caseIssueHolder ?>"></div>
+            <div class="caseLabel"><label><?= $description ?>:</label></div>
+            <div class="setCase">
+                <textarea type="text" id="editor" class="messArea" name="commtext" /></textarea><br>
+                <input type="hidden" name="addContact" value="<?= $todo->getIdContact() ?>">
+                <div class="caseBtn"><input type="submit" class="submitBtn" name="sendCase" value="<?= $save ?>" /></div>
+            </div>
+        </form>
         <?= $todo->addCase() ?>
     </div>
 </div>

@@ -67,6 +67,7 @@ class Todo
                       <div class='nav-link'>{$GLOBALS['navNew']}</div>
                           <div class='dropdown-content nav-link'>
                               <a href='new_contact.php'>{$GLOBALS['contact']}</a>
+                              <a href='new_case.php'>{$GLOBALS['navCase']}</a>
                           </div>
                   </div>
                 </td>
@@ -120,17 +121,7 @@ class Todo
               exit;
     			}
   		}
-
   		$html .= "
-  				<form action='' method='post'>
-  						<div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><input type='text' class='issueTitle' name='issuetitle' placeholder='{$GLOBALS['caseIssueHolder']}'></div>
-  						<div class='caseLabel'><label>{$GLOBALS['description']}:</label></div>
-              <div class='setCase'>
-                  <textarea type='text' id='editor' class='messArea' name='commtext' /></textarea><br>
-                  <input type='hidden' name='addContact' value='{$this->getIdContact()}'>
-      						<div class='caseBtn'><input type='submit' class='submitBtn' name='sendCase' value='{$GLOBALS['save']}' /></div>
-              </div>
-  				</form>
   				<div>{$error}</div>
   		";
       $pdo = null;
