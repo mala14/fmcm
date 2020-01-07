@@ -65,6 +65,7 @@ $home = "My page";                      // My page button
 $activeCases = "Active";                // Active cases button
 $closedCases = "Closed";                // Closed cases button
 $newCase = "New case";                  // New case button
+$contacts = "Contacts";                 // List contacts
 
 /**
 * Left menu variables, Admin buttons and admin vars

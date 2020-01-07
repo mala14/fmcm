@@ -2,6 +2,12 @@ revision history
 
 ===================
 
+v0.2.70 (2020-01-07)
+
+Added edit contact form.  
+Minor css fixes.  
+
+------------------
 v0.2.69 (2019-12-31)
 
 Cleaning some HTML from methods and moved it into front controllers.
