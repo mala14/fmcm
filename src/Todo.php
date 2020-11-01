@@ -97,10 +97,10 @@ class Todo
 
   		if(isset($_POST['sendCase'])){
           $name = $_SESSION['uname'] ?? null;
-    			$issue = $_POST['commtext'];
-    			$title = strip_tags($_POST['issuetitle']);
+    			$issue = htmlentities($_POST['commtext']);
+    			$title = htmlentities($_POST['issuetitle']);
     			$created = date('Y-m-d G:H:i');
-          $contacts = $_POST['addContact'];
+          $contacts = htmlentities(['addContact']);
           $status = 'Active';
 
     			if (empty($title)){
@@ -490,7 +490,7 @@ class Todo
         $dateStamp = date('Y-m-d H:i:s');
 
         if (isset($_POST['comment'])) {
-            $commtext = $_POST['commtext'];
+            $commtext = htmlentities($_POST['commtext']);
             if (!empty($commtext)) {
                 $sql = $this->conn->prepare("INSERT INTO fmcm_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
                 $sql->execute([$id, $commtext, $uname, $dateStamp]);

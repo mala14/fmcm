@@ -71,7 +71,7 @@ class Admin
 
 				if(isset($_POST['addus'])){
 						$uname = htmlentities($_POST['uname']);
-						$type = $_POST['type'];
+						$type = htmlentities($_POST['type']);
 						$lname = htmlentities($_POST['lname']);
 						$fname = htmlentities($_POST['fname']);
 						$email = htmlentities($_POST['email']);
@@ -164,8 +164,8 @@ class Admin
 						$lname = htmlentities($_POST['lname']);
 						$fname = htmlentities($_POST['fname']);
 						$email = htmlentities($_POST['email']);
-						$type = $_POST['type'];
-						$active = $_POST['active'];
+						$type = htmlentities($_POST['type']);
+						$active = htmlentities($_POST['active']);
 						$stmt = $this->conn->prepare("UPDATE fmcm_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
 						$stmt->execute([$uname, $type, $lname, $fname, $email, $active, $id]);
 						$pdo = null;
