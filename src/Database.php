@@ -2,10 +2,10 @@
 /**
 * db connection
 */
-$servername = "localhost";
-$username = "db user";
-$password = "db password";
-$database = "casemgmt";
+$servername = "";
+$username = "";
+$password = "";
+$database = "";
 $charset = "utf8mb4";
 
 $dsn = "mysql:host=$servername;dbname=$database;charset=$charset";

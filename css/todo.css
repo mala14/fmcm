@@ -54,8 +54,8 @@ td a {
 }
 
 .tbodyTd {
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     width: 10%;
 }
 
@@ -76,16 +76,18 @@ td a {
 
 .saveCase {
     border: none;
+    font-size: 1em;
     background-color: inherit;
     width: 100%;
     text-align: left;
+    padding: 7px;
+    font-family: 'Jura', sans-serif;
 }
 
 .saveCase:hover {
-    color: #fff;
-    background-color: #333;
-    border-radius: 3px;
-    padding: 3px;
+    color: #333;
+    background-color: #f1f1f1;
+    font-family: 'Jura', sans-serif;
 }
 
 .caseStatusOpen {

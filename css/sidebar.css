@@ -4,20 +4,22 @@
 
 .sidebar {
 		min-width: 140px;
-		background-color: #636161;
-		border-right: 1px solid #c1c0c0;
+		background-color: #fff;
+		margin-top: 3px;
+		/* border-right: 1px solid #c1c0c0; */
 }
 
 .side-lnk {
-		background-color: #636161;
+		background-color: inherit;
 		font-size: 1em;
-		color: #fff;
-		border-bottom: 1px solid #c1c0c0;
+		color: #333;
+		/* border-bottom: 1px solid #c1c0c0; */
 		padding-top: 10px;
 		padding-left: 10px;
 		padding-bottom: 10px;
 }
 
 .side-lnk:hover {
-		background-color: #8C8B8B;
+		background-color: #78AF9F;
+		color: #fff;
 }

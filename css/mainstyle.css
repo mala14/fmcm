@@ -1,20 +1,22 @@
-/*
-* Stylesheet for the site. Change main layout here.
-*/
+@charset "utf-8";
+/* CSS Document */
+
+* {
+   margin: 0px;
+   /* padding: 0px; */
+}
+
 html {
 		font-size: 100%;
 		overflow-y:scroll;
-		background-color: #f3f4f6;
+		background-color: #363538;
 }
 
-header,footer,nav,article,section,aside,figure,figcaption{display:block;}
 a:link {text-decoration:none; color:#333;}
 a:visited {text-decoration:none; color:#333;}
 a:hover {text-decoration:none; color:#333;}
 
 body {
-		padding: 0px;
-		margin: 0px;
 		height:100%;
 		font-family: Arial;
 		font-size: 0.9em;
@@ -28,7 +30,6 @@ body {
     body {
         width: auto;
     }
-
 }
 
 input[type="text"] {
@@ -52,11 +53,6 @@ textarea {
 		box-sizing: border-box;
 }
 
-h1 {
-		margin-top: 0;
-		margin-bottom: 0;
-}
-
 /**
 * make the whitespace under and over the tag smaller on all <p> tags
 */
@@ -68,13 +64,21 @@ p {
 }
 
 p.indent {
-	 padding-left: 0.5em
+	  padding-left: 0.5em
 }
 
 .site-title {
-		height: 55px;
-		margin-top: 15px;
-		background-color: #f3f4f6;
+    display: flex;
+		height: 100px;
+		color: #fff;
+		background-color: #FBAD4E;
+		font-family: 'Jura', sans-serif;
+    text-shadow: 1px 1px 0px #6b6a6a;
+}
+.site-image,
+.site-image img {
+    margin: 5px;
+    opacity: 0.6;
 }
 
 /*
@@ -82,9 +86,10 @@ p.indent {
 */
 .header {
 		max-width:1024px;
-		margin: 0 auto;
-		font-size: 24px;
-		text-indent:5px;
+    height: 100px;
+		/* margin: 0 auto; */
+		/* font-size: 24px; */
+		/* text-indent:5px; */
 }
 
 /**
@@ -212,24 +217,23 @@ p.indent {
 		border-color: #ccc;
 		padding-top: 20px;
 		margin-bottom: 20px;
-		background-color: #f3f4f6;
+		background-color: #363538;
 }
 
 .copyright {
 		width: 130px;
 		margin: 0 auto;
 		text-align: center;
+    color: #dda032;
 }
-/*
-.copyright a {
-		text-decoration: underline;
-} */
 
 .copyright:hover {
-		color: #ccc;
+		color: #78af9f;
 }
 
-
+.fa-github {
+    color: #dda032;
+}
 .fa-github:hover {
-		color: #ccc;
+		color: #78af9f;
 }

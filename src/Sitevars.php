@@ -10,15 +10,15 @@
 *
 */
 $title = "FreeMasons Case Management system"; // The html title
-$siteName = "FMCM"; // Site name.
+$siteName = "FreeMasons Case Management system"; // Site name.
 $lang = "en"; // The language setting
 
 /**
 * The main content variables
 *
 */
-$loginTitle = "FMCM Login";             // Login title
-$logoutTitle = "FMCM Logout";           // Logout title
+$loginTitle = "";             // Login title
+$logoutTitle = "";           // Logout title
 $loginSubmit = "Submit";                // The value on login button
 $logOutSubmit = "Logout";               // The value on logout button
 $loginHolder = "User name";             // The User name placeholder in login page
@@ -34,7 +34,7 @@ $assignedTo = "Assigned to";	          //  Assigned to title, at case listing
 $closed = "Closed";                     // Closed title, at closed case listing
 $closedBy = "Closed by";                // Closed by title, at closed case listing
 
-$contact = "Contact";                   // The case form Contact title & navbar new/contact
+$contact = "Customer";                   // The case form Contact title & navbar new/contact
 $name = "Name";                         // The case form Name title
 $userTitle = "Title";                   // The case form Title title
 $phone = "Phone";                       // The case form Phone title
