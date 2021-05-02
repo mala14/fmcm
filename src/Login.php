@@ -34,7 +34,7 @@ class Login
       			$username = strip_tags(trim($_POST['username']));
       			$password = strip_tags(trim($_POST['password']));
       			$hash = password_hash('$password', PASSWORD_BCRYPT);
-      			$stmt = $this->conn->prepare("SELECT * FROM fmtodo_users WHERE uname = :username AND active = 'active' LIMIT 1");
+      			$stmt = $this->conn->prepare("SELECT * FROM fmcm_users WHERE uname = :username AND active = 'active' LIMIT 1");
       			$stmt->execute([$username]);
       			$user = $stmt->fetch();
 
@@ -44,7 +44,7 @@ class Login
         				$ltime = time();
         				$status = 1;
         				$timestp = date('Y-m-d G:i:s');
-        				$sql = $this->conn->prepare("UPDATE fmtodo_users SET lastlogin = :timestp, status = :status, time = :ltime WHERE uname = :username");
+        				$sql = $this->conn->prepare("UPDATE fmcm_users SET lastlogin = :timestp, status = :status, time = :ltime WHERE uname = :username");
         				$sql->execute([$timestp, $status, $ltime, $username]);
 								echo "<script>location.href = 'my_page.php'</script>";
       			}
@@ -65,7 +65,7 @@ class Login
     		if(isset($_SESSION['uname'])){
       			$mySession = $_SESSION['uname'];
       			if(time() - $_SESSION['time'] > 18000){
-        				$stmt = $this->conn->prepare("UPDATE fmtodo_users SET time = NULL WHERE uname = :mySession");
+        				$stmt = $this->conn->prepare("UPDATE fmcm_users SET time = NULL WHERE uname = :mySession");
         				$stmt->execute([$mySession]);
         				$stmt = null;
         				session_destroy();
@@ -86,7 +86,7 @@ class Login
 						if(isset($_SESSION['uname'])){
 								$status = 0;
 								$mySession = $_SESSION['uname'];
-								$stmt = $this->conn->prepare("UPDATE fmtodo_users SET status = :status, time = NULL WHERE uname = :mySession");
+								$stmt = $this->conn->prepare("UPDATE fmcm_users SET status = :status, time = NULL WHERE uname = :mySession");
 								$stmt->execute([$mySession, $status]);
 								$pdo = null;
 								session_destroy();
