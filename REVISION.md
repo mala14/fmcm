@@ -1,10 +1,10 @@
 revision history
 
 ===================
-
 v0.2.71 (2021-05-02)
-Removed source for CKeditor5
-Some design changes.
+
+Design Changes  
+Removed CKeditor5 source  
 
 ------------------
 v0.2.70 (2020-01-07)
