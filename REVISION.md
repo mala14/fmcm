@@ -1,6 +1,12 @@
 revision history
 
 ===================
+v0.2.72 (2021-05-08)  
+
+Design more or less responsive.
+Add create view to database, for case views.
+
+------------------
 v0.2.71 (2021-05-02)
 
 Design Changes  

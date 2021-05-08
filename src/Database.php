@@ -6,7 +6,7 @@ $servername = "";
 $username = "";
 $password = "";
 $database = "";
-$charset = "utf8";
+$charset = "utf8mb4";
 
 $dsn = "mysql:host=$servername;dbname=$database;charset=$charset";
 $opt = [

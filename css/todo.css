@@ -28,13 +28,14 @@ td a {
 }
 
 .caseTbl {
-		width: 93%;
+		width: 100%;
     padding: 10px;
 		background-color: #fff;
     margin: 0 auto;
 }
 
 .contactTbl {
+    width: 80%;
     padding: 10px;
 		background-color: #fff;
 }
@@ -47,26 +48,55 @@ td a {
 .tableUser {
     margin-bottom: 3px;
     border-bottom: 1px solid #f3f4f6;
+    width: inherit;
 }
 
 .table-row {
 		width: 100%;
 }
+.thCategories {
+    color: #1B5B8E;
+    text-align: left;
+
+}
+
+@media screen and (max-width: 31.25em) {
+  th:nth-child(1) {
+    display:none;
+  }
+}
+
+@media screen and (max-width: 31.25em) {
+  .tbodyTd:nth-child(1) {
+    display:none;
+  }
+}
 
 .tbodyTd {
     padding-top: 5px;
     padding-bottom: 5px;
-    width: 10%;
+    width: 20%;
 }
+
+.paddingTop {
+    padding-top: 10px;
+}
+
+.paddingBottom {
+    padding-bottom: 10px;
+}
+
 
 .case-row {
-		text-align: center;
+		/* text-align: center; */
+    /* width: 100%; */
     border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
 }
 
-.case-row-left {
+/* .case-row-left {
     text-align: left;
-}
+} */
 
 .case-row:hover {
 		background-color: #f3f4f6;
@@ -132,15 +162,25 @@ tfoot {
     margin-bottom: 5px;
 }
 
+@media screen and (max-width: 31.25em) {
+  .caseContactInfo {
+    width: 290px;
+  }
+}
+
 .caseInfo {
 		float: left;
     width: 60%;
-    min-width: 350px;
 }
 
+@media screen and (max-width: 31.25em) {
+  .caseInfo {
+    width: 290px;
+  }
+}
 
 .caseInfoTitle {
-    width: 80px;
+    width: 115px;
     background-color: #e9ecef;
     border-right: 1px solid #ccc;
     padding: 5px;
@@ -216,7 +256,7 @@ tfoot {
 }
 
 .messArea {
-		width: 70%;
+		width: 100%;
     min-height: 150px;
     min-width: 20%;
     padding: 5px;

@@ -91,37 +91,38 @@ class Todo
     */
     public function addCase(){
   		$html = null;
-  		$msg = null;
+  		$error = null;
+  		$saved = null;
   		$search = "<i class='fas fa-search'></i>";
 
   		if(isset($_POST['sendCase'])){
           $name = $_SESSION['uname'] ?? null;
     			$issue = $_POST['commtext'];
-    			$title = htmlentities($_POST['issuetitle']);
+    			$title = strip_tags($_POST['issuetitle']);
     			$created = date('Y-m-d G:H:i');
           $contacts = $_POST['addContact'];
           $status = 'Active';
 
     			if (empty($title)){
-    				  $msg .= "{$GLOBALS['caseEmptyTitle']}";
+    				  $error .= "{$GLOBALS['caseEmptyTitle']}";
     			}
     			if (empty($issue)){
-    				  $msg .= "{$GLOBALS['caseEmptyMessage']}";
+    				  $error .= "{$GLOBALS['caseEmptyMessage']}";
     			}
           if (empty($contacts)) {
-              $msg .= "{$GLOBALS['caseEmptyContact']}";
+              $error .= "{$GLOBALS['caseEmptyContact']}";
           }
     			if(!empty($title) && !empty($issue) && !empty($contacts)){
-      				$stmt = $this->conn->prepare("INSERT INTO fmtodo_todo (name, title, issue, created, status, contacts) VALUES (:name, :title, :issue, :created, :status, :contacts)");
+      				$stmt = $this->conn->prepare("INSERT INTO fmcm_todo (name, title, issue, created, status, contacts) VALUES (:name, :title, :issue, :created, :status, :contacts)");
       				$stmt->execute([$name, $title, $issue, $created, $status, $contacts]);
-      				$msg .= "Message saved";
+      				$saved .= "Message saved";
       				$stmt = null;
               echo "<script>location.href = 'new_case.php'</script>";
               exit;
     			}
   		}
   		$html .= "
-  				<div>{$msg}</div>
+  				<div>{$error}</div>
   		";
       $pdo = null;
   		return $html;
@@ -139,7 +140,7 @@ class Todo
             $search = $_POST['searchval'];
             $sql = ("
             SELECT *
-            FROM fmtodo_contacts
+            FROM fmcm_contacts
             WHERE
                 con_fname LIKE ?
                 OR con_lname LIKE ?
@@ -183,7 +184,7 @@ class Todo
         $html = null;
         if (isset($_POST['selectContact'])) {
             $contact = $this->getIdContact();
-            $sql = ("SELECT id_contact, con_fname, con_lname, con_email, con_jtitle, con_office, con_phone, con_address FROM fmtodo_contacts WHERE id_contact = :contact");
+            $sql = ("SELECT id_contact, con_fname, con_lname, con_email, con_jtitle, con_office, con_phone, con_address FROM fmcm_contacts WHERE id_contact = :contact");
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([$contact]);
             $row = $stmt->fetch();
@@ -208,26 +209,37 @@ class Todo
   	public function getClosedCases()
     {
   		$html = null;
-  		$sql = $this->conn->prepare("SELECT id, created, title, assigned, closedby, status, fixed FROM fmtodo_todo WHERE closedby IS NOT NULL ORDER BY fixed DESC");
+  		$sql = $this->conn->prepare("
+      SELECT
+          created,
+          case_id,
+          contact,
+          title,
+          assigned
+      FROM
+          v_fmcm_caseinfo
+      WHERE
+          status = 'Closed' ORDER BY case_id DESC
+      ");
   		$sql->execute();
       $getAmount = $sql->rowCount();
       if ($getAmount >= 1) {
           foreach ($sql as $res) {
-              $html .= "
-              <tr class='case-row' data-href='case.php?id={$res['id']}'>
-                  <td class='tbodyTd'>{$res['id']}</td>
+            $cutCreated = substr($res['created'], 0, 10);
+            $html .= "
+              <tr class='case-row' data-href='case.php?id={$res['case_id']}'>
+                  <td class='tbodyTd'>{$cutCreated}</td>
+                  <td class='tbodyTd'>{$res['case_id']}</td>
+                  <td class='tbodyTd'>{$res['contact']}</td>
                   <td class='tbodyTd'>{$res['title']}</td>
-                  <td class='tbodyTd'>{$res['created']}</td>
-                  <td class='tbodyTd'>{$res['fixed']}</td>
                   <td class='tbodyTd'>{$res['assigned']}</td>
-                  <td class='tbodyTd'>{$res['closedby']}</td>
               </tr>
               ";
           }
       } else {
           $html .= "
           <tr class='case-row'>
-              <td class='nodata' colspan='6'>{$GLOBALS['noEntriesDb']}</td>
+              <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
           </tr>
           ";
         }
@@ -243,16 +255,28 @@ class Todo
 	  public function getAllOpenCases()
     {
 		$html = null;
-		$sql = $this->conn->prepare("SELECT id, created, title, assigned, status FROM fmtodo_todo WHERE closedby IS NULL ORDER BY id ASC");
+		$sql = $this->conn->prepare("
+    SELECT
+        created,
+        case_id,
+        contact,
+        title,
+        assigned
+    FROM
+        v_fmcm_caseinfo
+    WHERE
+        status = 'Active' ORDER BY case_id ASC
+    ");
 		$sql->execute();
     $getAmount = $sql->rowCount();
     if ($getAmount >= 1) {
         foreach ($sql as $res) {
-            $created = substr($res['created'], 0, 10);
+            $cutCreated = substr($res['created'], 0, 10);
             $html .= "
-            <tr class='case-row' data-href='case.php?id={$res['id']}'>
-                <td class='tbodyTd'>{$res['id']}</td>
-                <td class='tbodyTd'>{$created}</td>
+            <tr class='case-row' data-href='case.php?id={$res['case_id']}'>
+                <td class='tbodyTd'>{$cutCreated}</td>
+                <td class='tbodyTd'>{$res['case_id']}</td>
+                <td class='tbodyTd'>{$res['contact']}</td>
                 <td class='tbodyTd'>{$res['title']}</td>
                 <td class='tbodyTd'>{$res['assigned']}</td>
             </tr>
@@ -261,7 +285,7 @@ class Todo
       } else {
           $html .= "
           <tr class='case-row'>
-              <td class='nodata' colspan='4'>{$GLOBALS['noEntriesDb']}</td>
+              <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
           </tr>
           ";
       }
@@ -281,13 +305,13 @@ class Todo
         $status = 'Active';
     		$sql = $this->conn->prepare("
         SELECT
-            id,
+            created,
+            case_id,
+            contact,
             title,
-            status,
-            assigned,
-            created
+            assigned
         FROM
-            fmtodo_todo
+            v_fmcm_caseinfo
         WHERE
             status = :status
         AND
@@ -300,9 +324,10 @@ class Todo
           foreach ($sql as $val) {
               $cutCreated = substr($val['created'], 0, 10);
               $html .= "
-              <tr class='case-row' data-href='case.php?id={$val['id']}'>
-                  <td class='tbodyTd'>{$val['id']}</td>
+              <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
                   <td class='tbodyTd'>{$cutCreated}</td>
+                  <td class='tbodyTd'>{$val['case_id']}</td>
+                  <td class='tbodyTd'>{$val['contact']}</td>
                   <td class='tbodyTd'>{$val['title']}</td>
                   <td class='tbodyTd'>{$val['assigned']}</td>
               </tr>
@@ -311,7 +336,7 @@ class Todo
         } else {
                $html .= "
                <tr class='case-row'>
-                   <td class='nodata' colspan='4'>{$GLOBALS['noEntriesDb']}</td>
+                   <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
                </tr>
                ";
             }
@@ -326,7 +351,7 @@ class Todo
     */
     public function getEngineer() {
         $id = $this->getId();
-        $sql = $this->conn->prepare("SELECT id_user, uname FROM fmtodo_users WHERE id_user = :id");
+        $sql = $this->conn->prepare("SELECT id_user, uname FROM fmcm_users WHERE id_user = :id");
         $sql->execute([$id]);
         $res = $sql['uname'];
         return $res;
@@ -342,24 +367,24 @@ class Todo
     		$html = null;
   			$sql = $this->conn->prepare("
             SELECT
-                fmtodo_todo.id,
-                fmtodo_todo.assigned,
-                fmtodo_todo.created,
-                fmtodo_contacts.con_fname,
-                fmtodo_contacts.con_lname,
-                fmtodo_contacts.con_email,
-                fmtodo_contacts.con_jtitle,
-                fmtodo_contacts.con_phone,
-                fmtodo_contacts.con_office,
-                fmtodo_contacts.con_address
+                fmcm_todo.id,
+                fmcm_todo.assigned,
+                fmcm_todo.created,
+                fmcm_contacts.con_fname,
+                fmcm_contacts.con_lname,
+                fmcm_contacts.con_email,
+                fmcm_contacts.con_jtitle,
+                fmcm_contacts.con_phone,
+                fmcm_contacts.con_office,
+                fmcm_contacts.con_address
             FROM
-                fmtodo_todo
+                fmcm_todo
             INNER JOIN
-                fmtodo_contacts
+                fmcm_contacts
             ON
-                fmtodo_todo.contacts = fmtodo_contacts.id_contact
+                fmcm_todo.contacts = fmcm_contacts.id_contact
             WHERE
-                fmtodo_todo.id = ?
+                fmcm_todo.id = ?
             ");
   			$sql->execute([$this->getId()]);
   			$res = $sql->fetchAll();
@@ -395,17 +420,17 @@ class Todo
         $html = null;
         $sql = $this->conn->prepare("
         SELECT
-            fmtodo_todo.id,
-            fmtodo_users.fname,
-            fmtodo_users.lname
+            fmcm_todo.id,
+            fmcm_users.fname,
+            fmcm_users.lname
         FROM
-            fmtodo_todo
+            fmcm_todo
         INNER JOIN
-            fmtodo_users
+            fmcm_users
         ON
-            fmtodo_todo.assigned = fmtodo_users.uname
+            fmcm_todo.assigned = fmcm_users.uname
         WHERE
-            fmtodo_todo.id = ?
+            fmcm_todo.id = ?
         ");
         $sql->execute([$this->getId()]);
         $res = $sql->fetchAll();
@@ -425,13 +450,13 @@ class Todo
     {
         $html = null;
         $error = null;
-        $sql = $this->conn->prepare("SELECT fname, lname, uname FROM fmtodo_users");
+        $sql = $this->conn->prepare("SELECT fname, lname, uname FROM fmcm_users");
         $sql->execute();
         $res = $sql->fetchAll();
         if (isset($_POST['updateCaseInfo'])) {
             if (isset($_POST['assigned'])) {
                 $engineer = $_POST['assigned'];
-                $sql = $this->conn->prepare("UPDATE fmtodo_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
+                $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
                 $sql->execute([$engineer, $this->getId()]);
                 echo "<script>location.href = ''</script>";
                 exit;
@@ -469,7 +494,7 @@ class Todo
     */
     public function getCaseTitle()
     {
-  			$stmt = $this->conn->prepare("SELECT id, title FROM fmtodo_todo WHERE id = :id");
+  			$stmt = $this->conn->prepare("SELECT id, title FROM fmcm_todo WHERE id = :id");
   			$stmt->execute([$this->getId()]);
   			$res = $stmt->fetch();
         $pdo = null;
@@ -491,7 +516,7 @@ class Todo
         if (isset($_POST['comment'])) {
             $commtext = $_POST['commtext'];
             if (!empty($commtext)) {
-                $sql = $this->conn->prepare("INSERT INTO fmtodo_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
+                $sql = $this->conn->prepare("INSERT INTO fmcm_comment (id_todo, comment, id_user, saved) VALUES (:id, :commtext, :uname, :dateStamp)");
                 $sql->execute([$id, $commtext, $uname, $dateStamp]);
             } else {
                 $error = "{$GLOBALS['noComment']}";
@@ -525,7 +550,7 @@ class Todo
         $id = $this->getId();
         $status = 'Closed';
         if (isset($_POST['closeCase'])) {
-            $sql = $this->conn->prepare("UPDATE fmtodo_todo SET status = :status, closedby = :uname, fixed = :dateStamp WHERE id = :id LIMIT 1");
+            $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = :uname, fixed = :dateStamp WHERE id = :id LIMIT 1");
             $sql->execute([$status, $uname, $dateStamp, $id]);
         }
 
@@ -550,7 +575,7 @@ class Todo
         $id = $this->getId();
         $status = 'Active';
         if (isset($_POST['openCase'])) {
-            $sql = $this->conn->prepare("UPDATE fmtodo_todo SET status = :status, closedby = null, fixed = null WHERE id = :id LIMIT 1");
+            $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = null, fixed = null WHERE id = :id LIMIT 1");
             $sql->execute([$status, $id]);
         }
 
@@ -570,7 +595,7 @@ class Todo
   	*/
     public function caseStatus()
     {
-        $sql = $this->conn->prepare("SELECT id, status FROM fmtodo_todo WHERE id = :id");
+        $sql = $this->conn->prepare("SELECT id, status FROM fmcm_todo WHERE id = :id");
         $sql->execute([$this->getId()]);
         $res = $sql->fetch();
         if ($res['status'] === 'Active') {
@@ -597,7 +622,7 @@ class Todo
   	*/
     public function getIssue()
     {
-        $sql = $this->conn->prepare("SELECT id, issue FROM fmtodo_todo WHERE id = :id");
+        $sql = $this->conn->prepare("SELECT id, issue FROM fmcm_todo WHERE id = :id");
         $sql->execute([$this->getId()]);
         $res = $sql->fetch();
         return $res['issue'];
@@ -613,7 +638,7 @@ class Todo
     {
         $html = null;
         $id = $this->getId();
-        $sql = $this->conn->prepare("SELECT id_comment, id_todo, comment, id_user, saved FROM fmtodo_comment WHERE id_todo = :id ORDER BY id_comment DESC");
+        $sql = $this->conn->prepare("SELECT id_comment, id_todo, comment, id_user, saved FROM fmcm_comment WHERE id_todo = :id ORDER BY id_comment DESC");
         $sql->execute([$id]);
         $res = $sql->fetchAll();
         foreach ($res as $val) {

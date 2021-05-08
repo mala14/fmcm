@@ -42,10 +42,11 @@
 
 .editUserField {
 		height: 100%;
+		width: 100%;
 }
 
 .editUserField select {
-		width: 266px;
+		/* width: 266px; */
 		height: 27px;
 		border: none;
 }
@@ -53,41 +54,47 @@
 .editUserField input[type="text"] {
 		padding-left: 5px;
 		height: 27px;
-		width: 266px;
+		/* width: 266px; */
 		border: none;
 }
 
 .admEditUser {
 		float: left;
 		display: block;
+		width: 100%;
+}
+
+#addUtbl {
+		width: 30%;
+		min-width: 310px;
+}
+
+.inputField {
+		width: 20%;
 }
 
 #admLnk a{
 	color: #E7E3B2;
 }
 
-.idname {
+.td-users {
+		color: inherit;
 }
 
-.idstatus {
-}
-
-.idtype {
-		width: 60px;
-}
-
-.idedit {
-		width: 45px;
-		float: right;
-}
-
-.idlast {
-}
-
-.iduname {
-		width: 50px;
-}
-
+@media screen and (max-width: 31.25em) {
+		.td-users:nth-child(1) {
+				display:none;
+		}
+		.td-users:nth-child(2) {
+				display:none;
+		}
+		.td-users:nth-child(5) {
+				display:none;
+		}
+		 .td-users:nth-child(7) {
+	 			display:none;
+		}
+ }
 
 .active {
 		width: 60px;
@@ -132,7 +139,7 @@
 }
 
 .passwdBox {
-	width: 80px;
+	width: 115px;
 	background-color: #e9ecef;
 	border-right: 1px solid #ccc;
 	padding: 5px;
@@ -144,7 +151,7 @@
 		margin: 0;
 		padding-left: 5px;
 		border: none;
-		width: 75%;
+		width: 100%;
 }
 
 .passWdTbl {
@@ -160,9 +167,9 @@
 /*
 * Edit link on user admin page
 */
-.uedit {
+/* .uedit {
 		float: right;
-}
+} */
 
 #status{
 	float: right;

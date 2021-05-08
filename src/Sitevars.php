@@ -29,7 +29,7 @@ $navCase = "Case";                      // The navbar menu object Case title
 
 $caseId = "Case id";                    // The case id title at case listing
 $created = "Created";                   // Created title, at case listing
-$caseTitle = "Case title";	            // Case title, at case listing
+$caseTitle = "Title";	            // Case title, at case listing
 $assignedTo = "Assigned to";	          //  Assigned to title, at case listing
 $closed = "Closed";                     // Closed title, at closed case listing
 $closedBy = "Closed by";                // Closed by title, at closed case listing
@@ -65,7 +65,7 @@ $home = "My page";                      // My page button
 $activeCases = "Active";                // Active cases button
 $closedCases = "Closed";                // Closed cases button
 $newCase = "New case";                  // New case button
-$contacts = "Contacts";                 // List contacts
+$contacts = "Customer";                 // List of customers
 
 /**
 * Left menu variables, Admin buttons and admin vars

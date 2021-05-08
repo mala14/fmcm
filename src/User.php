@@ -51,7 +51,7 @@ class User Extends Todo
             $timestamp = date('Y-m-d G:i:s');
 
             if(!empty($lname) && !empty($fname)){
-                $stmt = $this->conn->prepare("INSERT INTO fmtodo_contacts (con_fname, con_lname, con_jtitle, con_phone, con_email, con_office, con_address) VALUES (:fname, :lname, :jtitle, :phone, :email, :office, :address)");
+                $stmt = $this->conn->prepare("INSERT INTO fmcm_contacts (con_fname, con_lname, con_jtitle, con_phone, con_email, con_office, con_address) VALUES (:fname, :lname, :jtitle, :phone, :email, :office, :address)");
                 $stmt->execute([$fname, $lname, $jtitle, $phone, $email, $office, $address]);
                 $stmt = null;
                 echo "<script>location.href = 'my_page.php'</script>";
@@ -70,20 +70,20 @@ class User Extends Todo
 		{
 			$html = null;
 			$inactive = null;
-			$stmt = $this->conn->prepare("SELECT id_contact, con_fname, con_lname, con_email, con_address, con_office, con_jtitle, con_phone FROM fmtodo_contacts");
+			$stmt = $this->conn->prepare("SELECT id_contact, con_fname, con_lname, con_email, con_address, con_office, con_jtitle, con_phone FROM fmcm_contacts");
 			$stmt->execute();
 			foreach($stmt as $row){
 					$html .= "
-								<table class='tableCase tableUser'>
-										<tr class='case-row case-row-left' data-href='contact_edit.php?id={$row['id_contact']}'>
-												<td class='pad-left-right' title='Id {$row['id_contact']}'>{$row['id_contact']}</td>
-												<td class='pad-left-right' title='{$row['con_fname']}'>{$row['con_fname']}</td>
-												<td class='pad-left-right' title='{$row['con_lname']}'>{$row['con_lname']}</td>
-                        <td class='pad-left-right' title='{$row['con_email']}'>{$row['con_email']}</td>
-                        <td class='pad-left-right' title='{$row['con_jtitle']}'>{$row['con_jtitle']}</td>
-												<td class='idedit pad-left-right' title='Edit'><a class='uedit' href='contact_edit.php?id={$row['id_contact']}'>{$GLOBALS['userEdit']}</a></td>
-										</tr>
-								</table>
+              <table class='tableCase tableUser'>
+                  <tr class='case-row' data-href='contact_edit.php?id={$row['id_contact']}'>
+                      <td class='td-users pad-left-right' title='{$row['con_fname']}'>{$row['con_fname']}</td>
+                      <td class='td-users pad-left-right' title='{$row['con_lname']}'>{$row['con_lname']}</td>
+                      <td class='td-users pad-left-right' title='{$row['con_email']}'>{$row['con_email']}</td>
+                      <td class='td-users pad-left-right' title='{$row['con_jtitle']}'>{$row['con_jtitle']}</td>
+                      <td class='td-users pad-left-right' title='{$row['con_phone']}'>{$row['con_phone']}</td>
+                      <td class='td-users pad-left-right' title='Edit'><a href='contact_edit.php?id={$row['id_contact']}'>{$GLOBALS['userEdit']}</a></td>
+                  </tr>
+              </table>
 					";
 			}
 			$pdo = null;
@@ -101,7 +101,7 @@ class User Extends Todo
 				$fail = null;
 
 				$id = $_GET['id'];
-				$stmt = $this->conn->prepare("SELECT id_contact, con_fname, con_lname, con_email, con_address, con_office, con_jtitle, con_phone FROM fmtodo_contacts WHERE id_contact = :id");
+				$stmt = $this->conn->prepare("SELECT id_contact, con_fname, con_lname, con_email, con_address, con_office, con_jtitle, con_phone FROM fmcm_contacts WHERE id_contact = :id");
 				$stmt->execute([$id]);
 				$val = $stmt->fetch();
 
@@ -115,7 +115,7 @@ class User Extends Todo
 						$jtitle = htmlentities($_POST['jtitle']);
 						$phone = htmlentities($_POST['phone']);
 						$stmt = $this->conn->prepare("
-                UPDATE fmtodo_contacts
+                UPDATE fmcm_contacts
                 SET
                     con_fname = :fname,
                     con_lname = :lname,

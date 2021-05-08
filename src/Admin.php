@@ -21,7 +21,7 @@ class Admin
 		{
 				if(isset($_SESSION['uname'])){
 						$user = $_SESSION['uname'];
-						$stmt = $this->conn->prepare("SELECT uname, type, active FROM fmtodo_users WHERE uname = :user AND time IS NOT NULL");
+						$stmt = $this->conn->prepare("SELECT uname, type, active FROM fmcm_users WHERE uname = :user AND time IS NOT NULL");
 						$stmt->execute(array('user' => $user));
 						$type = $stmt->fetch();
 						if($user && $type['type'] === 'admin'){
@@ -45,7 +45,7 @@ class Admin
 
 			if(isset($_SESSION['uname'])){
 				$user = $_SESSION['uname'];
-				$stmt = $this->conn->prepare("SELECT type FROM fmtodo_users WHERE uname = :user");
+				$stmt = $this->conn->prepare("SELECT type FROM fmcm_users WHERE uname = :user");
 				$stmt->execute(array('user' => $user));
 				$type = $stmt->fetch();
 				if($user && $type['type'] === 'admin'){
@@ -91,7 +91,7 @@ class Admin
 
 						if(!empty($password) && !empty($confirmpwd)) {
 								if($password === $confirmpwd){
-										$stmt = $this->conn->prepare("INSERT INTO fmtodo_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timestamp, :active)");
+										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timestamp, :active)");
 										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timestamp, $active]);
 										$pdo = null;
 										echo "<script>location.href = 'list_users.php';</script>";
@@ -116,7 +116,7 @@ class Admin
 		{
 			$html = null;
 			$inactive = null;
-			$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, type, active, lastlogin FROM fmtodo_users");
+			$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, type, active, lastlogin FROM fmcm_users");
 			$stmt->execute();
 			foreach($stmt as $row){
 					if($row['active'] === 'active'){
@@ -126,15 +126,15 @@ class Admin
 					}
 					$html .= "
 								<table class='tableCase tableUser'>
-										<tr class='case-row case-row-left' data-href='users_edit.php?id={$row['id_user']}'>
-												<td class='idname pad-left-right' title='Id {$row['id_user']}'>{$row['id_user']}</td>
-												<td class='iduname pad-left-right' title='{$row['uname']}'>{$row['uname']}</td>
-												<td class='iduname pad-left-right' title='{$row['fname']}'>{$row['fname']}</td>
-												<td class='iduname pad-left-right' title='{$row['lname']}'>{$row['lname']}</td>
-												<td class='idtype pad-left-right' title='{$row['type']}'>{$row['type']}</td>
-												<td> {$status} </td>
-												<td class='idlast pad-left-right' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
-												<td class='idedit pad-left-right' title='Edit'><a class='uedit' href='users_edit.php?id={$row['id_user']}'>{$GLOBALS['userEdit']}</a></td>
+										<tr class='case-row' data-href='users_edit.php?id={$row['id_user']}'>
+												<td class='td-users pad-left-right' title='Id {$row['id_user']}'>{$row['id_user']}</td>
+												<td class='td-users pad-left-right' title='{$row['uname']}'>{$row['uname']}</td>
+												<td class='td-users pad-left-right' title='{$row['fname']}'>{$row['fname']}</td>
+												<td class='td-users pad-left-right' title='{$row['lname']}'>{$row['lname']}</td>
+												<td class='td-users pad-left-right' title='{$row['type']}'>{$row['type']}</td>
+												<td class='td-users'> {$status} </td>
+												<td class='td-users idlast pad-left-right' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
+												<td class='td-users idedit pad-left-right' title='Edit'><a class='uedit' href='users_edit.php?id={$row['id_user']}'>{$GLOBALS['userEdit']}</a></td>
 										</tr>
 								</table>
 					";
@@ -154,7 +154,7 @@ class Admin
 				$fail = null;
 
 				$id = $_GET['id'];
-				$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, email, type, active FROM fmtodo_users WHERE id_user = :id");
+				$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, email, type, active FROM fmcm_users WHERE id_user = :id");
 				$stmt->execute([$id]);
 				$val = $stmt->fetch();
 
@@ -166,7 +166,7 @@ class Admin
 						$email = htmlentities($_POST['email']);
 						$type = $_POST['type'];
 						$active = $_POST['active'];
-						$stmt = $this->conn->prepare("UPDATE fmtodo_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
+						$stmt = $this->conn->prepare("UPDATE fmcm_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
 						$stmt->execute([$uname, $type, $lname, $fname, $email, $active, $id]);
 						$pdo = null;
 						echo "<script>location.href = 'list_users.php'</script>";
@@ -224,7 +224,7 @@ class Admin
 						}
 						if(!empty($password) && !empty($confirmpwd)){
 								if($password === $confirmpwd){
-										$stmt = $this->conn->prepare("UPDATE fmtodo_users SET passwd = :hash WHERE id_user = :id LIMIT 1");
+										$stmt = $this->conn->prepare("UPDATE fmcm_users SET passwd = :hash WHERE id_user = :id LIMIT 1");
 										$stmt->execute([$hash, $id]);
 										$success = "{$GLOBALS['passwordSuccess']}";
 										$pdo = null;

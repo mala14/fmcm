@@ -12,7 +12,7 @@
 </head>
 <body>
   <div class="site-title">
-      <div><img class="site-image" src="../img/site/illuminati.png" alt="Illuminati image"></div>
+      <div><img class="site-image" src="" alt=""></div>
       <div><h1><?= $siteName ?></h1></div>
   </div>
 <?php include("view/navbar.php"); ?>
