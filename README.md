@@ -15,5 +15,5 @@ Install instructions
 - Import the sql/casemgmt.sql through phpMyadmin or terminals etc.
 - Configure the database connection in src/Database.php, set your credentials.
 - After install of database login as admin:admin @your.site/Where fmcm resides/index.php
-- Go to left menu click on button "admin" and then "New user".
-- Create a new superuser. Disable or delete the admin account.
+- Go to left menu click on button "Add users" to create a new case management user.
+- Create a new superuser. Disable or delete (@ the moment delete through your database tool) the admin account.
