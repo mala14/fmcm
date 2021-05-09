@@ -61,15 +61,22 @@ td a {
 }
 
 @media screen and (max-width: 31.25em) {
-  th:nth-child(1) {
-    display:none;
-  }
+    th:nth-child(1) {
+      display:none;
+    }
+    th:nth-child(5) {
+      display:none;
+    }
 }
 
 @media screen and (max-width: 31.25em) {
-  .tbodyTd:nth-child(1) {
-    display:none;
-  }
+    .tbodyTd:nth-child(1) {
+      display:none;
+    }
+    .tbodyTd:nth-child(5) {
+      display:none;
+    }
+
 }
 
 .tbodyTd {

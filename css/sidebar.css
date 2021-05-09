@@ -2,24 +2,55 @@
 * The sidebar style
 */
 
+
+@media screen and (max-width: 50em) {
+    .side-lnk-text:nth-child(2) {
+				display: none;
+    }
+		.side-lnk-adm:nth-child(2) {
+				display: none;
+    }
+		.sidebar:nth-child(1) {
+				width: 55px;
+    }
+}
+
 .sidebar {
-		min-width: 140px;
+		width: 140px;
 		background-color: #fff;
 		margin-top: 3px;
 		/* border-right: 1px solid #c1c0c0; */
+		/* display: inline-flex; */
 }
 
 .side-lnk {
 		background-color: inherit;
 		font-size: 1em;
 		color: #333;
-		/* border-bottom: 1px solid #c1c0c0; */
 		padding-top: 10px;
 		padding-left: 10px;
 		padding-bottom: 10px;
 }
 
+.side-lnk-text {
+		display: inherit;
+}
+
+.side-lnk-adm {
+		display: initial;
+}
+
+.fas:hover,
+.fa-fw:hover,
+.side-lnk-text:hover,
+.side-lnk-adm:hover,
 .side-lnk:hover {
 		background-color: #78AF9F;
 		color: #fff;
+}
+
+.fas,
+.fa-fw {
+		padding-left: 3px;
+		padding-right: 3px;
 }

@@ -1,61 +1,68 @@
 revision history
 
-===================
-v0.2.72 (2021-05-08)  
+===================  
 
-Design more or less responsive.
-Add create view to database, for case views.
+v0.2.73 (2021-05-09)  
+
+Left menu is more responsive.  
 
 ------------------
-v0.2.71 (2021-05-02)
+
+v0.2.72 (2021-05-08)  
+
+Design more or less responsive.  
+Add create view to database, for case views.  
+
+------------------
+v0.2.71 (2021-05-02)  
 
 Design Changes  
 Removed CKeditor5 source  
 
 ------------------
-v0.2.70 (2020-01-07)
+v0.2.70 (2020-01-07)  
 
 Added edit contact form.  
 Minor css fixes.  
 
 ------------------
-v0.2.69 (2019-12-31)
+v0.2.69 (2019-12-31)  
 
 Cleaning some HTML from methods and moved it into front controllers.
 
 ------------------
-v0.2.68 (2019-12-30)
+v0.2.68 (2019-12-30)  
 
-Fixed headers already sent error.
-removed db dump function in TODO list.
-
-------------------
-v0.2.67 (2019-11-26)
-
-Minor design fixes.
-Edit on sitevars.
-Todo changes.
+Fixed headers already sent error.  
+removed db dump function in TODO list.  
 
 ------------------
-v0.2.66 (2019-11-20)
+v0.2.67 (2019-11-26)  
 
-Can now set a password when creating new user.
-
-------------------
-v0.2.65 (2019-11-20)
-
-And update of revision (forget to often).
+Minor design fixes.  
+Edit on sitevars.  
+Todo changes.  
 
 ------------------
+v0.2.66 (2019-11-20)  
 
-v0.2.64 (2019-11-20)
+Can now set a password when creating new user.  
 
-Fixed add user error
-More globals added to src/Sitevars
+------------------
+v0.2.65 (2019-11-20)  
+
+And update of revision (forget to often).  
 
 ------------------
 
-v0.2.61 (2019-11-19)
+v0.2.64 (2019-11-20)  
+
+Fixed add user error  
+More globals added to src/Sitevars  
+
+------------------
+
+v0.2.61 (2019-11-19)  
 
 More globals added to src/Sitevars  
 
@@ -63,16 +70,16 @@ More globals added to src/Sitevars
 
 v0.2.6 (2019-11-19)  
 
-Added src/Sitevars.php with variables to make it easier to change titles and stuff.
-Updated latest push on default branch by Travis.
-Some changes to future projects.
+Added src/Sitevars.php with variables to make it easier to change titles and stuff.  
+Updated latest push on default branch by Travis.  
+Some changes to future projects.  
 
 -------------------
 
 (2019-11-15)  
 
 Some design changes.  
-Updated a sammle code vulnerability check badge,  javascript.
+Updated a sammle code vulnerability check badge,  javascript.  
 
 -------------------
 

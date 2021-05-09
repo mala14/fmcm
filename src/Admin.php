@@ -50,8 +50,8 @@ class Admin
 				$type = $stmt->fetch();
 				if($user && $type['type'] === 'admin'){
 						$html .= "
-								<a href='users_adm.php' title='Users' ><div class='side-lnk'>{$GLOBALS['addUsers']}</div></a>
-								<a href='list_users.php' title='Users' ><div class='side-lnk'>{$GLOBALS['editUsers']}</div></a>
+								<div class='side-lnk'><a href='users_adm.php' title='Users'><i class='fas fa-user-plus'></i><div class='side-lnk-adm'>{$GLOBALS['addUsers']}</div></a></div>
+								<div class='side-lnk'><a href='list_users.php' title='Users'><i class='fas fa-user-edit'></i><div class='side-lnk-adm'>{$GLOBALS['editUsers']}</div></a></div>
 						";
 				}
 			}
