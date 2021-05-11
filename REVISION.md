@@ -2,6 +2,11 @@ revision history
 
 ===================  
 
+v0.2.74 (2021-05-11)  
+
+Fixed left menu design flaws.  
+
+------------------
 v0.2.73 (2021-05-09)  
 
 Left menu is more responsive.  

@@ -32,21 +32,21 @@
 		padding-bottom: 10px;
 }
 
+/* .fas:hover,
+.fa-fw:hover,
+.side-lnk-text:hover,
+.side-lnk-adm:hover, */
+.side-lnk:hover {
+		background-color: #78AF9F;
+		color: #fff;
+}
+
 .side-lnk-text {
-		display: inherit;
+		display: contents;
 }
 
 .side-lnk-adm {
 		display: initial;
-}
-
-.fas:hover,
-.fa-fw:hover,
-.side-lnk-text:hover,
-.side-lnk-adm:hover,
-.side-lnk:hover {
-		background-color: #78AF9F;
-		color: #fff;
 }
 
 .fas,

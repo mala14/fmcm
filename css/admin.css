@@ -54,7 +54,7 @@
 .editUserField input[type="text"] {
 		padding-left: 5px;
 		height: 27px;
-		/* width: 266px; */
+		width: 100%;
 		border: none;
 }
 
