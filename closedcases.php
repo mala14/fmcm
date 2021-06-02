@@ -20,9 +20,7 @@
                     <th class="thCategories paddingBottom"><?= $assignedTo ?></th>
                 </tr>
             </thead>
-            <tbody>
                 <?= $todo->getClosedCases() ?>
-            </tbody>
         </table>
     </div>
 <?php include ("view/footer.php"); ?>

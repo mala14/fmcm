@@ -260,13 +260,17 @@ class Todo
       $html .= "
           <tfoot>
               <tr>
-                  <th colspan='5'>
+                  <td></td>
+                  <td></td>
+                  <td colspan='3'>
                       <ul class='paddingTop paddingBottom'>
                           <li class='page-item'>
                               {$paging}
                           </li>
                       </ul>
-                  </th>
+                  </td>
+                  <td></td>
+                  <td></td>
               </tr>
           </tfoot>
       ";
@@ -330,15 +334,19 @@ class Todo
       }
 
       $html .= "
-          <tfoot class=''>
+          <tfoot>
               <tr>
-                  <th colspan='5'>
+                  <td></td>
+                  <td></td>
+                  <td colspan='3'>
                       <ul class='paddingTop paddingBottom'>
                           <li class='page-item'>
                               {$paging}
                           </li>
                       </ul>
-                  </th>
+                  </td>
+                  <td></td>
+                  <td></td>
               </tr>
           </tfoot>
       ";
@@ -409,15 +417,19 @@ class Todo
         }
 
         $html .= "
-            <tfoot class=''>
+            <tfoot>
                 <tr>
-                    <th colspan='5'>
+                    <td></td>
+                    <td></td>
+                    <td colspan='3'>
                         <ul class='paddingTop paddingBottom'>
                             <li class='page-item'>
                                 {$paging}
                             </li>
                         </ul>
-                    </th>
+                    </td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tfoot>
         ";

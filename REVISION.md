@@ -2,6 +2,13 @@ revision history
 
 ===================  
 
+v0.2.76 (2021-06-02)  
+
+Minor css fixes to pagination. That it wont disappear at a specific @media value.
+Fixed css border top and bottom in closed cases list. 
+
+-------------------  
+
 v0.2.75 (2021-06-02)  
 
 Removed local fontawesome and linked to it in header.  

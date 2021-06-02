@@ -57,26 +57,27 @@ td a {
 .thCategories {
     color: #1B5B8E;
     text-align: left;
-
 }
 
 @media screen and (max-width: 31.25em) {
     th:nth-child(1) {
-      display:none;
+        display:none;
     }
     th:nth-child(5) {
-      display:none;
+        display:none;
     }
-}
-
-@media screen and (max-width: 31.25em) {
+    .thead:nth-child(1) {
+        display: none;
+    }
+    .thead:nth-child(5) {
+        display:none;
+    }
     .tbodyTd:nth-child(1) {
-      display:none;
+        display:none;
     }
     .tbodyTd:nth-child(5) {
-      display:none;
+        display:none;
     }
-
 }
 
 .tbodyTd {
