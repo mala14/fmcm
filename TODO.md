@@ -8,7 +8,5 @@ Fix assign case when creating new case.
 Mail function to inform engineers and contacts.  
 Print function.  
 
-Pagination for cases and users
-
 Admin panel to be more extensive
 . Contact admin

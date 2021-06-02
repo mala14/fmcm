@@ -142,8 +142,29 @@ td a {
     padding: 2px;
 }
 
+.navCaseStatus {
+    color: #444;
+}
+
 tfoot {
     border-top: 1px solid #f3f4f6;
+}
+
+.page-link {
+    display: inline-flex;
+}
+
+.page-item {
+    margin-top: 20px;
+    list-style: none;
+}
+
+.page-nr {
+    padding: 10px;
+    margin: 2px;
+    font-size: 1em;
+    border: 1px solid #1B5B8E;
+    border-radius: 2px;
 }
 
 .submitBtn {

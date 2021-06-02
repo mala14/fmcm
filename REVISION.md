@@ -2,6 +2,12 @@ revision history
 
 ===================  
 
+v0.2.75 (2021-06-02)  
+
+Removed local fontawesome and linked to it in header.  
+All case pages has now a simple pagination.  
+
+-------------------  
 v0.2.74 (2021-05-11)  
 
 Fixed left menu design flaws.  

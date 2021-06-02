@@ -20,15 +20,6 @@
                     <th class="thCategories paddingBottom"><?= $assignedTo ?></th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th class="thCategories paddingTop"><?= $created ?></th>
-                    <th class="thCategories paddingTop"><?= $caseId ?></th>
-                    <th class="thCategories paddingTop"><?= $contact ?></th>
-                    <th class="thCategories paddingTop"><?= $caseTitle ?></th>
-                    <th class="thCategories paddingTop"><?= $assignedTo ?></th>
-                </tr>
-            </tfoot>
             <tbody>
                 <?= $todo->getClosedCases() ?>
             </tbody>

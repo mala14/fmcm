@@ -8,7 +8,7 @@ class Todo
 
     /* Properties */
     private $conn;
-
+    public $numPerPage = 30;
     /* Get database access */
     public function __construct($pdo)
     {
@@ -60,24 +60,24 @@ class Todo
         if (isset($_SESSION['uname'])) {
             $html .= "
                 <td class='nav-item'>
-                   <a class='nav-link' href='logout.php'>{$GLOBALS['logOutSubmit']}</a>
+                   <a class='nav-link' href='logout.php' alt='Logout'>{$GLOBALS['logOutSubmit']}</a>
                 </td>
                 <td class='nav-item'>
                   <div class='dropdown'>
                       <div class='nav-link'>{$GLOBALS['navNew']}</div>
                           <div class='dropdown-content'>
-                              <a href='new_contact.php'>{$GLOBALS['contact']}</a>
-                              <a href='new_case.php'>{$GLOBALS['navCase']}</a>
+                              <a href='new_contact.php' alt='New contact'>{$GLOBALS['contact']}</a>
+                              <a href='new_case.php' alt='New case'>{$GLOBALS['navCase']}</a>
                           </div>
                   </div>
                 </td>
                 <td class='nav-item'>
                   <div class='dropdown'>
                       <div class='nav-link'>{$GLOBALS['navCase']}</div>
-                          <div class='dropdown-content'>
-                              {$this->closeCase()}
-                              {$this->openCase()}
-                          </div>
+                      <div class='dropdown-content'>
+                        {$this->closeCase()}
+                        {$this->openCase()}
+                      </div>
                   </div>
                 </td>
             ";
@@ -209,6 +209,15 @@ class Todo
   	public function getClosedCases()
     {
   		$html = null;
+      $paging = null;
+
+      if(isset($_GET['page'])) {
+          $page = $_GET['page'];
+      } else {
+         $page = 1;
+      }
+      $startPage = ($page-1)*$this->numPerPage;
+
   		$sql = $this->conn->prepare("
       SELECT
           created,
@@ -220,29 +229,47 @@ class Todo
           v_fmcm_caseinfo
       WHERE
           status = 'Closed' ORDER BY case_id DESC
-      ");
-  		$sql->execute();
-      $getAmount = $sql->rowCount();
-      if ($getAmount >= 1) {
-          foreach ($sql as $res) {
-            $cutCreated = substr($res['created'], 0, 10);
-            $html .= "
-              <tr class='case-row' data-href='case.php?id={$res['case_id']}'>
-                  <td class='tbodyTd'>{$cutCreated}</td>
-                  <td class='tbodyTd'>{$res['case_id']}</td>
-                  <td class='tbodyTd'>{$res['contact']}</td>
-                  <td class='tbodyTd'>{$res['title']}</td>
-                  <td class='tbodyTd'>{$res['assigned']}</td>
-              </tr>
-              ";
-          }
-      } else {
+      LIMIT $startPage, $this->numPerPage");
+      $sql->execute();
+      $res = $sql->fetchAll();
+
+      $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo WHERE status = 'Closed'");
+      $rowsNr->execute();
+      $rowCount = $rowsNr->rowCount();
+      $maxPages = ceil($rowCount/$this->numPerPage);
+
+      for($i=1;$i<=$maxPages;$i++) {
+          $paging .= "<a class='page-nr' href='closedcases.php?page=".$i."'>".$i."</a>";
+      }
+
+      foreach ($res as $val) {
+          $cutCreated = substr($val['created'], 0, 10);
           $html .= "
-          <tr class='case-row'>
-              <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
-          </tr>
+              <tbody>
+                  <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                      <td class='tbodyTd'>{$cutCreated}</td>
+                      <td class='tbodyTd'>{$val['case_id']}</td>
+                      <td class='tbodyTd'>{$val['contact']}</td>
+                      <td class='tbodyTd'>{$val['title']}</td>
+                      <td class='tbodyTd'>{$val['assigned']}</td>
+                  </tr>
+              </tbody>
           ";
-        }
+      }
+
+      $html .= "
+          <tfoot>
+              <tr>
+                  <th colspan='5'>
+                      <ul class='paddingTop paddingBottom'>
+                          <li class='page-item'>
+                              {$paging}
+                          </li>
+                      </ul>
+                  </th>
+              </tr>
+          </tfoot>
+      ";
       $pdo = null;
   		return $html;
   	}
@@ -252,45 +279,71 @@ class Todo
   	*
   	* @return
   	*/
-	  public function getAllOpenCases()
+    public function getAllOpenCases()
     {
-		$html = null;
-		$sql = $this->conn->prepare("
-    SELECT
-        created,
-        case_id,
-        contact,
-        title,
-        assigned
-    FROM
-        v_fmcm_caseinfo
-    WHERE
-        status = 'Active' ORDER BY case_id ASC
-    ");
-		$sql->execute();
-    $getAmount = $sql->rowCount();
-    if ($getAmount >= 1) {
-        foreach ($sql as $res) {
-            $cutCreated = substr($res['created'], 0, 10);
-            $html .= "
-            <tr class='case-row' data-href='case.php?id={$res['case_id']}'>
-                <td class='tbodyTd'>{$cutCreated}</td>
-                <td class='tbodyTd'>{$res['case_id']}</td>
-                <td class='tbodyTd'>{$res['contact']}</td>
-                <td class='tbodyTd'>{$res['title']}</td>
-                <td class='tbodyTd'>{$res['assigned']}</td>
-            </tr>
-            ";
-        }
+      $html = null;
+      $paging = null;
+
+      if(isset($_GET['page'])) {
+          $page = $_GET['page'];
       } else {
+         $page = 1;
+      }
+      $startPage = ($page-1)*$this->numPerPage;
+
+      $sql = $this->conn->prepare("
+      SELECT
+          created,
+          case_id,
+          contact,
+          title,
+          assigned
+      FROM v_fmcm_caseinfo
+      WHERE
+          status = 'Active' ORDER BY case_id ASC
+      LIMIT $startPage, $this->numPerPage");
+      $sql->execute();
+      $res = $sql->fetchAll();
+
+      $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo WHERE status = 'Active'");
+      $rowsNr->execute();
+      $rowCount = $rowsNr->rowCount();
+      $maxPages = ceil($rowCount/$this->numPerPage);
+
+      for($i=1;$i<=$maxPages;$i++) {
+          $paging .= "<a class='page-nr' href='test_file.php?page=".$i."'>".$i."</a>";
+      }
+
+      foreach ($res as $val) {
+          $cutCreated = substr($val['created'], 0, 10);
           $html .= "
-          <tr class='case-row'>
-              <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
-          </tr>
+              <tbody>
+                  <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                      <td class='tbodyTd'>{$cutCreated}</td>
+                      <td class='tbodyTd'>{$val['case_id']}</td>
+                      <td class='tbodyTd'>{$val['contact']}</td>
+                      <td class='tbodyTd'>{$val['title']}</td>
+                      <td class='tbodyTd'>{$val['assigned']}</td>
+                  </tr>
+              </tbody>
           ";
       }
-        $pdo = null;
-    		return $html;
+
+      $html .= "
+          <tfoot class=''>
+              <tr>
+                  <th colspan='5'>
+                      <ul class='paddingTop paddingBottom'>
+                          <li class='page-item'>
+                              {$paging}
+                          </li>
+                      </ul>
+                  </th>
+              </tr>
+          </tfoot>
+      ";
+      $pdo = null;
+      return $html;
     }
 
     /**
@@ -301,6 +354,15 @@ class Todo
   	public function getMyCases()
     {
     		$html = null;
+        $paging = null;
+
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+           $page = 1;
+        }
+        $startPage = ($page-1)*$this->numPerPage;
+
     		$uname = $_SESSION['uname'];
         $status = 'Active';
     		$sql = $this->conn->prepare("
@@ -316,30 +378,49 @@ class Todo
             status = :status
         AND
             assigned = :uname
+        LIMIT $startPage, $this->numPerPage
         ");
 
-    		$sql->execute([$status, $uname]);
-        $getAmount = $sql->rowCount();
-        if ($getAmount >= 1) {
-          foreach ($sql as $val) {
-              $cutCreated = substr($val['created'], 0, 10);
-              $html .= "
-              <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
-                  <td class='tbodyTd'>{$cutCreated}</td>
-                  <td class='tbodyTd'>{$val['case_id']}</td>
-                  <td class='tbodyTd'>{$val['contact']}</td>
-                  <td class='tbodyTd'>{$val['title']}</td>
-                  <td class='tbodyTd'>{$val['assigned']}</td>
-              </tr>
-              ";
-          }
-        } else {
-               $html .= "
-               <tr class='case-row'>
-                   <td class='nodata' colspan='5'>{$GLOBALS['noEntriesDb']}</td>
-               </tr>
-               ";
-            }
+        $sql->execute([$status, $uname]);
+        $res = $sql->fetchAll();
+
+        $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo WHERE status = 'Active' AND assigned = :uname");
+        $rowsNr->execute([$uname]);
+        $rowCount = $rowsNr->rowCount();
+        $maxPages = ceil($rowCount/$this->numPerPage);
+
+        for($i=1;$i<=$maxPages;$i++) {
+            $paging .= "<a class='page-nr' href='test_file.php?page=".$i."'>".$i."</a>";
+        }
+
+        foreach ($res as $val) {
+            $cutCreated = substr($val['created'], 0, 10);
+            $html .= "
+                <tbody>
+                    <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                        <td class='tbodyTd'>{$cutCreated}</td>
+                        <td class='tbodyTd'>{$val['case_id']}</td>
+                        <td class='tbodyTd'>{$val['contact']}</td>
+                        <td class='tbodyTd'>{$val['title']}</td>
+                        <td class='tbodyTd'>{$val['assigned']}</td>
+                    </tr>
+                </tbody>
+            ";
+        }
+
+        $html .= "
+            <tfoot class=''>
+                <tr>
+                    <th colspan='5'>
+                        <ul class='paddingTop paddingBottom'>
+                            <li class='page-item'>
+                                {$paging}
+                            </li>
+                        </ul>
+                    </th>
+                </tr>
+            </tfoot>
+        ";
     		$pdo = null;
     		return $html;
   	}
@@ -549,14 +630,14 @@ class Todo
         $dateStamp = date('Y-m-d H:i:s');
         $id = $this->getId();
         $status = 'Closed';
+
         if (isset($_POST['closeCase'])) {
             $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = :uname, fixed = :dateStamp WHERE id = :id LIMIT 1");
             $sql->execute([$status, $uname, $dateStamp, $id]);
         }
-
         $html .= "
             <form method='post'>
-                <button type='submit' name='closeCase' class='saveCase'>{$GLOBALS['closeCase']}</button>
+                <input type='submit' name='closeCase' class='saveCase' alt='Close case' value='{$GLOBALS['closeCase']}'>
             </form>
         ";
         $pdo = null;
@@ -581,7 +662,7 @@ class Todo
 
         $html .= "
             <form method='post'>
-                <input type='submit' name='openCase' class='saveCase' value='{$GLOBALS['openCase']}'>
+                <input type='submit' name='openCase' class='saveCase' alt='Open case' value='{$GLOBALS['openCase']}'>
             </form>
         ";
         $pdo = null;
@@ -651,5 +732,21 @@ class Todo
         }
         $pdo = null;
         return $html;
+    }
+    public function showCases()
+    {
+      $sql = "
+        SELECT
+            created,
+            case_id,
+            contact,
+            title,
+            assigned
+        FROM
+            v_fmcm_caseinfo
+        WHERE
+            status = :status ORDER BY case_id ASC
+        ";
+      return $sql;
     }
 }
