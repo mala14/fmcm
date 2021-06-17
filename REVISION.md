@@ -2,7 +2,7 @@ revision history
 
 ===================  
 
-v0.2.76 (2021-06-17)  
+v0.2.77 (2021-06-17)  
 
 Minor css fixes to pagination. That it wont disappear at a specific @media value.  
 Fixed css border top and bottom in closed cases list.  
