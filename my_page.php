@@ -14,7 +14,8 @@
         <thead>
             <tr>
                 <th class="thCategories paddingBottom"><?= $created ?></th>
-                <th class="thCategories paddingBottom"><?= $caseId ?></th>
+                <span><th class="thCategories paddingBottom fulltext"><?= $caseId ?></th></span>
+                <span><th class="thCategories paddingBottom shortText">Id</th></span>
                 <th class="thCategories paddingBottom"><?= $contact ?></th>
                 <th class="thCategories paddingBottom"><?= $caseTitle ?></th>
                 <th class="thCategories paddingBottom"><?= $assignedTo ?></th>

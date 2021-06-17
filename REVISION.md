@@ -2,11 +2,14 @@ revision history
 
 ===================  
 
-v0.2.76 (2021-06-02)  
+v0.2.76 (2021-06-17)  
 
-Minor css fixes to pagination. That it wont disappear at a specific @media value.
-Fixed css border top and bottom in closed cases list.
-Fixed pagination link that pointed to a test page.
+Minor css fixes to pagination. That it wont disappear at a specific @media value.  
+Fixed css border top and bottom in closed cases list.  
+Fixed width @media on new case.  
+Fixed column name @media on case view.  
+Removed added html tags from texfield to database.  
+Added a dashboard with a graph from: [https://www.chartjs.org](https://www.chartjs.org/)  
 
 -------------------  
 

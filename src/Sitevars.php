@@ -42,6 +42,7 @@ $email = "Email";                       // The case form Email title
 $office = "Office";                     // The case form Office title
 $address = "Address";                   // The case form Address title
 $userCreated = "Created";               // The case form Created title
+$dashboard = "Dashboard";               // The dashboard title
 
 $assigned = "Assigned";                 // The case form Assigned titles
 $issue = "Issue";                       // The case form Issue title

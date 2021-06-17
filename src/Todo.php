@@ -60,14 +60,14 @@ class Todo
         if (isset($_SESSION['uname'])) {
             $html .= "
                 <td class='nav-item'>
-                   <a class='nav-link' href='logout.php' alt='Logout'>{$GLOBALS['logOutSubmit']}</a>
+                   <a class='nav-link' href='logout.php' title='Logout'>{$GLOBALS['logOutSubmit']}</a>
                 </td>
                 <td class='nav-item'>
                   <div class='dropdown'>
                       <div class='nav-link'>{$GLOBALS['navNew']}</div>
                           <div class='dropdown-content'>
-                              <a href='new_contact.php' alt='New contact'>{$GLOBALS['contact']}</a>
-                              <a href='new_case.php' alt='New case'>{$GLOBALS['navCase']}</a>
+                              <a href='new_contact.php' title='New customer'>{$GLOBALS['contact']}</a>
+                              <a href='new_case.php' title='New case'>{$GLOBALS['navCase']}</a>
                           </div>
                   </div>
                 </td>
@@ -91,38 +91,37 @@ class Todo
     */
     public function addCase(){
   		$html = null;
-  		$error = null;
-  		$saved = null;
+  		$msg = null;
   		$search = "<i class='fas fa-search'></i>";
 
   		if(isset($_POST['sendCase'])){
           $name = $_SESSION['uname'] ?? null;
-    			$issue = $_POST['commtext'];
-    			$title = strip_tags($_POST['issuetitle']);
+    			$issue = htmlentities(strip_tags($_POST['commtext']));
+    			$title = htmlentities(strip_tags($_POST['issuetitle']));
     			$created = date('Y-m-d G:H:i');
           $contacts = $_POST['addContact'];
           $status = 'Active';
 
     			if (empty($title)){
-    				  $error .= "{$GLOBALS['caseEmptyTitle']}";
+    				  $msg .= "{$GLOBALS['caseEmptyTitle']}";
     			}
     			if (empty($issue)){
-    				  $error .= "{$GLOBALS['caseEmptyMessage']}";
+    				  $msg .= "{$GLOBALS['caseEmptyMessage']}";
     			}
           if (empty($contacts)) {
-              $error .= "{$GLOBALS['caseEmptyContact']}";
+              $msg .= "{$GLOBALS['caseEmptyContact']}";
           }
     			if(!empty($title) && !empty($issue) && !empty($contacts)){
       				$stmt = $this->conn->prepare("INSERT INTO fmcm_todo (name, title, issue, created, status, contacts) VALUES (:name, :title, :issue, :created, :status, :contacts)");
       				$stmt->execute([$name, $title, $issue, $created, $status, $contacts]);
-      				$saved .= "Message saved";
+      				$msg .= "Message saved";
       				$stmt = null;
               echo "<script>location.href = 'new_case.php'</script>";
               exit;
     			}
   		}
   		$html .= "
-  				<div>{$error}</div>
+  				<div>{$msg}</div>
   		";
       $pdo = null;
   		return $html;
@@ -228,7 +227,7 @@ class Todo
       FROM
           v_fmcm_caseinfo
       WHERE
-          status = 'Closed' ORDER BY case_id DESC
+          status = 'Closed' ORDER BY created ASC
       LIMIT $startPage, $this->numPerPage");
       $sql->execute();
       $res = $sql->fetchAll();
@@ -256,24 +255,17 @@ class Todo
               </tbody>
           ";
       }
-
       $html .= "
-          <tfoot>
-              <tr>
-                  <td></td>
-                  <td></td>
-                  <td colspan='3'>
-                      <ul class='paddingTop paddingBottom'>
-                          <li class='page-item'>
-                              {$paging}
-                          </li>
-                      </ul>
-                  </td>
-                  <td></td>
-                  <td></td>
-              </tr>
-          </tfoot>
-      ";
+      <tfoot>
+          <tr>
+              <td colspan='5'>
+                  <li class='page-item'>
+                      {$paging}
+                  </li>
+              </td>
+          </tr>
+      </tfoot>";
+
       $pdo = null;
   		return $html;
   	}
@@ -304,7 +296,7 @@ class Todo
           assigned
       FROM v_fmcm_caseinfo
       WHERE
-          status = 'Active' ORDER BY case_id ASC
+          status = 'Active' ORDER BY created ASC
       LIMIT $startPage, $this->numPerPage");
       $sql->execute();
       $res = $sql->fetchAll();
@@ -336,17 +328,11 @@ class Todo
       $html .= "
           <tfoot>
               <tr>
-                  <td></td>
-                  <td></td>
-                  <td colspan='3'>
-                      <ul class='paddingTop paddingBottom'>
-                          <li class='page-item'>
-                              {$paging}
-                          </li>
-                      </ul>
+                  <td colspan='5'>
+                      <li class='page-item'>
+                          {$paging}
+                      </li>
                   </td>
-                  <td></td>
-                  <td></td>
               </tr>
           </tfoot>
       ";
@@ -385,7 +371,7 @@ class Todo
         WHERE
             status = :status
         AND
-            assigned = :uname
+            assigned = :uname ORDER BY created ASC
         LIMIT $startPage, $this->numPerPage
         ");
 
@@ -419,17 +405,13 @@ class Todo
         $html .= "
             <tfoot>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td colspan='3'>
-                        <ul class='paddingTop paddingBottom'>
+                    <td colspan='5'>
+
                             <li class='page-item'>
                                 {$paging}
                             </li>
-                        </ul>
+
                     </td>
-                    <td></td>
-                    <td></td>
                 </tr>
             </tfoot>
         ";
@@ -543,7 +525,7 @@ class Todo
     {
         $html = null;
         $error = null;
-        $sql = $this->conn->prepare("SELECT fname, lname, uname FROM fmcm_users");
+        $sql = $this->conn->prepare("SELECT fname, lname, uname FROM fmcm_users WHERE active = 'active'");
         $sql->execute();
         $res = $sql->fetchAll();
         if (isset($_POST['updateCaseInfo'])) {
@@ -649,7 +631,7 @@ class Todo
         }
         $html .= "
             <form method='post'>
-                <input type='submit' name='closeCase' class='saveCase' alt='Close case' value='{$GLOBALS['closeCase']}'>
+                <input type='submit' name='closeCase' class='saveCase' title='Close case' value='{$GLOBALS['closeCase']}'>
             </form>
         ";
         $pdo = null;
@@ -674,7 +656,7 @@ class Todo
 
         $html .= "
             <form method='post'>
-                <input type='submit' name='openCase' class='saveCase' alt='Open case' value='{$GLOBALS['openCase']}'>
+                <input type='submit' name='openCase' class='saveCase' title='Open case' value='{$GLOBALS['openCase']}'>
             </form>
         ";
         $pdo = null;

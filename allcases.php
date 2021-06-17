@@ -9,18 +9,19 @@
 		$login->getSessions();
 ?>
 <?php include ("view/sidebar.php"); ?>
-    <div class="caseTbl">
-        <table class="tableCase">
-            <thead>
-                <tr>
-                    <th class="thCategories paddingBottom"><?= $created ?></th>
-                    <th class="thCategories paddingBottom"><?= $caseId ?></th>
-                    <th class="thCategories paddingBottom"><?= $contact ?></th>
-                    <th class="thCategories paddingBottom"><?= $caseTitle ?></th>
-                    <th class="thCategories paddingBottom"><?= $assignedTo ?></th>
-                </tr>
-            </thead>
-            <?= $todo->getAllOpenCases() ?>
-        </table>
-    </div>
+<div class="caseTbl">
+    <table class="tableCase">
+        <thead>
+            <tr>
+                <th class="thCategories paddingBottom"><?= $created ?></th>
+                <span><th class="thCategories paddingBottom fulltext"><?= $caseId ?></th></span>
+                <span><th class="thCategories paddingBottom shortText">Id</th></span>
+                <th class="thCategories paddingBottom"><?= $contact ?></th>
+                <th class="thCategories paddingBottom"><?= $caseTitle ?></th>
+                <th class="thCategories paddingBottom"><?= $assignedTo ?></th>
+            </tr>
+        </thead>
+        <?= $todo->getAllOpenCases() ?>
+    </table>
+</div>
 <?php include ("view/footer.php"); ?>

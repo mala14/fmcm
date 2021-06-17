@@ -13,7 +13,7 @@
               <div>
                   <input type="password" class="form-login" name='password' placeholder="<?= $loginPassHolder ?>" required='required'>
               </div>
-              <button type="submit" name="login" class="loginBtn"><?= $loginSubmit ?></button>
+              <button type="submit" name="login" class="loginBtn form-login"><?= $loginSubmit ?></button>
               <?= $login->uLogin() ?>
             </form>
         </div>

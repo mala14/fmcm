@@ -32,25 +32,22 @@
 		padding-bottom: 10px;
 }
 
-/* .fas:hover,
-.fa-fw:hover,
-.side-lnk-text:hover,
-.side-lnk-adm:hover, */
 .side-lnk:hover {
 		background-color: #78AF9F;
 		color: #fff;
 }
 
 .side-lnk-text {
-		display: contents;
+    display: inline-flex;
+    text-indent: 3px;
 }
 
 .side-lnk-adm {
 		display: initial;
 }
 
-.fas,
+/* .fas,
 .fa-fw {
 		padding-left: 3px;
 		padding-right: 3px;
-}
+} */

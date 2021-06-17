@@ -1,2 +1,5 @@
 src/Database.php
 vendor/
+.htaccess
+robots.txt
+favicon.ico

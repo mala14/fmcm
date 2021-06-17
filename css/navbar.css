@@ -79,3 +79,13 @@
 .no-navbar {
 		height: 27px;
 }
+
+.navCaseStatus {
+		border: none;
+		font-size: 1em;
+		background-color: inherit;
+		width: 100%;
+		text-align: left;
+		padding: 7px;
+		font-family: 'Jura', sans-serif;
+}
