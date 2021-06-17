@@ -10,6 +10,8 @@ Fixed width @media on new case.
 Fixed column name @media on case view.  
 Removed added html tags from texfield to database.  
 Added a dashboard with a graph from: [https://www.chartjs.org](https://www.chartjs.org/)  
+Fixed html in case info text to display format.
+Added a column for not assigned cases to dashboard.
 
 -------------------  
 

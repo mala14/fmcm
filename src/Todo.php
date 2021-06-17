@@ -96,8 +96,8 @@ class Todo
 
   		if(isset($_POST['sendCase'])){
           $name = $_SESSION['uname'] ?? null;
-    			$issue = htmlentities(strip_tags($_POST['commtext']));
-    			$title = htmlentities(strip_tags($_POST['issuetitle']));
+    			$issue = htmlspecialchars_decode($_POST['commtext']);
+    			$title = htmlspecialchars_decode($_POST['issuetitle']);
     			$created = date('Y-m-d G:H:i');
           $contacts = $_POST['addContact'];
           $status = 'Active';
@@ -530,7 +530,11 @@ class Todo
         $res = $sql->fetchAll();
         if (isset($_POST['updateCaseInfo'])) {
             if (isset($_POST['assigned'])) {
-                $engineer = $_POST['assigned'];
+                if (empty($_POST['assigned'])) {
+                    $engineer = NULL;
+                } else {
+                    $engineer = $_POST['assigned'];
+                }
                 $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
                 $sql->execute([$engineer, $this->getId()]);
                 echo "<script>location.href = ''</script>";
@@ -700,7 +704,7 @@ class Todo
         $sql = $this->conn->prepare("SELECT id, issue FROM fmcm_todo WHERE id = :id");
         $sql->execute([$this->getId()]);
         $res = $sql->fetch();
-        return $res['issue'];
+        return htmlspecialchars_decode($res['issue']);
         $pdo = null;
     }
 

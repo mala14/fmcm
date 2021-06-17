@@ -85,6 +85,21 @@ Class Graphs
     }
 
     /**
+    * Count not assigned cases which are active
+    *
+    *@return
+    */
+    public function getNotAssCasesSql()
+    {
+        $status = 'Active';
+        $assigned = NULL;
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE status = :status AND assigned IS NULL");
+        $sql->execute([$status]);
+        $res = $sql->fetchColumn();
+        return $res;
+    }
+
+    /**
     * Select case data from db and display it in graph
     *
     *@return
@@ -95,7 +110,7 @@ Class Graphs
         $getAllActive = $this->getAllActiveCasesSql();
         $getOthersActive = $this->getOthersCasesSql();
         $getAllClosed = $this->getClosedCasesSql();
-
+        $getNotAssCase = $this->getNotAssCasesSql();
         $html = null;
 
         $html .= "
@@ -104,21 +119,23 @@ Class Graphs
                 var myChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: ['My cases', 'All active', 'Assigned to others', 'All Closed'],
+                        labels: ['My cases', 'All active', 'Assigned to others', 'All closed', 'Not assigned'],
                         datasets: [{
                             label: 'Amount of Cases',
-                            data: [{$myCases}, {$getAllActive}, $getOthersActive, $getAllClosed],
+                            data: [{$myCases}, {$getAllActive}, $getOthersActive, $getAllClosed, $getNotAssCase],
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
                                 'rgba(54, 162, 235, 0.2)',
                                 'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)'
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
                             ],
                             borderColor: [
                                 'rgba(255, 99, 132, 1)',
                                 'rgba(54, 162, 235, 1)',
                                 'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)'
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
                             ],
                             borderWidth: 1
                         }]
