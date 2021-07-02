@@ -207,6 +207,7 @@ p.indent {
 }
 
 .loginBtn {
+    font-family: 'Jura', sans-serif;
 		border: 1px solid #B8B7B7;
 		border-radius: 5px;
 		box-shadow: none;

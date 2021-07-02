@@ -29,7 +29,7 @@ $navCase = "Case";                      // The navbar menu object Case title
 
 $caseId = "Case id";                    // The case id title at case listing
 $created = "Created";                   // Created title, at case listing
-$caseTitle = "Title";	            // Case title, at case listing
+$caseTitle = "Title";	                  // Case title, at case listing
 $assignedTo = "Assigned to";	          //  Assigned to title, at case listing
 $closed = "Closed";                     // Closed title, at closed case listing
 $closedBy = "Closed by";                // Closed by title, at closed case listing
@@ -42,7 +42,6 @@ $email = "Email";                       // The case form Email title
 $office = "Office";                     // The case form Office title
 $address = "Address";                   // The case form Address title
 $userCreated = "Created";               // The case form Created title
-$dashboard = "Dashboard";               // The dashboard title
 
 $assigned = "Assigned";                 // The case form Assigned titles
 $issue = "Issue";                       // The case form Issue title
@@ -67,6 +66,7 @@ $activeCases = "Active";                // Active cases button
 $closedCases = "Closed";                // Closed cases button
 $newCase = "New case";                  // New case button
 $contacts = "Customer";                 // List of customers
+$dashboard = "Dashboard";               // The dashboard title
 
 /**
 * Left menu variables, Admin buttons and admin vars

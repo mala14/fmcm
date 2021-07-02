@@ -6,7 +6,5 @@ Engineer field to be searchable,
 Fix assign case when creating new case.
 
 Mail function to inform engineers and contacts.  
-Print function.  
 
 Admin panel to be more extensive
-. Contact admin

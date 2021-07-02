@@ -59,5 +59,12 @@ INSERT INTO `fmcm_users` (`id_user`, `fname`, `lname`, `uname`, `email`, `type`,
 
 --DROP VIEW IF EXISTS `v_fmcm_caseinfo`;
 CREATE VIEW `v_fmcm_caseinfo` AS
-SELECT `fmcm_todo`.`created` AS `created`, `fmcm_todo`.`id` AS `case_id`, concat(`fmcm_contacts`.`con_fname`,' ',`fmcm_contacts`.`con_lname`) AS `contact`, `fmcm_todo`.`title` AS `title`, `fmcm_todo`.`assigned` AS `assigned`, `fmcm_todo`.`status` AS `status`
+SELECT
+	`fmcm_todo`.`created` AS `created`,
+    `fmcm_todo`.`id` AS `case_id`,
+    concat(`fmcm_contacts`.`con_fname`,' ',`fmcm_contacts`.`con_lname`) AS `contact`,
+    `fmcm_todo`.`title` AS `title`,
+    `fmcm_todo`.`assigned` AS `assigned`,
+    `fmcm_todo`.`status` AS `status`,
+    `fmcm_todo`.`closedby` AS `closedby`
 FROM (`fmcm_todo` join `fmcm_contacts` on(`fmcm_todo`.`contacts` = `fmcm_contacts`.`id_contact`)) ;

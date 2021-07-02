@@ -2,6 +2,17 @@ revision history
 
 ===================  
 
+(2021-06-28)  
+Added new column, closedby, to database view  
+The graph has now counter on logged in users closed cases.  
+Moved the global dashboard value to left menu globals in Sitevars.php  
+Added functions to texteditor.  
+Removed unused fonts.  
+Nav menu buttons Open and Close case changes by status and if no case is selected the buttons will be disabled.  
+
+
+-------------------  
+
 v0.2.77 (2021-06-17)  
 
 Minor css fixes to pagination. That it wont disappear at a specific @media value.  
@@ -10,8 +21,8 @@ Fixed width @media on new case.
 Fixed column name @media on case view.  
 Removed added html tags from texfield to database.  
 Added a dashboard with a graph from: [https://www.chartjs.org](https://www.chartjs.org/)  
-Fixed html in case info text to display format.
-Added a column for not assigned cases to dashboard.
+Fixed html in case info text to display format.  
+Added a column for not assigned cases to dashboard.  
 
 -------------------  
 

@@ -56,6 +56,27 @@ class Todo
     */
     public function getNavBar()
     {
+        $id = $this->getId();
+        $sql = $this->conn->prepare("SELECT status FROM v_fmcm_caseinfo WHERE case_id = :id");
+        $sql->execute([$id]);
+        $res = $sql->fetch();
+        if (isset($id) && $res['status'] === 'Active') {
+            $closed = $this->closeCase();
+        } else {
+            $closed = "
+                <form method='post'>
+                    <input type='submit' name='closeCase' class='saveCase' title='Close case' value='{$GLOBALS['closeCase']}' disabled>
+                </form>";
+        }
+        if (isset($id) && $res['status'] === 'Closed') {
+            $open = $this->openCase();
+        } else {
+            $open = "
+            <form method='post'>
+                <input type='submit' name='closeCase' class='saveCase' title='Close case' value='{$GLOBALS['openCase']}' disabled>
+            </form>";
+        }
+
         $html = null;
         if (isset($_SESSION['uname'])) {
             $html .= "
@@ -75,13 +96,14 @@ class Todo
                   <div class='dropdown'>
                       <div class='nav-link'>{$GLOBALS['navCase']}</div>
                       <div class='dropdown-content'>
-                        {$this->closeCase()}
-                        {$this->openCase()}
+                        {$closed}
+                        {$open}
                       </div>
                   </div>
                 </td>
             ";
         }
+        $pdo = null;
         return $html;
     }
 
@@ -406,11 +428,9 @@ class Todo
             <tfoot>
                 <tr>
                     <td colspan='5'>
-
-                            <li class='page-item'>
-                                {$paging}
-                            </li>
-
+                        <li class='page-item'>
+                            {$paging}
+                        </li>
                     </td>
                 </tr>
             </tfoot>
@@ -617,6 +637,7 @@ class Todo
         return $html;
     }
 
+
     /**
   	* Closed case.
   	*
@@ -632,6 +653,8 @@ class Todo
         if (isset($_POST['closeCase'])) {
             $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = :uname, fixed = :dateStamp WHERE id = :id LIMIT 1");
             $sql->execute([$status, $uname, $dateStamp, $id]);
+            echo "<script>location.href = ''</script>";
+            exit;
         }
         $html .= "
             <form method='post'>
@@ -656,6 +679,8 @@ class Todo
         if (isset($_POST['openCase'])) {
             $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = null, fixed = null WHERE id = :id LIMIT 1");
             $sql->execute([$status, $id]);
+            echo "<script>location.href = ''</script>";
+            exit;
         }
 
         $html .= "

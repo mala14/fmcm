@@ -5,35 +5,3 @@
 	font-family: jura;
 	src: url('../fonts/Jura-Bold.ttf');
 }
-@font-face{
-	font-family: Acme-Regular;
-	src: url('../fonts/Acme-Regular.ttf');
-}
-@font-face{
-	font-family: SairaExtraCondensed-Regular;
-	src: url('../fonts/SairaExtraCondensed-Regular.ttf');
-}
-@font-face{
-	font-family: SairaExtraCondensed-Medium;
-	src: url('../fonts/SairaExtraCondensed-Medium.ttf');
-}
-@font-face{
-	font-family: Yantramanav-Medium;
-	src: url('../fonts/Yantramanav-Medium.ttf');
-}
-@font-face{
-	font-family: NunitoSans-Regular;
-	src: url('../fonts/NunitoSans-Regular.ttf');
-}
-@font-face{
-	font-family: Raleway-regular;
-	src: url('../fonts/Raleway-Regular.ttf');
-}
-@font-face{
-	font-family: Raleway-Medium;
-	src: url('../fonts/Raleway-Medium.ttf');
-}
-@font-face{
-	font-family: Play-Regular;
-	src: url('../fonts/Play-Regular.ttf');
-}

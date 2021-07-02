@@ -2,11 +2,11 @@
 /**
 * db connection
 */
-$servername = "";
-$username = "";
-$password = "";
-$database = "";
-$charset = "utf8mb4";
+$servername = "freemasons.se.mysql";
+$username = "freemasons_se";
+$password = "Muppen@FM13";
+$database = "freemasons_se";
+$charset = "utf8";
 
 $dsn = "mysql:host=$servername;dbname=$database;charset=$charset";
 $opt = [
