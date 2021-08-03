@@ -2,20 +2,20 @@
 * Style for admininstration modules
 */
 #admMenu{
-	width:90%;
-	margin: auto;
-	height:20px;
-	font-size: 12px;
-	font-weight: bold;
-	background-color: #2d2d2d;
-	text-indent: 20px;
-	border-left: 1px solid;
-	border-right: 1px solid;
-	border-bottom: 1px solid;
-	border-color: #b87821;
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
-	box-shadow: 1px 1px 2px #454949;
+		width:90%;
+		margin: auto;
+		height:20px;
+		font-size: 12px;
+		font-weight: bold;
+		background-color: #2d2d2d;
+		text-indent: 20px;
+		border-left: 1px solid;
+		border-right: 1px solid;
+		border-bottom: 1px solid;
+		border-color: #b87821;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		box-shadow: 1px 1px 2px #454949;
 }
 
 .pad-left-right {
@@ -46,7 +46,6 @@
 }
 
 .editUserField select {
-		/* width: 266px; */
 		height: 27px;
 		border: none;
 }
@@ -56,12 +55,6 @@
 		height: 27px;
 		width: 100%;
 		border: none;
-}
-
-.admEditUser {
-		float: left;
-		display: block;
-		width: 100%;
 }
 
 #addUtbl {
@@ -74,11 +67,7 @@
 }
 
 #admLnk a{
-	color: #E7E3B2;
-}
-
-.td-users {
-		color: inherit;
+		color: #E7E3B2;
 }
 
 @media screen and (max-width: 31.25em) {
@@ -110,18 +99,18 @@
 	border:1px solid;
 }
 #editUs{
-	float:left;
+		float:left;
 }
 
 #mainAdmContent{
-	width:90%;
-	margin: auto;
-	margin-top: 10px;
-	padding-bottom: 3px;
-	background-color: #f3f4f6;
+		width:90%;
+		margin: auto;
+		margin-top: 10px;
+		padding-bottom: 3px;
+		background-color: #f3f4f6;
 }
 #addUs{
-	float: right;
+		float: right;
 }
 
 
@@ -131,7 +120,7 @@
 
 
 #updateUs{
-	width: 200px;
+		width: 200px;
 }
 
 .changePassWord {
@@ -139,11 +128,10 @@
 }
 
 .passwdBox {
-	width: 115px;
-	background-color: #e9ecef;
-	border-right: 1px solid #ccc;
-	padding: 5px;
-
+		width: 115px;
+		background-color: #e9ecef;
+		border-right: 1px solid #ccc;
+		padding: 5px;
 }
 
 .passWdTbl input[type="password"] {
@@ -161,27 +149,24 @@
 }
 
 #userEdit{
-	display: inline-table;
+		display: inline-table;
 }
 
 /*
 * Edit link on user admin page
 */
-/* .uedit {
-		float: right;
-} */
 
 #status{
-	float: right;
+		float: right;
 }
 
 #customBtn{
-	display: inline-table;
-	margin: auto;
+		display: inline-table;
+		margin: auto;
 }
 #customBtn a{
-	color: #495f78;
+		color: #495f78;
 }
 #pagings{
-	display: inline-table;
+		display: inline-table;
 }

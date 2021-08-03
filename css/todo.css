@@ -33,12 +33,6 @@ td a {
     background-color: #fff;
 }
 
-.contactTbl {
-    width: 80%;
-    padding: 10px;
-		background-color: #fff;
-}
-
 .tableCase {
 		width: 100%;
     border-collapse: collapse;
@@ -65,6 +59,9 @@ td a {
     th:nth-child(5) {
         display:none;
     }
+    th:nth-child(6) {
+        display:none;
+    }
     .thead:nth-child(1) {
         display: none;
     }
@@ -75,6 +72,9 @@ td a {
         display:none;
     }
     .tbodyTd:nth-child(5) {
+        display:none;
+    }
+    .tbodyTd:nth-child(6) {
         display:none;
     }
     .caseContactInfo {

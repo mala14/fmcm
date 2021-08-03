@@ -2,8 +2,15 @@ revision history
 
 ===================  
 
+v0.2.79 (2021-08-03)  
+
+Design changes at user and customer listing.  
+It is now responsive.  
+
+-------------------  
+
 v0.2.78 (2021-07-02)
-   
+
 Added new column, closedby, to database view  
 The graph has now counter on logged in users closed cases.  
 Moved the global dashboard value to left menu globals in Sitevars.php  

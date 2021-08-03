@@ -34,10 +34,12 @@ $assignedTo = "Assigned to";	          //  Assigned to title, at case listing
 $closed = "Closed";                     // Closed title, at closed case listing
 $closedBy = "Closed by";                // Closed by title, at closed case listing
 
-$contact = "Customer";                   // The case form Contact title & navbar new/contact
+$userId = "User id";                    // The id of user in db
+$contact = "Customer";                  // The case form Contact title & navbar new/contact
 $name = "Name";                         // The case form Name title
 $userTitle = "Title";                   // The case form Title title
 $phone = "Phone";                       // The case form Phone title
+$phoneNum = "Phone number";             // The customer list phone number column title
 $email = "Email";                       // The case form Email title
 $office = "Office";                     // The case form Office title
 $address = "Address";                   // The case form Address title
@@ -75,8 +77,8 @@ $dashboard = "Dashboard";               // The dashboard title
 $addUsers = "Add users";                // Add users button
 $editUsers = "Edit users";              // Edit users button
 $username = "Username";                 // The add user Username title
-$surname = "Surname";                   // The add user Surname title
-$type = "Type";                         // The type of user title
+$surname = "Lastname";                  // The add user Surname title
+$type = "Type";                         // The type of user permission
 $usrType = "User";                      // The user value in dropdown select type
 $adminType = "Admin";                   // The admin value in the drop down select type
 $userEdit = "Edit";                     // The edit user link
@@ -93,7 +95,7 @@ $setPassWordHolder = "Password";        // The update password placeholder
 $confPassWordHolder = "Confirm password";// The confirm password placeholder
 $lastLogin = "Last login";              // The last login title at list users
 $jobTitle = "Job title";                // The add contact job title
-
+$fullname = "Full name";                // First and last name
 
 /**
 * The error message variables

@@ -125,18 +125,16 @@ class Admin
 							$status = "<div class='inactive'>{$GLOBALS['userDisabled']}</div>";
 					}
 					$html .= "
-								<table class='tableCase tableUser'>
+								<tbody>
 										<tr class='case-row' data-href='users_edit.php?id={$row['id_user']}'>
-												<td class='td-users pad-left-right' title='Id {$row['id_user']}'>{$row['id_user']}</td>
-												<td class='td-users pad-left-right' title='{$row['uname']}'>{$row['uname']}</td>
-												<td class='td-users pad-left-right' title='{$row['fname']}'>{$row['fname']}</td>
-												<td class='td-users pad-left-right' title='{$row['lname']}'>{$row['lname']}</td>
-												<td class='td-users pad-left-right' title='{$row['type']}'>{$row['type']}</td>
-												<td class='td-users'> {$status} </td>
-												<td class='td-users idlast pad-left-right' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
-												<td class='td-users idedit pad-left-right' title='Edit'><a class='uedit' href='users_edit.php?id={$row['id_user']}'>{$GLOBALS['userEdit']}</a></td>
+												<td class='tbodyTd' title='Id {$row['id_user']}'>{$row['id_user']}</td>
+												<td class='tbodyTd' title='{$row['uname']}'>{$row['uname']}</td>
+												<td class='tbodyTd' title='{$GLOBALS['contacts']}'>{$row['fname']} {$row['lname']}</td>
+												<td class='tbodyTd' title='{$row['type']}'>{$row['type']}</td>
+												<td class='tbodyTd'> {$status} </td>
+												<td class='tbodyTd' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
 										</tr>
-								</table>
+								</tbody>
 					";
 			}
 			$pdo = null;

@@ -74,16 +74,15 @@ class User Extends Todo
 			$stmt->execute();
 			foreach($stmt as $row){
 					$html .= "
-              <table class='tableCase tableUser'>
+              <tbody>
                   <tr class='case-row' data-href='contact_edit.php?id={$row['id_contact']}'>
-                      <td class='td-users pad-left-right' title='{$row['con_fname']}'>{$row['con_fname']}</td>
-                      <td class='td-users pad-left-right' title='{$row['con_lname']}'>{$row['con_lname']}</td>
-                      <td class='td-users pad-left-right' title='{$row['con_email']}'>{$row['con_email']}</td>
-                      <td class='td-users pad-left-right' title='{$row['con_jtitle']}'>{$row['con_jtitle']}</td>
-                      <td class='td-users pad-left-right' title='{$row['con_phone']}'>{$row['con_phone']}</td>
-                      <td class='td-users pad-left-right' title='Edit'><a href='contact_edit.php?id={$row['id_contact']}'>{$GLOBALS['userEdit']}</a></td>
+                      <td class='tbodyTd' title='{$GLOBALS['userId']}'>{$row['id_contact']}</td>
+                      <td class='tbodyTd' title='{$GLOBALS['contacts']}'>{$row['con_fname']} {$row['con_lname']}</td>
+                      <td class='tbodyTd' title='{$row['con_email']}'>{$row['con_email']}</td>
+                      <td class='tbodyTd' title='{$row['con_jtitle']}'>{$row['con_jtitle']}</td>
+                      <td class='tbodyTd' title='{$row['con_phone']}'>{$row['con_phone']}</td>                  
                   </tr>
-              </table>
+              </tbody>
 					";
 			}
 			$pdo = null;
