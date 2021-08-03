@@ -18,7 +18,7 @@
                 <th class="thCategories paddingBottom"><?= $contacts ?></th>
                 <th class="thCategories paddingBottom"><?= $email ?></th>
                 <th class="thCategories paddingBottom"><?= $jobTitle ?></th>
-                <th class="thCategories paddingBottom"><?= $phoneNum ?></th>
+                <th class="thCategories paddingBottom colHide"><?= $phoneNum ?></th>
             </tr>
         </thead>
         <?= $users->editContacts() ?>

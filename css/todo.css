@@ -56,25 +56,13 @@ td a {
     th:nth-child(1) {
         display:none;
     }
-    th:nth-child(5) {
-        display:none;
-    }
-    th:nth-child(6) {
-        display:none;
-    }
     .thead:nth-child(1) {
         display: none;
-    }
-    .thead:nth-child(5) {
-        display:none;
     }
     .tbodyTd:nth-child(1) {
         display:none;
     }
-    .tbodyTd:nth-child(5) {
-        display:none;
-    }
-    .tbodyTd:nth-child(6) {
+    .colHide {
         display:none;
     }
     .caseContactInfo {
@@ -97,7 +85,6 @@ td a {
 .tbodyTd {
     padding-top: 5px;
     padding-bottom: 5px;
-    /* width: 20%; */
 }
 
 .paddingTop {
@@ -111,10 +98,6 @@ td a {
 .case-row {
     border-top: 1px solid #f3f4f6;
 }
-
-/* .case-row-left {
-    text-align: left;
-} */
 
 .case-row:hover {
 		background-color: #f3f4f6;

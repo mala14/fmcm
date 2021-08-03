@@ -272,7 +272,7 @@ class Todo
                       <td class='tbodyTd'>{$val['case_id']}</td>
                       <td class='tbodyTd'>{$val['contact']}</td>
                       <td class='tbodyTd'>{$val['title']}</td>
-                      <td class='tbodyTd'>{$val['assigned']}</td>
+                      <td class='tbodyTd colHide'>{$val['assigned']}</td>
                   </tr>
               </tbody>
           ";
@@ -341,7 +341,7 @@ class Todo
                       <td class='tbodyTd'>{$val['case_id']}</td>
                       <td class='tbodyTd'>{$val['contact']}</td>
                       <td class='tbodyTd'>{$val['title']}</td>
-                      <td class='tbodyTd'>{$val['assigned']}</td>
+                      <td class='tbodyTd colHide'>{$val['assigned']}</td>
                   </tr>
               </tbody>
           ";
@@ -418,7 +418,7 @@ class Todo
                         <td class='tbodyTd'>{$val['case_id']}</td>
                         <td class='tbodyTd'>{$val['contact']}</td>
                         <td class='tbodyTd'>{$val['title']}</td>
-                        <td class='tbodyTd'>{$val['assigned']}</td>
+                        <td class='tbodyTd colHide'>{$val['assigned']}</td>
                     </tr>
                 </tbody>
             ";

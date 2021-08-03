@@ -132,7 +132,7 @@ class Admin
 												<td class='tbodyTd' title='{$GLOBALS['contacts']}'>{$row['fname']} {$row['lname']}</td>
 												<td class='tbodyTd' title='{$row['type']}'>{$row['type']}</td>
 												<td class='tbodyTd'> {$status} </td>
-												<td class='tbodyTd' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
+												<td class='tbodyTd colHide' title='{$row['lastlogin']}'>{$GLOBALS['lastLogin']}: {$row['lastlogin']}</td>
 										</tr>
 								</tbody>
 					";

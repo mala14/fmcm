@@ -19,7 +19,7 @@
                 <th class="thCategories paddingBottom"><?= $fullname ?></th>
                 <th class="thCategories paddingBottom"><?= $type ?></th>
                 <th class="thCategories paddingBottom"><?= $status ?></th>
-                <th class="thCategories paddingBottom"><?= $lastLogin ?></th>
+                <th class="thCategories paddingBottom colHide"><?= $lastLogin ?></th>
             </tr>
         </thead>
         <?= $admin->editUsers() ?>

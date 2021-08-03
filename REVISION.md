@@ -2,6 +2,11 @@ revision history
 
 ===================  
 
+v0.2.8 (2021-08-03)  
+
+Fixed design flaws  
+
+-------------------  
 v0.2.79 (2021-08-03)  
 
 Design changes at user and customer listing.  

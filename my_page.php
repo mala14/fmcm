@@ -18,7 +18,7 @@
                 <span><th class="thCategories paddingBottom shortText">Id</th></span>
                 <th class="thCategories paddingBottom"><?= $contact ?></th>
                 <th class="thCategories paddingBottom"><?= $caseTitle ?></th>
-                <th class="thCategories paddingBottom"><?= $assignedTo ?></th>
+                <th class="thCategories paddingBottom colHide"><?= $assignedTo ?></th>
             </tr>
         </thead>
         <?= $todo->getMyCases() ?>

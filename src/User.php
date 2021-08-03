@@ -30,7 +30,7 @@ class User Extends Todo
     }
 
     /**
-    * Add contacts to FMCM system
+    * Add contacts to fmcm system
     *
     * @return
     */
@@ -80,7 +80,7 @@ class User Extends Todo
                       <td class='tbodyTd' title='{$GLOBALS['contacts']}'>{$row['con_fname']} {$row['con_lname']}</td>
                       <td class='tbodyTd' title='{$row['con_email']}'>{$row['con_email']}</td>
                       <td class='tbodyTd' title='{$row['con_jtitle']}'>{$row['con_jtitle']}</td>
-                      <td class='tbodyTd' title='{$row['con_phone']}'>{$row['con_phone']}</td>                  
+                      <td class='tbodyTd colHide' title='{$row['con_phone']}'>{$row['con_phone']}</td>
                   </tr>
               </tbody>
 					";
