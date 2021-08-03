@@ -2,10 +2,10 @@
 /**
 * db connection
 */
-$servername = "freemasons.se.mysql";
-$username = "freemasons_se";
-$password = "Muppen@FM13";
-$database = "freemasons_se";
+$servername = "";
+$username = "";
+$password = "";
+$database = "";
 $charset = "utf8";
 
 $dsn = "mysql:host=$servername;dbname=$database;charset=$charset";
