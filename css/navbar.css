@@ -1,3 +1,5 @@
+@charset "utf-8";
+/* CSS Document */
 /**
 * The main navbar style
 */
@@ -6,14 +8,16 @@
 		width: 100%;
 		background-color: #fff;
 		border-bottom: 1px solid #c1c0c0;
-		/* padding-bottom: 6px; */
-		/* height: 25px; */
 }
 
 .nav-link {
 		font-size:1.3em;
 		font-family: 'Jura', sans-serif;
 		padding: 3px;
+}
+
+.nav-search {
+		padding: 2px;
 }
 .nav-link:hover {
 		background-color: #78AF9F;

@@ -101,6 +101,9 @@ class Todo
                       </div>
                   </div>
                 </td>
+                <td class='nav-item'>
+                    <a class='nav-link' href='search.php' title='Search'><i class='fal fa-search fa-sm'></i></a>
+                </td>
             ";
         }
         $pdo = null;
@@ -771,5 +774,53 @@ class Todo
             status = :status ORDER BY case_id ASC
         ";
       return $sql;
+    }
+
+    /**
+  	* Main search. The search of cases, by case id, contact, phone number etc.
+  	*
+  	* @return
+  	*/
+    public function getSearchRes()
+    {
+        $html = null;
+        $result = null;
+        if (isset($_POST['mainSearch'])) {
+            $search = $_POST['mainSearch'];
+            $sql = ("
+            SELECT *
+            FROM
+                v_fmcm_caseinfo
+            WHERE
+                case_id LIKE ?
+                OR contact LIKE ?
+                OR title LIKE ?
+                OR assigned LIKE ?
+            ORDER BY case_id ASC
+            ");
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(["%$search%", "%$search%", "%$search%", "%$search%"]);
+            $result = $stmt->fetchAll();
+            if (!empty($search)) {
+                foreach ($result as $row) {
+                  $cutCreated = substr($row['created'], 0, 10);
+                  $html .= "
+                      <tbody>
+                          <tr class='case-row' data-href='case.php?id={$row['case_id']}'>
+                              <td class='tbodyTd'>{$cutCreated}</td>
+                              <td class='tbodyTd'>{$row['case_id']}</td>
+                              <td class='tbodyTd'>{$row['contact']}</td>
+                              <td class='tbodyTd'>{$row['title']}</td>
+                              <td class='tbodyTd colHide'>{$row['assigned']}</td>
+                          </tr>
+                      </tbody>
+                  ";
+                }
+            } else {
+                $html .= "Empty search";
+            }
+        }
+        $pdo = null;
+        return $html;
     }
 }

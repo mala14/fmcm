@@ -2,6 +2,11 @@ revision history
 
 ===================  
 
+v0.2.81 (2021-08-06)  // not gitted
+
+Added a search function to cases.  
+
+-------------------  
 v0.2.8 (2021-08-03)  
 
 Fixed design flaws  
