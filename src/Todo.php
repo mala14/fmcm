@@ -785,41 +785,78 @@ class Todo
     {
         $html = null;
         $result = null;
+        $search = null;
+        $paging = null;
+
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+           $page = 1;
+        }
+        $startPage = ($page-1)*$this->numPerPage;
+
         if (isset($_POST['mainSearch'])) {
             $search = $_POST['mainSearch'];
-            $sql = ("
-            SELECT *
-            FROM
-                v_fmcm_caseinfo
-            WHERE
-                case_id LIKE ?
-                OR contact LIKE ?
-                OR title LIKE ?
-                OR assigned LIKE ?
-            ORDER BY case_id ASC
-            ");
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(["%$search%", "%$search%", "%$search%", "%$search%"]);
-            $result = $stmt->fetchAll();
-            if (!empty($search)) {
-                foreach ($result as $row) {
-                  $cutCreated = substr($row['created'], 0, 10);
-                  $html .= "
-                      <tbody>
-                          <tr class='case-row' data-href='case.php?id={$row['case_id']}'>
-                              <td class='tbodyTd'>{$cutCreated}</td>
-                              <td class='tbodyTd'>{$row['case_id']}</td>
-                              <td class='tbodyTd'>{$row['contact']}</td>
-                              <td class='tbodyTd'>{$row['title']}</td>
-                              <td class='tbodyTd colHide'>{$row['assigned']}</td>
-                          </tr>
-                      </tbody>
-                  ";
-                }
-            } else {
-                $html .= "Empty search";
-            }
         }
+
+        $sql = $this->conn->prepare("
+        SELECT *
+        FROM
+            v_fmcm_caseinfo
+        WHERE
+            case_id LIKE ?
+            OR created LIKE ?
+            OR contact LIKE ?
+            OR title LIKE ?
+            OR assigned LIKE ?
+        ORDER BY case_id ASC
+        LIMIT $startPage, $this->numPerPage
+        ");
+        $sql->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        $result = $sql->fetchAll();
+        // pagination starts here
+        $rowsNr = $this->conn->prepare("
+        SELECT *
+        FROM v_fmcm_caseinfo
+        WHERE
+            case_id LIKE ?
+            OR created LIKE ?
+            OR contact LIKE ?
+            OR title LIKE ?
+            OR assigned LIKE ?
+        ");
+        $rowsNr->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        $rowCount = $rowsNr->rowCount();
+        $maxPages = ceil($rowCount/$this->numPerPage);
+
+        for($i=1;$i<=$maxPages;$i++) {
+            $paging .= "<a class='page-nr' href='search.php?page=".$i."'>".$i."</a>";
+        }
+
+        foreach ($result as $row) {
+          $cutCreated = substr($row['created'], 0, 10);
+          $html .= "
+              <tbody>
+                  <tr class='case-row' data-href='case.php?id={$row['case_id']}'>
+                      <td class='tbodyTd'>{$cutCreated}</td>
+                      <td class='tbodyTd'>{$row['case_id']}</td>
+                      <td class='tbodyTd'>{$row['contact']}</td>
+                      <td class='tbodyTd'>{$row['title']}</td>
+                      <td class='tbodyTd colHide'>{$row['assigned']}</td>
+                  </tr>
+              </tbody>
+          ";
+        }
+        $html .= "
+        <tfoot>
+            <tr>
+                <td colspan='5'>
+                    <li class='page-item'>
+                        {$paging}
+                    </li>
+                </td>
+            </tr>
+        </tfoot>";
         $pdo = null;
         return $html;
     }

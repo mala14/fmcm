@@ -2,7 +2,14 @@ revision history
 
 ===================  
 
-v0.2.81 (2021-08-06)  // not gitted
+v0.2.82 (2021-08-09)  
+
+Added date to search function.  
+Added pagination to search result page.  
+
+-------------------  
+
+v0.2.81 (2021-08-06)
 
 Added a search function to cases.  
 
