@@ -30,8 +30,6 @@
 }
 
 .navbar-row {
-		/* font-size: 1.5em; */
-		/* font-family: 'Jura', sans-serif; */
 		margin-left: 150px;
 }
 
@@ -55,7 +53,6 @@
 .dropdown-content {
 		display: none;
 		position: absolute;
-		/* background-color: #f1f1f1; */
 		min-width: 110px;
 		padding: 3px;
 		border-left: 1px solid #ccc;

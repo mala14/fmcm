@@ -7,7 +7,7 @@ class User Extends Todo
 
     /* Properties */
     private $conn;
-
+    public $numPerPage = 30;
     /**
     * Get database access
     *
@@ -69,10 +69,40 @@ class User Extends Todo
 		public function editContacts()
 		{
 			$html = null;
-			$inactive = null;
-			$stmt = $this->conn->prepare("SELECT id_contact, con_fname, con_lname, con_email, con_address, con_office, con_jtitle, con_phone FROM fmcm_contacts");
+      $paging = null;
+
+      if(isset($_GET['page'])) {
+          $page = $_GET['page'];
+      } else {
+         $page = 1;
+      }
+      $startPage = ($page-1)*$this->numPerPage;
+
+			$stmt = $this->conn->prepare("
+      SELECT
+          id_contact,
+          con_fname,
+          con_lname,
+          con_email,
+          con_address,
+          con_office,
+          con_jtitle,
+          con_phone
+      FROM fmcm_contacts
+      LIMIT $startPage, $this->numPerPage");
 			$stmt->execute();
-			foreach($stmt as $row){
+      $res = $stmt->fetchAll();
+
+      $rowsNr = $this->conn->prepare("SELECT * FROM fmcm_contacts");
+      $rowsNr->execute();
+      $rowCount = $rowsNr->rowCount();
+      $maxPages = ceil($rowCount/$this->numPerPage);
+
+      for($i=1;$i<=$maxPages;$i++) {
+          $paging .= "<a class='page-nr' href='list_contacts.php?page=".$i."'>".$i."</a>";
+      }
+
+			foreach($res as $row){
 					$html .= "
               <tbody>
                   <tr class='case-row' data-href='contact_edit.php?id={$row['id_contact']}'>
@@ -85,6 +115,16 @@ class User Extends Todo
               </tbody>
 					";
 			}
+      $html .= "
+      <tfoot>
+          <tr>
+              <td colspan='5'>
+                  <li class='page-item'>
+                      {$paging}
+                  </li>
+              </td>
+          </tr>
+      </tfoot>";
 			$pdo = null;
 			return $html;
 		}

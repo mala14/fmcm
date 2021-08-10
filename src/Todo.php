@@ -798,7 +798,6 @@ class Todo
         if (isset($_POST['mainSearch'])) {
             $search = $_POST['mainSearch'];
         }
-
         $sql = $this->conn->prepare("
         SELECT *
         FROM
@@ -809,11 +808,14 @@ class Todo
             OR contact LIKE ?
             OR title LIKE ?
             OR assigned LIKE ?
+            OR email LIKE ?
+            OR phone LIKE ?
         ORDER BY case_id ASC
         LIMIT $startPage, $this->numPerPage
         ");
-        $sql->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        $sql->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
         $result = $sql->fetchAll();
+
         // pagination starts here
         $rowsNr = $this->conn->prepare("
         SELECT *
@@ -824,11 +826,12 @@ class Todo
             OR contact LIKE ?
             OR title LIKE ?
             OR assigned LIKE ?
+            OR email LIKE ?
+            OR phone LIKE ?
         ");
-        $rowsNr->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        $rowsNr->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
         $rowCount = $rowsNr->rowCount();
         $maxPages = ceil($rowCount/$this->numPerPage);
-
         for($i=1;$i<=$maxPages;$i++) {
             $paging .= "<a class='page-nr' href='search.php?page=".$i."'>".$i."</a>";
         }

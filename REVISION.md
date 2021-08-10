@@ -2,6 +2,14 @@ revision history
 
 ===================  
 
+v0.2.83 (2021-08-10)  
+
+Update to search, email and phone number.  
+Removed unused css code.  
+Updated db view 'v_fmcm_caseinfo' with email and phone.  
+Add pagination to list_contacts and list_users  
+
+-------------------  
 v0.2.82 (2021-08-09)  
 
 Added date to search function.  

@@ -66,5 +66,7 @@ SELECT
     `fmcm_todo`.`title` AS `title`,
     `fmcm_todo`.`assigned` AS `assigned`,
     `fmcm_todo`.`status` AS `status`,
-    `fmcm_todo`.`closedby` AS `closedby`
-FROM (`fmcm_todo` join `fmcm_contacts` on(`fmcm_todo`.`contacts` = `fmcm_contacts`.`id_contact`)) ;
+    `fmcm_todo`.`closedby` AS `closedby`,
+    `fmcm_contacts`.`con_email` AS `email`,
+    `fmcm_contacts`.`con_phone` AS `phone`
+FROM (`fmcm_todo` join `fmcm_contacts` on(`fmcm_todo`.`contacts` = `fmcm_contacts`.`id_contact`));

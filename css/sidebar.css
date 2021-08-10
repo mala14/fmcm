@@ -21,8 +21,6 @@
 		width: 140px;
 		background-color: #fff;
 		margin-top: 3px;
-		/* border-right: 1px solid #c1c0c0; */
-		/* display: inline-flex; */
 }
 
 .side-lnk {
@@ -47,9 +45,3 @@
 .side-lnk-adm {
 		display: initial;
 }
-
-/* .fas,
-.fa-fw {
-		padding-left: 3px;
-		padding-right: 3px;
-} */

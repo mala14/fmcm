@@ -6,7 +6,8 @@ class Admin
 {
 
 		private $conn;
-
+		public $numPerPage = 30;
+		/* get database access */
 		public function __construct($pdo)
 		{
 				$this->conn = $pdo;
@@ -116,9 +117,39 @@ class Admin
 		{
 			$html = null;
 			$inactive = null;
-			$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, type, active, lastlogin FROM fmcm_users");
+			$paging = null;
+
+      if(isset($_GET['page'])) {
+          $page = $_GET['page'];
+      } else {
+         $page = 1;
+      }
+      $startPage = ($page-1)*$this->numPerPage;
+
+			$stmt = $this->conn->prepare("
+			SELECT
+					id_user,
+					fname,
+					lname,
+					uname,
+					type,
+					active,
+					lastlogin
+			FROM fmcm_users
+			LIMIT $startPage, $this->numPerPage");
 			$stmt->execute();
-			foreach($stmt as $row){
+      $res = $stmt->fetchAll();
+
+			$rowsNr = $this->conn->prepare("SELECT * FROM fmcm_users");
+      $rowsNr->execute();
+      $rowCount = $rowsNr->rowCount();
+      $maxPages = ceil($rowCount/$this->numPerPage);
+
+      for($i=1;$i<=$maxPages;$i++) {
+          $paging .= "<a class='page-nr' href='list_users.php?page=".$i."'>".$i."</a>";
+      }
+
+			foreach($res as $row){
 					if($row['active'] === 'active'){
 							$status = "<div class='active'>{$GLOBALS['userActive']}</div>";
 					}	else {
@@ -137,6 +168,16 @@ class Admin
 								</tbody>
 					";
 			}
+			$html .= "
+      <tfoot>
+          <tr>
+              <td colspan='6'>
+                  <li class='page-item'>
+                      {$paging}
+                  </li>
+              </td>
+          </tr>
+      </tfoot>";
 			$pdo = null;
 			return $html;
 		}
