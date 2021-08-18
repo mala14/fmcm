@@ -2,6 +2,17 @@ revision history
 
 ===================  
 
+v0.2.84 (2021-08-18)
+
+Enabled mail send through PHPMailer.  
+Added new table for mail settings.
+New page for settings created where most of the site settings will be.  
+Create and edit mailtemplates are possible.
+Add template to mail.
+Added a new type of user, Moderator
+Admin and moderators can edit templates.
+
+-------------------  
 v0.2.83 (2021-08-10)  
 
 Update to search, email and phone number.  

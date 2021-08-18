@@ -5,6 +5,7 @@
 		$users = new User($pdo);
 		$login = new Login($pdo);
     $admin = new Admin($pdo);
+    $admin->IsAdmin();
 		$login->checkLogin();
 		$login->getSessions();
 ?>

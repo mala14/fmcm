@@ -57,6 +57,26 @@ CREATE TABLE IF NOT EXISTS `fmcm_users` (
 INSERT INTO `fmcm_users` (`id_user`, `fname`, `lname`, `uname`, `email`, `type`, `passwd`, `active`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin@fmcm', 'admin', '$2y$12$dW/quMv4KJEQc0NiskDkmegIsMg33UGghpI2JQoFn4QYq6G6.UqwG', 'active');
 
+--DROP TABLE IF EXISTS `fmcm_settings`;
+CREATE TABLE IF NOT EXISTS `fmcm_settings` (
+    `mailhost` varchar(150) DEFAULT NULL UNIQUE,
+    `mailuser` varchar(150) DEFAULT NULL,
+    `setfrom` varchar(150) DEFAULT NULL,
+    `mailpasswd` varchar(255) DEFAULT NULL,
+    `passkey` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `fmcm_settings` (`mailhost`, `mailuser`, `setfrom`, `mailpasswd`, `passkey`) VALUES
+('', '', '', '', '');
+
+--DROP TABLE IF EXISTS `fmcm_mailtemplate`;
+CREATE TABLE IF NOT EXISTS `fmcm_mailtemplate` (
+    `id` INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` varchar(100) DEFAULT NULL,
+    `template` TEXT DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 --DROP VIEW IF EXISTS `v_fmcm_caseinfo`;
 CREATE VIEW `v_fmcm_caseinfo` AS
 SELECT

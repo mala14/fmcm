@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+
+/**
+* The style for email templates
+*/
+.template-list {
+    display: flex;
+}
+
+.messages {
+    width: 100%;
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.mess-title {
+    width: 20%;
+}
+
+.select-template {
+    width: 80%;
+    text-align: right;
+}
+
+.temp-select {
+    width: 200px;
+}

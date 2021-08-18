@@ -6,4 +6,5 @@
     <a href="new_case.php" title="New case"><div class='side-lnk'><i class="fas fa-door-open"></i><div class="side-lnk-text"><?= $newCase ?></div></div></a>
     <a href="list_contacts.php" title="Customers"><div class='side-lnk'><i class="fas fa-address-card"></i><div class="side-lnk-text"><?= $contact ?></div></div></a>
     <?= $admin->getAdmMenu() ?>
+    <?= $admin->getModMenu() ?>
 </div>

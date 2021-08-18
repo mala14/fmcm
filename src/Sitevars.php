@@ -69,6 +69,7 @@ $closedCases = "Closed";                // Closed cases button
 $newCase = "New case";                  // New case button
 $contacts = "Customer";                 // List of customers
 $dashboard = "Dashboard";               // The dashboard title
+$settings = "Settings";                 // The site settings button
 
 /**
 * Left menu variables, Admin buttons and admin vars
@@ -81,7 +82,9 @@ $surname = "Lastname";                  // The add user Surname title
 $type = "Type";                         // The type of user permission
 $usrType = "User";                      // The user value in dropdown select type
 $adminType = "Admin";                   // The admin value in the drop down select type
-$userEdit = "Edit";                     // The edit user link
+$modType = "Moderator";                 // The moderator value in the drop down select type
+$userEdit = "Edit";                     // The edit user link title
+$templates = "Templates";               // The templates link title
 
 $firstName = "First name";              // The edit user firstname title
 $status = "Status";                     // The edit user status title
@@ -119,7 +122,15 @@ $emptySearch = "Search field can not be empty"; // The seaarch contact empty fie
 $noEntriesDb = "No entries in database"; // The message when no cases are registered
 $noComment = "You have to leave a comment"; // The empty comment error message
 
-
+/**
+* The email variables
+*
+*/
+$send = "Send";                         // Send button text value
+$createTemplate = "Create template";    // Create new template button text value
+$selectTemplate = "Select mail template"; // Text for select box for mail templates
+$mailMessage = "Message";               // The send mail message title at mail textarea
+$mailSubject = "Case id:";              // Subject field case id text
 /**
 * The footer vars
 *

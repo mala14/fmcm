@@ -33,7 +33,7 @@ Class Graphs
     {
         // $id = $this->getUname();
         $status = 'Active';
-        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmtodo_caseinfo WHERE status = :status");
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE status = :status");
         $sql->execute([$status]);
         $res = $sql->fetchColumn();
         return $res;
@@ -48,7 +48,7 @@ Class Graphs
     {
         $id = $this->getUname();
         $status = 'Active';
-        $sql = $this->conn->prepare("SELECT COUNT(assigned) FROM v_fmtodo_caseinfo WHERE assigned = :id AND status = :status");
+        $sql = $this->conn->prepare("SELECT COUNT(assigned) FROM v_fmcm_caseinfo WHERE assigned = :id AND status = :status");
         $sql->execute([$id, $status]);
         $res = $sql->fetchColumn();
         return $res;
@@ -63,7 +63,7 @@ Class Graphs
     {
         $id = $this->getUname();
         $status = 'Active';
-        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmtodo_caseinfo WHERE status = :status AND assigned <> :id");
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE status = :status AND assigned <> :id");
         $sql->execute([$status, $id]);
         $res = $sql->fetchColumn();
         return $res;
@@ -78,7 +78,7 @@ Class Graphs
     {
         $id = $this->getUname();
         $status = 'Closed';
-        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmtodo_caseinfo WHERE status = :status");
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE status = :status");
         $sql->execute([$status]);
         $res = $sql->fetchColumn();
         return $res;
@@ -93,7 +93,7 @@ Class Graphs
     {
         $status = 'Active';
         $assigned = NULL;
-        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmtodo_caseinfo WHERE status = :status AND assigned IS NULL");
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE status = :status AND assigned IS NULL");
         $sql->execute([$status]);
         $res = $sql->fetchColumn();
         return $res;
@@ -107,7 +107,7 @@ Class Graphs
     public function getClosedUsrCasesSql()
     {
         $id = $this->getUname();
-        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmtodo_caseinfo WHERE closedby = :id");
+        $sql = $this->conn->prepare("SELECT COUNT(*) FROM v_fmcm_caseinfo WHERE closedby = :id");
         $sql->execute([$id]);
         $res = $sql->fetchColumn();
         return $res;
