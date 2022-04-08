@@ -27,6 +27,12 @@ class Todo
         return $id;
     }
 
+    public function getCaseId()
+    {
+        $caseId = $_GET['caseId'] ?? null;
+        return $caseId;
+    }
+
     /**
     * Get logged in users username
     *
@@ -47,67 +53,6 @@ class Todo
     {
         $id_contact = $_POST['id_contact'] ?? null;
         return $id_contact;
-    }
-
-    /**
-    * Display navbar if logged in.
-    *
-    * @return
-    */
-    public function getNavBar()
-    {
-        $id = $this->getId();
-        $sql = $this->conn->prepare("SELECT status FROM v_fmcm_caseinfo WHERE case_id = :id");
-        $sql->execute([$id]);
-        $res = $sql->fetch();
-        if (isset($id) && $res['status'] === 'Active') {
-            $closed = $this->closeCase();
-        } else {
-            $closed = "
-                <form method='post'>
-                    <input type='submit' name='closeCase' class='saveCase' title='Close case' value='{$GLOBALS['closeCase']}' disabled>
-                </form>";
-        }
-        if (isset($id) && $res['status'] === 'Closed') {
-            $open = $this->openCase();
-        } else {
-            $open = "
-            <form method='post'>
-                <input type='submit' name='closeCase' class='saveCase' title='Close case' value='{$GLOBALS['openCase']}' disabled>
-            </form>";
-        }
-
-        $html = null;
-        if (isset($_SESSION['uname'])) {
-            $html .= "
-                <td class='nav-item'>
-                   <a class='nav-link' href='logout.php' title='Logout'>{$GLOBALS['logOutSubmit']}</a>
-                </td>
-                <td class='nav-item'>
-                  <div class='dropdown'>
-                      <div class='nav-link'>{$GLOBALS['navNew']}</div>
-                          <div class='dropdown-content'>
-                              <a href='new_contact.php' title='New customer'>{$GLOBALS['contact']}</a>
-                              <a href='new_case.php' title='New case'>{$GLOBALS['navCase']}</a>
-                          </div>
-                  </div>
-                </td>
-                <td class='nav-item'>
-                  <div class='dropdown'>
-                      <div class='nav-link'>{$GLOBALS['navCase']}</div>
-                      <div class='dropdown-content'>
-                        {$closed}
-                        {$open}
-                      </div>
-                  </div>
-                </td>
-                <td class='nav-item'>
-                    <a class='nav-link' href='search.php' title='Search'><i class='fal fa-search fa-sm'></i></a>
-                </td>
-            ";
-        }
-        $pdo = null;
-        return $html;
     }
 
     /**
@@ -141,7 +86,7 @@ class Todo
       				$stmt->execute([$name, $title, $issue, $created, $status, $contacts]);
       				$msg .= "Message saved";
       				$stmt = null;
-              echo "<script>location.href = 'new_case.php'</script>";
+              echo "<script>window.location.href = 'new_case.php'</script>";
               exit;
     			}
   		}
@@ -270,7 +215,7 @@ class Todo
           $cutCreated = substr($val['created'], 0, 10);
           $html .= "
               <tbody>
-                  <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                  <tr class='case-row' data-href='case.php?caseId={$val['case_id']}'>
                       <td class='tbodyTd'>{$cutCreated}</td>
                       <td class='tbodyTd'>{$val['case_id']}</td>
                       <td class='tbodyTd'>{$val['contact']}</td>
@@ -339,7 +284,7 @@ class Todo
           $cutCreated = substr($val['created'], 0, 10);
           $html .= "
               <tbody>
-                  <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                  <tr class='case-row' data-href='case.php?caseId={$val['case_id']}'>
                       <td class='tbodyTd'>{$cutCreated}</td>
                       <td class='tbodyTd'>{$val['case_id']}</td>
                       <td class='tbodyTd'>{$val['contact']}</td>
@@ -416,7 +361,7 @@ class Todo
             $cutCreated = substr($val['created'], 0, 10);
             $html .= "
                 <tbody>
-                    <tr class='case-row' data-href='case.php?id={$val['case_id']}'>
+                    <tr class='case-row' data-href='case.php?caseId={$val['case_id']}'>
                         <td class='tbodyTd'>{$cutCreated}</td>
                         <td class='tbodyTd'>{$val['case_id']}</td>
                         <td class='tbodyTd'>{$val['contact']}</td>
@@ -484,7 +429,7 @@ class Todo
             WHERE
                 fmcm_todo.id = ?
             ");
-  			$sql->execute([$this->getId()]);
+  			$sql->execute([$this->getCaseId()]);
   			$res = $sql->fetchAll();
 
         foreach ($res as $val) {
@@ -530,7 +475,7 @@ class Todo
         WHERE
             fmcm_todo.id = ?
         ");
-        $sql->execute([$this->getId()]);
+        $sql->execute([$this->getCaseId()]);
         $res = $sql->fetchAll();
         foreach ($res as $val) {
             $html .= "{$val['fname']} {$val['lname']}";
@@ -560,7 +505,7 @@ class Todo
                 }
                 $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
                 $sql->execute([$engineer, $this->getId()]);
-                echo "<script>location.href = ''</script>";
+                echo "<script>window.location.href = ''</script>";
                 exit;
             }
         }
@@ -571,8 +516,7 @@ class Todo
             <div class='selectObj'>
                 <select name='assigned'>
                     <option>{$this->getAssigned()}</option>
-                    <option></option>
-        ";
+          ";
         foreach ($res as $row) {
             $html .= "
                 <option value='{$row['uname']}'>{$row['fname']} {$row['lname']}</option>
@@ -596,11 +540,14 @@ class Todo
     */
     public function getCaseTitle()
     {
-  			$stmt = $this->conn->prepare("SELECT id, title FROM fmcm_todo WHERE id = :id");
-  			$stmt->execute([$this->getId()]);
-  			$res = $stmt->fetch();
+
+  			$stmt = $this->conn->prepare("SELECT id, title FROM fmcm_todo WHERE id = :caseId");
+  			$stmt->execute([$this->getCaseId()]);
+  			$res = $stmt->fetchAll();
         $pdo = null;
-        return $res['title'];
+        foreach ($res as $val) {
+            return $val['title'];
+        }
     }
 
     /**
@@ -611,7 +558,7 @@ class Todo
     public function updateCase()
     {
         $error = null;
-        $id = $this->getId();
+        $id = $this->getCaseId();
         $uname = $_SESSION['uname'];
         $dateStamp = date('Y-m-d H:i:s');
 
@@ -650,13 +597,13 @@ class Todo
         $html = null;
         $uname = $_SESSION['uname'];
         $dateStamp = date('Y-m-d H:i:s');
-        $id = $this->getId();
+        $id = $this->getCaseId();
         $status = 'Closed';
 
         if (isset($_POST['closeCase'])) {
             $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = :uname, fixed = :dateStamp WHERE id = :id LIMIT 1");
             $sql->execute([$status, $uname, $dateStamp, $id]);
-            echo "<script>location.href = ''</script>";
+            echo "<script>window.location.href = ''</script>";
             exit;
         }
         $html .= "
@@ -677,12 +624,12 @@ class Todo
         $html = null;
         $uname = $_SESSION['uname'];
         $dateStamp = date('Y-m-d H:i:s');
-        $id = $this->getId();
+        $id = $this->getCaseId();
         $status = 'Active';
         if (isset($_POST['openCase'])) {
             $sql = $this->conn->prepare("UPDATE fmcm_todo SET status = :status, closedby = null, fixed = null WHERE id = :id LIMIT 1");
             $sql->execute([$status, $id]);
-            echo "<script>location.href = ''</script>";
+            echo "<script>window.location.href = ''</script>";
             exit;
         }
 
@@ -702,10 +649,10 @@ class Todo
   	*/
     public function caseStatus()
     {
-        $sql = $this->conn->prepare("SELECT id, status FROM fmcm_todo WHERE id = :id");
-        $sql->execute([$this->getId()]);
+        $sql = $this->conn->prepare("SELECT id, status FROM fmcm_todo WHERE id = :caseId");
+        $sql->execute([$this->getCaseId()]);
         $res = $sql->fetch();
-        if ($res['status'] === 'Active') {
+        if ($res['status'] == 'Active') {
             $status = "
                 <div class='caseStatusOpen'>
                     {$res['status']}
@@ -729,10 +676,13 @@ class Todo
   	*/
     public function getIssue()
     {
+        $id = $this->getCaseId();
         $sql = $this->conn->prepare("SELECT id, issue FROM fmcm_todo WHERE id = :id");
-        $sql->execute([$this->getId()]);
-        $res = $sql->fetch();
-        return htmlspecialchars_decode($res['issue']);
+        $sql->execute([$id]);
+        $res = $sql->fetchAll();
+        foreach ($res as $val) {
+            return htmlspecialchars_decode($val['issue']);
+        }
         $pdo = null;
     }
 
@@ -744,7 +694,7 @@ class Todo
     public function getComment()
     {
         $html = null;
-        $id = $this->getId();
+        $id = $this->getCaseId();
         $sql = $this->conn->prepare("SELECT id_comment, id_todo, comment, id_user, saved FROM fmcm_comment WHERE id_todo = :id ORDER BY id_comment DESC");
         $sql->execute([$id]);
         $res = $sql->fetchAll();
@@ -759,6 +709,12 @@ class Todo
         $pdo = null;
         return $html;
     }
+
+    /**
+  	* Show cases
+  	*
+  	* @return
+  	*/
     public function showCases()
     {
       $sql = "

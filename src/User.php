@@ -54,7 +54,7 @@ class User Extends Todo
                 $stmt = $this->conn->prepare("INSERT INTO fmcm_contacts (con_fname, con_lname, con_jtitle, con_phone, con_email, con_office, con_address) VALUES (:fname, :lname, :jtitle, :phone, :email, :office, :address)");
                 $stmt->execute([$fname, $lname, $jtitle, $phone, $email, $office, $address]);
                 $stmt = null;
-                echo "<script>location.href = 'my_page.php'</script>";
+                echo "<script>window.location.href = 'my_page.php'</script>";
                 exit;
             }
         }
@@ -169,7 +169,7 @@ class User Extends Todo
                 ");
 						$stmt->execute([$fname, $lname, $email, $address, $office, $jtitle, $phone, $id]);
 						$pdo = null;
-						echo "<script>location.href = 'list_contacts.php'</script>";
+						echo "<script>window.location.href = 'list_contacts.php'</script>";
 						exit;
 					}
 						$html .= "

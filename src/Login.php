@@ -18,7 +18,7 @@ class Login
     public function checkLogin()
     {
         $user = isset($_SESSION['uname']) ? $_SESSION['uname'] : null;
-				isset($user) or die("<script>location.href = 'index.php'</script>");
+				isset($user) or die("<script>window.location.href = 'index.php'</script>");
 	  }
 
 		/**
@@ -46,7 +46,7 @@ class Login
         				$timestp = date('Y-m-d G:i:s');
         				$sql = $this->conn->prepare("UPDATE fmcm_users SET lastlogin = :timestp, status = :status, time = :ltime WHERE uname = :username");
         				$sql->execute([$timestp, $status, $ltime, $username]);
-								echo "<script>location.href = 'my_page.php'</script>";
+								echo "<script>window.location.href = 'my_page.php'</script>";
       			}
     				$pdo = null;
             exit;
@@ -92,7 +92,7 @@ class Login
 								session_destroy();
 								unset($_SESSION['uname']);
 						}
-						echo "<script>location.href = 'index.php'</script>";
+						echo "<script>window.location.href = 'index.php'</script>";
             exit;
 				}
 				$html .= "<button type='submit' class='loginBtn' name='logout'>{$GLOBALS['logOutSubmit']}</button>";

@@ -28,7 +28,7 @@ class Admin
 						if($user && $type['type'] === 'admin'){
 
 						}	else {
-							echo "<script>location.href = 'my_page.php';</script>";
+							echo "<script>window.location.href = 'my_page.php';</script>";
 							exit;
 						}
 				}
@@ -104,7 +104,7 @@ class Admin
 						$email = htmlentities($_POST['email']);
 						$active = null;
 
-						$timestamp = date('Y-m-d G:i:s');
+						$timeStmp = date('Y-m-d G:i:s');
 						$password = strip_tags($_POST['password']);
 						$confirmpwd = strip_tags($_POST['confirmpwd']);
 						$hash = password_hash($password, PASSWORD_BCRYPT);
@@ -118,10 +118,10 @@ class Admin
 
 						if(!empty($password) && !empty($confirmpwd)) {
 								if($password === $confirmpwd){
-										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timestamp, :active)");
+										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timeStmp, :active)");
 										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timestamp, $active]);
 										$pdo = null;
-										echo "<script>location.href = 'list_users.php';</script>";
+										echo "<script>window.location.href = 'list_users.php';</script>";
 										exit;
 								}	else {
 											$fail = "{$GLOBALS['passwordNoMatch']}";
@@ -217,7 +217,6 @@ class Admin
 		{
 				$html = null;
 				$fail = null;
-
 				$id = $_GET['id'];
 				$stmt = $this->conn->prepare("SELECT id_user, fname, lname, uname, email, type, active FROM fmcm_users WHERE id_user = :id");
 				$stmt->execute([$id]);
@@ -234,7 +233,7 @@ class Admin
 						$stmt = $this->conn->prepare("UPDATE fmcm_users SET uname = :uname, type = :type, lname = :lname, fname = :fname, email = :email, active = :active  WHERE id_user = :id LIMIT 1");
 						$stmt->execute([$uname, $type, $lname, $fname, $email, $active, $id]);
 						$pdo = null;
-						echo "<script>location.href = 'list_users.php'</script>";
+						echo "<script>window.location.href = 'list_users.php'</script>";
 						exit;
 					}
 						$html .= "
@@ -446,7 +445,7 @@ class Admin
 						$passkey = $_POST['passkey'];
 						$sql = $this->conn->prepare("UPDATE fmcm_settings SET mailhost = :mailhost, mailuser = :mailuser, setfrom = :setfrom, passkey = :passkey");
 						$sql->execute([$mailhost, $mailuser, $setfrom, $passkey]);
-						echo "<script>location.href = 'settings.php';</script>";
+						echo "<script>window.location.href = 'settings.php';</script>";
 						exit;
 				}
 				$pdo = null;

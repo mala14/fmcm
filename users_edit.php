@@ -9,6 +9,7 @@
 		$login->checkLogin();
 		$login->getSessions();
 ?>
+
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">
@@ -24,5 +25,4 @@
         <?= $admin->changePassword() ?>
     </div>
 </div>
-
 <?php include ("view/footer.php"); ?>

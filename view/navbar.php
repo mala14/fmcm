@@ -1,9 +1,9 @@
 <?php
-    $todo = new Todo($pdo);
+    $navbar = new Navbar($pdo);
 ?>
 <nav class="navbar">
     <div class="navbar-row">
-        <?= $todo->getNavBar() ?>
+        <?= $navbar->getNavBar() ?>
     </div>
 </nav>
 <div class="nav-row"></div>

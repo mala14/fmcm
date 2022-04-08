@@ -34,10 +34,10 @@ class Mailer
         return $id;
     }
 
-    public function isPhpMailer()
-    {
-        $sql = $this
-    }
+    // public function isPhpMailer()
+    // {
+    //     $sql = $this
+    // }
 
     /**
     * Get recepient for the send mail front controller
@@ -198,7 +198,7 @@ class Mailer
             $template = $_POST['etemplate'];
             $sql = $this->conn->prepare("UPDATE fmcm_mailtemplate SET name = :name, template = :template WHERE id = :id LIMIT 1");
             $sql->execute([$name, $template, $this->getTid()]);
-            echo "<script>location.href = ''</script>;";
+            echo "<script>window.location.href = ''</script>;";
             exit;
             $pdo = null;
         }

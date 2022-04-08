@@ -22,6 +22,7 @@
                 <div class="usrInfoTbl"><div class="formdata"><div class="caseInfoTitle"><?= $type ?>: </div><div class="editUserField">
                     <select name="type" class="editUserField">
                         <option value="usr"><?= $usrType ?></option>
+                        <option value="mod"><?= $modType ?></option>
                         <option value="admin"><?= $adminType ?></option>
                     </select>
                 </div></div></div>

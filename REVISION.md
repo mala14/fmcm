@@ -1,7 +1,16 @@
 revision history
 
 ===================  
+v0.2.85 (2022-04-08)
 
+Fixed "Trying to access array offset on value of type bool" in Todo.php.
+Added new value case id when posting new/updates to case, due to user id could get same value.
+Added value Moderator to users_adm at creation of new user.
+Fixed Case status (open & close) in navbar case butdton dropdown.
+Changes to redirecting to pages.
+Added new class for Navbar.
+
+-------------------
 v0.2.84 (2021-08-18)
 
 Enabled mail send through PHPMailer.  
