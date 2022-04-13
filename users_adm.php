@@ -13,6 +13,7 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
+        <div class="titles"><?= $newUser ?></div>
         <form method="post">
             <div id="addUtbl">
                 <div class="usrInfoTbl"><div class="formdata"><div class="caseInfoTitle"><?= $username ?>: </div><div class="editUserField"><input type="text" name="uname" required /></div></div></div>

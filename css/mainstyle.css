@@ -86,6 +86,10 @@ p.indent {
     opacity: 0.6;
 }
 
+.titles {
+    margin-bottom: 5px;
+}
+
 /*
 * Main header style
 */

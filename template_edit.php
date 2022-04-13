@@ -15,6 +15,7 @@
     <table class="tableCase">
         <thead>
             <tr>
+                <div class="titles"><?= $editTemplate ?></div>
                 <th class="thCategories paddingBottom"></th>
                 <?= $mailer->editTemplate() ?>
               </tr>

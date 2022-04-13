@@ -12,10 +12,12 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
+          <div class="titles"><?= $caseContactInfo ?></div>
           <?= $todo->getCaseInfo() ?>
           <?= $todo->assignCaseEngineer() ?>
     </div>
     <div class="caseInfo">
+        <div class="titles"><?= $caseInfo ?></div>
         <?= $todo->updateCase() ?>
     </div>
 </div>

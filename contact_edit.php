@@ -12,6 +12,7 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
+        <div class="titles"><?= $editContact ?></div>
         <?= $users->getEditContact() ?>
     </div>
 </div>

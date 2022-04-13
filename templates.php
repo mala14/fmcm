@@ -15,8 +15,8 @@
     <table class="tableCase">
         <thead>
             <tr>
+              <div class="titles"><?= $createNewTemplate ?></div>
               <form method="post">
-                  <div>Create new mail template:</div>
                   <div class="usrInfoTbl"><div class="formdata"><div class="caseInfoTitle">Name: </div><div class="usrInfo"><input type="text" class="issueTitle" name="ntempname" value=""></div></div></div>
                   <textarea type="text" id="editor" class="messArea" name="mtemplate" /></textarea>
                   <div class="caseBtn"><input type="submit" class="submitBtn" name="createtemplate" value="<?= $createTemplate ?>" ></div>

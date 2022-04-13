@@ -575,7 +575,7 @@ class Todo
      		$html = "
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['issue']}: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
-    				Add comment
+    				<div class='titles'>{$GLOBALS['addComment']}</div>
             <form method='post' class='setCase'>
                 <input type='hidden' name='id' value='{$id}'>
             		<textarea type='text' id='editor' class='messArea' name='commtext' placeholder='{$error}'/></textarea><br>

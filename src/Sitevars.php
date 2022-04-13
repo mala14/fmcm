@@ -54,6 +54,11 @@ $save = "save";                         // The case save butdton value
 $caseIssueHolder = "Case title";        // The case issue title placeholder
 $closeCase = "Close case";              // The close case button value
 $openCase = "Open case";                // The open case button value
+$caseContactInfo = "Case contact info"; // The title for contact info in a case
+$editContact = "Edit contact";          // The title for edit contact
+$createNewTemplate = "Create new mail template"; // The title for create new template field
+$editTemplate = "Edit template";        // The title for edit mail template field
+$addComment = "Add comment";            // The title for case issue field
 
 $reset = "Reset";                       // The case field reset button value
 $search = "Search";                     // The seaarch contact form title
@@ -77,6 +82,7 @@ $settings = "Settings";                 // The site settings button
 */
 $addUsers = "Add users";                // Add users button
 $editUsers = "Edit users";              // Edit users button
+$newUser = "New user";                  // The title for new user field
 $username = "Username";                 // The add user Username title
 $surname = "Lastname";                  // The add user Surname title
 $type = "Type";                         // The type of user permission
@@ -84,6 +90,7 @@ $usrType = "User";                      // The user value in dropdown select typ
 $adminType = "Admin";                   // The admin value in the drop down select type
 $modType = "Moderator";                 // The moderator value in the drop down select type
 $userEdit = "Edit";                     // The edit user link title
+$editUser = "Edit user";                // the title for edit user field
 $templates = "Templates";               // The templates link title
 
 $firstName = "First name";              // The edit user firstname title
@@ -94,11 +101,16 @@ $updateUser = "Update";                 // The update user button value
 
 $setPassWord = "Password";              // The update password title
 $confPassWord = "Confirm";              // The confirm password title
+$changePassword = "Change password";    // The title for change password field
 $setPassWordHolder = "Password";        // The update password placeholder
 $confPassWordHolder = "Confirm password";// The confirm password placeholder
 $lastLogin = "Last login";              // The last login title at list users
 $jobTitle = "Job title";                // The add contact job title
 $fullname = "Full name";                // First and last name
+
+$searchContact = "Search for contact";  // The title for search contact
+$caseInfo = "Case info";                // The title for case info field
+$newContact = "New Contact";            // The title for new contact
 
 /**
 * The error message variables
@@ -131,9 +143,11 @@ $createTemplate = "Create template";    // Create new template button text value
 $selectTemplate = "Select mail template"; // Text for select box for mail templates
 $mailMessage = "Message";               // The send mail message title at mail textarea
 $mailSubject = "Case id:";              // Subject field case id text
+$mailSettings = "Mail settings";        // The title to mail settings field
+$mailPassword = "Change mail password"; // The title for mail password setting field
 /**
 * The footer vars
 *
 */
-$copyright = "&copy; mala14 www.freemasons.se"; // The creator
+$copyRight = "&copy; mala14";           // The creator
 $github = "<a href='https://github.com/mala14/fmcm'><i class='fab fa-github fa-2x'></i></a>"; // FMCM GitHub repo

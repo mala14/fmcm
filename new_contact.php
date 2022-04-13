@@ -11,6 +11,7 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
+        <div class="titles"><?= $newContact ?></div>
         <form method="post">
             <div class="usrInfoTbl"><div class="formdata"><div class="caseInfoTitle"><?= $name ?>: </div><input type="text" class="conInfo" name="fname" required /></div></div>
             <div class="usrInfoTbl"><div class="formdata"><div class="caseInfoTitle"><?= $surname ?>: </div><input type="text" class="conInfo" name="lname" required /></div></div>

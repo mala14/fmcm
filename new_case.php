@@ -12,12 +12,14 @@
 
 <div class="caseTbl">
     <div class="caseContactInfo">
+        <div class="titles"><?= $searchContact ?></div>
         <?= $todo->searchUserForm() ?>
     </div>
     <div class="caseInfo">
+        <div class="titles"><?= $caseInfo ?></div>
         <form method="post">
             <div class="caseUpdate"><div class="caseUpdateTitle"><?= $caseTitle ?>: </div><input type="text" class="issueTitle" name="issuetitle" placeholder="<?= $caseIssueHolder ?>"></div>
-            <div class="caseLabel"><label><?= $description ?>:</label></div>
+            <div class="caseLabel"><div class="titles"><?= $description ?>:</div></div>
             <div class="setCase">
                 <textarea type="text" id="editor" class="messArea" name="commtext" /></textarea><br>
                 <input type="hidden" name="addContact" value="<?= $todo->getIdContact() ?>">

@@ -1,6 +1,6 @@
 </article>
 <div class="footer">
-    <div class="copyright"><?= $copyright ?></div>
+    <div class="copyright"><?= $copyRight ?></div>
     <div class="copyright"><?= $github ?></div>
 </div>
 
