@@ -11,10 +11,10 @@ CREATE TABLE `fmcm_users` (
 	`lastlogin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`active` char(10) DEFAULT NULL,
 	`status` int(2) DEFAULT NULL,
-	`time` int(25) DEFAULT NULL
+	`sesstime` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `fmcm_users` (`id_user`, `fname`, `lname`, `uname`, `email`, `avatar`, `type`, `passwd`, `regdate`, `lastlogin`, `active`, `status`, `time`) VALUES
+INSERT INTO `fmcm_users` (`id_user`, `fname`, `lname`, `uname`, `email`, `avatar`, `type`, `passwd`, `regdate`, `lastlogin`, `active`, `status`, `sesstime`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin@fmcm', NULL, 'admin', '$2y$12$dW/quMv4KJEQc0NiskDkmegIsMg33UGghpI2JQoFn4QYq6G6.UqwG', '2023-01-12 09:48:02', '2023-01-12 11:14:31', 'active', Null, Null);
 
 ALTER TABLE `fmcm_users`

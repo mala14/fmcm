@@ -497,19 +497,19 @@ class Todo
         $sql->execute();
         $res = $sql->fetchAll();
         if (isset($_POST['updateCaseInfo'])) {
+			$engineer = $_POST['assigned'];
             if (isset($_POST['assigned'])) {
-                if (empty($_POST['assigned'])) {
-                    $engineer = NULL;
+                if (!empty($_POST['assigned'])) {
+					$engineer = $_POST['assigned'];
                 } else {
-                    $engineer = $_POST['assigned'];
+                    $engineer = NULL;                    
                 }
-                $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id LIMIT 1");
-                $sql->execute([$engineer, $this->getId()]);
+                $sql = $this->conn->prepare("UPDATE fmcm_todo SET assigned = :engineer WHERE id = :id");
+                $sql->execute([$engineer, $this->getCaseId()]);
                 echo "<script>window.location.href = ''</script>";
                 exit;
             }
         }
-
         $html .= "
         <form method='post'>
             <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['assigned']}: </div><div class='selectInfo'>
@@ -520,12 +520,13 @@ class Todo
         foreach ($res as $row) {
             $html .= "
                 <option value='{$row['uname']}'>{$row['fname']} {$row['lname']}</option>
+				<option value=''></option>
             ";
         }
         $html .= "
                 </select>
             </div></div></div></div>
-            <input type='submit' class='right sumitBtn' name='updateCaseInfo' value='Assign'>
+            <input type='submit' class='right sumitBtn' name='updateCaseInfo'>
         </form>
         {$error}
     ";

@@ -22,7 +22,7 @@ class Admin
 		{
 				if(isset($_SESSION['uname'])){
 						$user = $_SESSION['uname'];
-						$stmt = $this->conn->prepare("SELECT uname, type, active FROM fmcm_users WHERE uname = :user AND time IS NOT NULL");
+						$stmt = $this->conn->prepare("SELECT uname, type, active FROM fmcm_users WHERE uname = :user AND sesstime IS NOT NULL");
 						$stmt->execute(array('user' => $user));
 						$type = $stmt->fetch();
 						if($user && $type['type'] === 'admin'){
@@ -119,7 +119,7 @@ class Admin
 						if(!empty($password) && !empty($confirmpwd)) {
 								if($password === $confirmpwd){
 										$stmt = $this->conn->prepare("INSERT INTO fmcm_users (uname, lname, fname, email, type, passwd, regdate, active) VALUES (:uname, :lname, :fname, :email, :type, :hash, :timeStmp, :active)");
-										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timestamp, $active]);
+										$stmt->execute([$uname, $lname, $fname, $email, $type, $hash, $timeStmp, $active]);
 										$pdo = null;
 										echo "<script>window.location.href = 'list_users.php';</script>";
 										exit;
