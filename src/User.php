@@ -39,13 +39,13 @@ class User Extends Todo
         $html = null;
         $error = null;
         if(isset($_POST['add-user'])){
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $jtitle = $_POST['jtitle'];
-            $phone = $_POST['phone'];
-            $email = $_POST['email'];
-            $office = $_POST['office'];
-            $address = $_POST['address'];
+            $fname = strip_tags($_POST['fname']);
+            $lname = strip_tags($_POST['lname']);
+            $jtitle = strip_tags($_POST['jtitle']);
+            $phone = strip_tags($_POST['phone']);
+            $email = strip_tags($_POST['email']);
+            $office = strip_tags($_POST['office']);
+            $address = strip_tags($_POST['address']);
 
             $email = $_POST['email'];
             $timestamp = date('Y-m-d G:i:s');

@@ -1,11 +1,18 @@
 revision history
 ===================  
+v0.3 (2023-01-12)  
+
+Fixed "Trying to access array offset on value of type bool" in Todo.php  
+Fixed search bar design  
+Removed many of "ALTER TABLE" to full db install in file casemgmt.sql  
+
+------------------  
 v0.2.86 (2022-04-13)  
 
 Fixed some style issues  
 Added new sitevars  
 
--------------------
+-------------------  
 v0.2.85 (2022-04-08)  
 
 Fixed "Trying to access array offset on value of type bool" in Todo.php.  

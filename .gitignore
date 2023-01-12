@@ -1,5 +1,6 @@
 src/Database.php
 vendor/
+.idea/
 .htaccess
 robots.txt
 favicon.ico

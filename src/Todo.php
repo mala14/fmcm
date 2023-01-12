@@ -8,7 +8,7 @@ class Todo
 
     /* Properties */
     private $conn;
-    public $numPerPage = 30;
+    public $numPerPage = 30; # Number of objects displayed per page
     /* Get database access */
     public function __construct($pdo)
     {
@@ -651,22 +651,25 @@ class Todo
     {
         $sql = $this->conn->prepare("SELECT id, status FROM fmcm_todo WHERE id = :caseId");
         $sql->execute([$this->getCaseId()]);
-        $res = $sql->fetch();
-        if ($res['status'] == 'Active') {
-            $status = "
-                <div class='caseStatusOpen'>
-                    {$res['status']}
-                </div>
-            ";
-        } else {
-            $status = "
-                <div class='caseStatusClosed'>
-                    {$res['status']}
-                </div>
-            ";
+        $res = $sql->fetchAll();
+        foreach ($res as $val) {
+            if ($val['status'] == 'Active') {
+                $status = "
+                    <div class='caseStatusOpen'>
+                        {$val['status']}
+                    </div>
+                ";
+            } else {
+                $status = "
+                    <div class='caseStatusClosed'>
+                        {$val['status']}
+                    </div>
+                ";
+            }
+            return $status;
         }
         $pdo = null;
-        return $status;
+
     }
 
     /**
@@ -733,17 +736,74 @@ class Todo
       $pdo = null;
     }
 
+
     /**
-  	* Main search. The search of cases, by case id, contact, phone number etc.
+  	* Check if search is done, get results
   	*
   	* @return
   	*/
     public function getSearchRes()
     {
+        if (isset($_POST['mainSearch'])) {
+            $search = $_POST['mainSearch'];
+            return $this->getAllSearchObjects();
+        } else {
+            return $this->getSearchPaging();
+        }
+    }
+
+    /**
+  	* Get the number of hits from search for pagination
+  	*
+  	* @return
+  	*/
+    public function getHitsSearch()
+    {
+        $html = null;
+        $paging = null;
+        $sql = $this->conn->prepare("
+        SELECT COUNT(*) AS c
+        FROM v_fmcm_caseinfo
+        WHERE
+            assigned = 'makkro'");
+        $sql->execute();
+        $res = $sql->fetchAll();
+        foreach ($res as $amount) {
+            $rows = $amount['c'];
+        }
+        // $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo");
+        // $rowsNr->execute();
+        // $rowCount = $rows;
+        $maxPages = ceil($rows/$this->numPerPage);
+
+        for($i=1;$i<=$maxPages;$i++) {
+            $paging .= "<a class='page-nr' href='search.php?page=".$i."'>".$i."</a>";
+        }
+        $html .= "
+        <tfoot>
+            <tr>
+                <td colspan='5'>
+                    <li class='page-item'>
+                        {$paging}
+                    </li>
+                </td>
+            </tr>
+        </tfoot>";
+        return $html;
+    }
+
+    /**
+  	* Get result from search
+  	*
+  	* @return
+  	*/
+    public function getAllSearchObjects()
+    {
         $html = null;
         $result = null;
-        $search = null;
+        $search = $_POST['mainSearch'];
         $paging = null;
+        // $numPerPage = 1000;
 
         if(isset($_GET['page'])) {
             $page = $_GET['page'];
@@ -752,9 +812,6 @@ class Todo
         }
         $startPage = ($page-1)*$this->numPerPage;
 
-        if (isset($_POST['mainSearch'])) {
-            $search = $_POST['mainSearch'];
-        }
         $sql = $this->conn->prepare("
         SELECT *
         FROM
@@ -768,36 +825,73 @@ class Todo
             OR email LIKE ?
             OR phone LIKE ?
         ORDER BY case_id ASC
-        LIMIT $startPage, $this->numPerPage
         ");
         $sql->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
-        $result = $sql->fetchAll();
+        $res = $sql->fetchAll();
 
-        // pagination starts here
-        $rowsNr = $this->conn->prepare("
-        SELECT *
+        foreach ($res as $val) {
+            $cutCreated = substr($val['created'], 0, 10);
+            $html .= "
+                <tbody>
+                    <tr class='case-row' data-href='case.php?caseId={$val['case_id']}'>
+                        <td class='tbodyTd'>{$cutCreated}</td>
+                        <td class='tbodyTd'>{$val['case_id']}</td>
+                        <td class='tbodyTd'>{$val['contact']}</td>
+                        <td class='tbodyTd'>{$val['title']}</td>
+                        <td class='tbodyTd colHide'>{$val['assigned']}</td>
+                    </tr>
+                </tbody>
+            ";
+        }
+
+        return $html;
+        $pdo = null;
+  }
+
+    /**
+  	* If search is not done, return all cases.
+  	*
+  	* @return
+  	*/
+    public function getSearchPaging()
+    {
+        $html = null;
+        $result = null;
+        $search = null;
+        $paging = null;
+
+        if(isset($_GET['page'])) {
+            $page = $_GET['page'];
+        } else {
+           $page = 1;
+        }
+        $startPage = ($page-1)*$this->numPerPage;
+        $sql = $this->conn->prepare("
+        SELECT
+            created,
+            case_id,
+            contact,
+            title,
+            assigned
         FROM v_fmcm_caseinfo
-        WHERE
-            case_id LIKE ?
-            OR created LIKE ?
-            OR contact LIKE ?
-            OR title LIKE ?
-            OR assigned LIKE ?
-            OR email LIKE ?
-            OR phone LIKE ?
-        ");
-        $rowsNr->execute(["%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%", "%$search%"]);
+        ORDER BY case_id ASC
+        LIMIT $startPage, $this->numPerPage");
+        $sql->execute();
+        $res = $sql->fetchAll();
+
+        $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo");
+        $rowsNr->execute();
         $rowCount = $rowsNr->rowCount();
         $maxPages = ceil($rowCount/$this->numPerPage);
+
         for($i=1;$i<=$maxPages;$i++) {
             $paging .= "<a class='page-nr' href='search.php?page=".$i."'>".$i."</a>";
         }
-
-        foreach ($result as $row) {
+        foreach ($res as $row) {
           $cutCreated = substr($row['created'], 0, 10);
           $html .= "
               <tbody>
-                  <tr class='case-row' data-href='case.php?id={$row['case_id']}'>
+                  <tr class='case-row' data-href='case.php?caseId={$row['case_id']}'>
                       <td class='tbodyTd'>{$cutCreated}</td>
                       <td class='tbodyTd'>{$row['case_id']}</td>
                       <td class='tbodyTd'>{$row['contact']}</td>
