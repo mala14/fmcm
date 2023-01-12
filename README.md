@@ -3,9 +3,19 @@ FreeMasons Case Management System
 [![Build Status](https://travis-ci.com/mala14/fmcm.svg?branch=master)](https://travis-ci.com/mala14/fmcm)  
 ==================
 
-FMCM is a simple case management system. Purpose of fmcm is to register cases with follow ups and add info.
-It is not complete yet. More info in todo.md about project status and what is to be done.
+FMCM is a simple case management system. Purpose of fmcm is to register cases with follow ups and add info.  
 
+Features:  
+- Register new cases.  
+- Add and edit admin/Moderators/Users.  
+- Add customers.  
+- Update case info.  
+- Send email to customers.  
+- Dashboard with graphs for case statistics.  
+- Create email templates.  
+- My page with open cases assigned to logged in system user.  
+- Page for closed cases.
+- Authority levels Admin, Moderator, User
 
 Install instructions
 ===================

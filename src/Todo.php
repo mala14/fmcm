@@ -520,10 +520,10 @@ class Todo
         foreach ($res as $row) {
             $html .= "
                 <option value='{$row['uname']}'>{$row['fname']} {$row['lname']}</option>
-				<option value=''></option>
             ";
         }
         $html .= "
+					<option value=''></option>
                 </select>
             </div></div></div></div>
             <input type='submit' class='right sumitBtn' name='updateCaseInfo'>
