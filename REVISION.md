@@ -1,5 +1,12 @@
 revision history
 ===================  
+v03.02 (2023-01-16)  
+New db table store sent emails  
+New page to list emails  
+New page to read emails  
+Update on db email table install in casemgmt.sql  
+
+-----------------
 v0.3.01 (2023-01-12)  
 change of columname in fmcm_users time to sesstime  
 Fixed assign engineer  

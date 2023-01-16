@@ -436,8 +436,8 @@ class Todo
             $assigned = $_POST['setEngineer'] ?? null;
             $created = substr($val['created'], 0, 10);
             $html .= "
-        				<div class='caseFormData'>
-          					<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['caseId']}: </div><div class='usrInfo'>{$val['id']}</div></div></div>
+        		<div class='caseFormData'>
+          			<div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['caseId']}: </div><div class='usrInfo'>{$val['id']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['contact']}: </div><div class='usrInfo'>{$val['con_fname']} {$val['con_lname']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userTitle']}: </div><div class='usrInfo'>{$val['con_jtitle']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['phone']}: </div><div class='usrInfo'>{$val['con_phone']}</div></div></div>
@@ -445,11 +445,11 @@ class Todo
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['office']}: </div><div class='usrInfo'>{$val['con_office']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['address']}: </div><div class='usrInfo'>{$val['con_address']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userCreated']}: </div><div class='usrInfo'>{$created}</div></div></div>
-        				</div>
+        		</div>
         		";
         }
         $pdo = null;
-    		return $html;
+    	return $html;
   	}
 
 
@@ -542,9 +542,9 @@ class Todo
     public function getCaseTitle()
     {
 
-  			$stmt = $this->conn->prepare("SELECT id, title FROM fmcm_todo WHERE id = :caseId");
-  			$stmt->execute([$this->getCaseId()]);
-  			$res = $stmt->fetchAll();
+  		$stmt = $this->conn->prepare("SELECT id, title FROM fmcm_todo WHERE id = :caseId");
+  		$stmt->execute([$this->getCaseId()]);
+  		$res = $stmt->fetchAll();
         $pdo = null;
         foreach ($res as $val) {
             return $val['title'];
@@ -576,7 +576,7 @@ class Todo
      		$html = "
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['issue']}: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
-    				<div class='titles'>{$GLOBALS['addComment']}</div>
+    		<div class='titles'>{$GLOBALS['addComment']}</div>
             <form method='post' class='setCase'>
                 <input type='hidden' name='id' value='{$id}'>
             		<textarea type='text' id='editor' class='messArea' name='commtext' placeholder='{$error}'/></textarea><br>
@@ -753,45 +753,6 @@ class Todo
         }
     }
 
-    /**
-  	* Get the number of hits from search for pagination
-  	*
-  	* @return
-  	*/
-    public function getHitsSearch()
-    {
-        $html = null;
-        $paging = null;
-        $sql = $this->conn->prepare("
-        SELECT COUNT(*) AS c
-        FROM v_fmcm_caseinfo
-        WHERE
-            assigned = 'makkro'");
-        $sql->execute();
-        $res = $sql->fetchAll();
-        foreach ($res as $amount) {
-            $rows = $amount['c'];
-        }
-        // $rowsNr = $this->conn->prepare("SELECT * FROM v_fmcm_caseinfo");
-        // $rowsNr->execute();
-        // $rowCount = $rows;
-        $maxPages = ceil($rows/$this->numPerPage);
-
-        for($i=1;$i<=$maxPages;$i++) {
-            $paging .= "<a class='page-nr' href='search.php?page=".$i."'>".$i."</a>";
-        }
-        $html .= "
-        <tfoot>
-            <tr>
-                <td colspan='5'>
-                    <li class='page-item'>
-                        {$paging}
-                    </li>
-                </td>
-            </tr>
-        </tfoot>";
-        return $html;
-    }
 
     /**
   	* Get result from search

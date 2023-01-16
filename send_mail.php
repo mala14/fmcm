@@ -41,6 +41,7 @@
           $mail->Port = 587;
           /* Finally send the mail. */
           $mail->send();
+          $mailer->saveMail();
         }
         catch (Exception $e)
         {
@@ -53,6 +54,7 @@
      }
 ?>
 <?php include ("view/sidebar.php"); ?>
+
 <div class="caseTbl">
     <form method="post">
         <div class="mailForm">
@@ -63,7 +65,7 @@
             </div>
             <div class="caseUpdate">
               <div class="caseUpdateTitle">Subject: </div>
-              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?> <?= $GLOBALS['mailSubject'] ?> <?= $mailer->getID() ?>"></div>
+              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?>"></div>
             </div>
 
             <div class="messages">
@@ -80,4 +82,5 @@
         </div>
     </form>
 </div>
+
 <?php include ("view/footer.php"); ?>

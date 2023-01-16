@@ -26,3 +26,21 @@
 .temp-select {
     width: 200px;
 }
+
+/**
+* Style for mail links for selected case
+*/
+.case-mail {
+	color: #1B5B8E !important;
+	padding-right: 5px;
+}
+
+.email-lnks {
+	border-bottom: 1px solid #f3f4f6;
+	margin-bottom: 5px;
+}
+
+.sender {
+	padding: 5px 0 5px 5px;
+	border: 1px solid #f3f4f6;
+}

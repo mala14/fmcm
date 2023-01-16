@@ -2,15 +2,18 @@
     require ("config.php");
     include ("view/header.php");
     $todo = new Todo($pdo);
-		$users = new User($pdo);
-		$login = new Login($pdo);
+	$users = new User($pdo);
+	$login = new Login($pdo);
     $admin = new Admin($pdo);
-		$login->checkLogin();
-		$login->getSessions();
+    $mailer = new Mailer($pdo);
+	$login->checkLogin();
+	$login->getSessions();
 ?>
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">
+    <div class="email-lnks paddingBottom"><?= $mailer->getMailCount() ?></div>
+    <tr>
     <div class="caseContactInfo">
           <div class="titles"><?= $caseContactInfo ?></div>
           <?= $todo->getCaseInfo() ?>

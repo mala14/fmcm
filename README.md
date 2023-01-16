@@ -10,7 +10,8 @@ Features:
 - Add and edit admin/Moderators/Users.  
 - Add customers.  
 - Update case info.  
-- Send email to customers.  
+- Send email to customers. 
+- Store and view emails.  
 - Dashboard with graphs for case statistics.  
 - Create email templates.  
 - My page with open cases assigned to logged in system user.  

@@ -13,7 +13,7 @@ class Mailer
         $this->conn = $pdo;
     }
     /**
-    * Get user or object id
+    * Get object id
     *
     * @return
     */
@@ -21,6 +21,29 @@ class Mailer
     {
         $id = $_GET['id'] ?? null;
         return $id;
+    }
+
+    /**
+    * Get case_id id
+    *
+    * @return
+    */
+    public function getCaseID()
+    {
+        $caseid = $_GET['caseId'] ?? null;
+        return $caseid;
+    }
+
+    /**
+    * Get logged in users username as sender
+    *
+    * @return
+    */
+
+    public function getUname()
+    {
+        $uname = $_SESSION['uname'] ?? null;
+        return $uname;
     }
 
     /**
@@ -33,6 +56,18 @@ class Mailer
         $id = $_GET['tid'] ?? null;
         return $id;
     }
+
+    /**
+    * Get email id
+    *
+    * @return
+    */
+    public function getMailId()
+    {
+        $mailId = $_GET['mailId'] ?? null;
+        return $mailId;
+    }
+
 
     // public function isPhpMailer()
     // {
@@ -251,6 +286,155 @@ class Mailer
                 ";
             }
         return $html;
+		$pdo = null;
         }
     }
+
+    /**
+    * Save mail conversation to db
+    *
+    * @return
+    */
+    public function saveMail()
+    {
+        $body = $_POST['body'];
+        $dateStamp = date('Y-m-d H:i:s');
+        $attachment = null;
+        $sql = $this->conn->prepare("INSERT INTO fmcm_mail (time_sent, sender, recepient, attachment, message, case_id) VALUES (:timesent, :sender, :recepient, :attachment, :body, :case_id)");
+        $sql->execute([$dateStamp, $this->getUname(), $this->getRecepient(), $attachment, $body, $this->getID()]);
+        $pdo = null;
+    }
+
+    /**
+    * count all mail conversations in specific case_id
+    *
+    * @return
+    */
+    public function getMailCount()
+    {
+        $html = null;
+        $sql = $this->conn->prepare("SELECT COUNT(*) AS count FROM fmcm_mail WHERE case_id = :case_id");
+        $sql->execute([$this->getCaseID()]);
+        $res = $sql->fetch();
+        if ($res['count'] > '0') {
+            $html .= "<a class='case-mail' href='case_mail.php?caseId={$this->getCaseID()}'>{$GLOBALS['email']} ({$res['count']})</a>";
+        } else {
+            $html .= "{$GLOBALS['email']} ({$res['count']})";
+            }
+        return $html;
+        $pdo = null;
+    }
+
+    /**
+    * List all mail conversations to case_id
+    *
+    * @return
+    */
+    public function getMailMessages()
+    {
+        $html = null;
+        #$sql = $this->conn->prepare("SELECT id_mail, time_sent, sender  FROM fmcm_mail WHERE case_id = :case_id");
+		$sql = $this->conn->prepare("
+		SELECT
+			fmcm_mail.id_mail,
+			fmcm_mail.time_sent,
+			v_fmcm_caseinfo.title,
+			fmcm_mail.sender,
+			v_fmcm_caseinfo.assigned
+		FROM fmcm_mail
+		INNER JOIN v_fmcm_caseinfo
+		ON fmcm_mail.case_id = v_fmcm_caseinfo.case_id
+		WHERE fmcm_mail.case_id = ?
+		");
+        $sql->execute([$this->getCaseID()]);
+        $val = $sql->fetchAll();
+        foreach ($val as $res) {
+            $html .= "
+                <tbody>
+                    <tr class='case-row 'data-href='read_mail.php?mailId={$res['id_mail']}'>
+						<td class='colHide'>{$res['id_mail']}</td>
+                        <td class='created'>{$res['time_sent']}</td>
+						<td class='colHide'>{$res['sender']}</td>
+						<td>{$res['title']}</td>
+						<td>{$res['assigned']}</td>
+                    </tr>
+                </tbody>
+            ";
+        }
+        return $html;
+        $pdo = null;
+    }
+
+    /**
+    * Open selected mail message
+    *
+    * @return
+    */	
+	public function readMailMessage()
+	{
+        $html = null;
+        $sql = $this->conn->prepare("SELECT time_sent, sender, recepient, message FROM fmcm_mail WHERE id_mail = :id_mail");
+        $sql->execute([$this->getMailId()]);
+        $val = $sql->fetchAll();
+		foreach ($val as $res) {
+			$html .= "<td class='sender'>Sender: {$res['sender']}</td>
+				<tr>
+					<td class='sender'>To: {$res['recepient']}</td>
+				<tr>
+					<td class='sender'>Message {$res['message']}</td>
+			";
+		}
+		return $html;
+		$pdo = null;
+	}
+	
+    /**
+    * Menu button for return to active case
+    *
+    * @return
+    */
+	public function backToActiveCase()
+	{
+        $html = null;
+        $sql = $this->conn->prepare("SELECT case_id FROM fmcm_mail WHERE id_mail = :id_mail");
+        $sql->execute([$this->getMailId()]);
+        $val = $sql->fetch();
+		if ($this->getMailId() !== null) {
+			foreach ($val as $res) {
+					$html .="
+						<a class='case-mail' href='case.php?caseId={$val['case_id']}'>To case</a>	
+					";
+			}
+		} else {
+			$html .="
+				<tbody>
+					<a class='case-mail' href='case.php?caseId={$this->getCaseID()}'>To case</a>
+				</tbody>		
+			";				
+			}
+		return $html;
+		$pdo = null;
+	}
+	
+    /**
+    * Menu button for return to mail list on active case
+    *
+    * @return
+    */
+	public function backToMailList()
+	{
+        $html = null;
+        $sql = $this->conn->prepare("SELECT case_id FROM fmcm_mail WHERE id_mail = :id_mail");
+        $sql->execute([$this->getMailId()]);
+        $val = $sql->fetch();
+		foreach ($val as $res) {
+				$html .="
+				<tbody>
+					<a class='case-mail' href='case_mail.php?caseId={$val['case_id']}'>To Email</a>
+				</tbody>		
+				";
+		}				
+		return $html;
+		$pdo = null;
+	}
 }

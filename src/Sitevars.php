@@ -9,7 +9,7 @@
 * The html and header vars
 *
 */
-$title = "FreeMasons Case Management system"; // The html title
+$htmlTitle = "FreeMasons Case Management system"; // The html title
 $siteName = "FreeMasons Case Management system"; // Site name.
 $lang = "en"; // The language setting
 
@@ -139,12 +139,15 @@ $noComment = "You have to leave a comment"; // The empty comment error message
 *
 */
 $send = "Send";                         // Send button text value
+$mailSent = "Sent";						// Date and time when email was sent from fmcm
+$sender = "Sender";						// Who sent mail from fmcm
 $createTemplate = "Create template";    // Create new template button text value
 $selectTemplate = "Select mail template"; // Text for select box for mail templates
 $mailMessage = "Message";               // The send mail message title at mail textarea
 $mailSubject = "Case id:";              // Subject field case id text
 $mailSettings = "Mail settings";        // The title to mail settings field
 $mailPassword = "Change mail password"; // The title for mail password setting field
+$mailId = "id";							// The id number of case mail
 /**
 * The footer vars
 *
