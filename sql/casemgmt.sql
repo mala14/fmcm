@@ -1,4 +1,3 @@
--- DROP TABLE IF EXISTS `fmcm_comment`;
 CREATE TABLE IF NOT EXISTS `fmcm_comment` (
   `id_comment` int(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `id_todo` int(6) NOT NULL,
@@ -7,7 +6,6 @@ CREATE TABLE IF NOT EXISTS `fmcm_comment` (
   `saved` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- DROP TABLE IF EXISTS `fmcm_contacts`;
 CREATE TABLE IF NOT EXISTS `fmcm_contacts` (
   `id_contact` int(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `con_fname` varchar(25) NOT NULL,
@@ -20,7 +18,6 @@ CREATE TABLE IF NOT EXISTS `fmcm_contacts` (
   `con_info` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- DROP TABLE IF EXISTS `fmcm_todo`;
 CREATE TABLE IF NOT EXISTS `fmcm_todo` (
   `id` int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(50) NOT NULL,
@@ -37,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `fmcm_todo` (
   `contacts` int(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- DROP TABLE IF EXISTS `fmcm_users`;
 CREATE TABLE IF NOT EXISTS `fmcm_users` (
   `id_user` int(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `fname` varchar(30) NOT NULL,
@@ -57,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `fmcm_users` (
 INSERT INTO `fmcm_users` (`id_user`, `fname`, `lname`, `uname`, `email`, `type`, `passwd`, `active`) VALUES
 (1, 'admin', 'admin', 'admin', 'admin@fmcm', 'admin', '$2y$12$dW/quMv4KJEQc0NiskDkmegIsMg33UGghpI2JQoFn4QYq6G6.UqwG', 'active');
 
---DROP TABLE IF EXISTS `fmcm_settings`;
 CREATE TABLE IF NOT EXISTS `fmcm_settings` (
     `mailhost` varchar(150) DEFAULT NULL UNIQUE,
     `mailuser` varchar(150) DEFAULT NULL,
@@ -69,13 +64,28 @@ CREATE TABLE IF NOT EXISTS `fmcm_settings` (
 INSERT INTO `fmcm_settings` (`mailhost`, `mailuser`, `setfrom`, `mailpasswd`, `passkey`) VALUES
 ('', '', '', '', '');
 
---DROP TABLE IF EXISTS `fmcm_mailtemplate`;
 CREATE TABLE IF NOT EXISTS `fmcm_mailtemplate` (
     `id` INT(6) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` varchar(100) DEFAULT NULL,
     `template` TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `fmcm_mail` (
+  `id_mail` int(10) NOT NULL,
+  `time_sent` datetime DEFAULT NULL,
+  `sender` varchar(11) NOT NULL,
+  `recepient` varchar(100) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `attachment` varchar(255) DEFAULT NULL,
+  `message` text NOT NULL,
+  `case_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `fmcm_mail`
+  ADD PRIMARY KEY (`id_mail`);
+
+ALTER TABLE `fmcm_mail`
+  MODIFY `id_mail` int(10) NOT NULL AUTO_INCREMENT;
 
 --DROP VIEW IF EXISTS `v_fmcm_caseinfo`;
 CREATE VIEW `v_fmcm_caseinfo` AS
