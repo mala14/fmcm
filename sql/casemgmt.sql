@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `fmcm_mailtemplate` (
     `template` TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `fmcm_mail` (
+CREATE TABLE IF NOT EXISTS `fmcm_mail` (
   `id_mail` int(10) NOT NULL,
   `time_sent` datetime DEFAULT NULL,
   `sender` varchar(11) NOT NULL,
