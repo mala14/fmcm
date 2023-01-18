@@ -1,6 +1,15 @@
 revision history
 ===================  
+v0.3.03 (2023-01-18)  
+
+Editor extended with more buttons  
+Style change font  
+Style change read_mail  
+Add button to "My page" to navbar  
+
+-----------------
 v03.02 (2023-01-16)  
+
 New db table store sent emails  
 New page to list emails  
 New page to read emails  

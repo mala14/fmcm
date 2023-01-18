@@ -21,7 +21,7 @@ td a {
 }
 
 .flex {
-		display: flex;
+	display: flex;
 }
 
 .caseTbl {
@@ -97,7 +97,7 @@ td a {
 }
 
 .case-row:hover {
-		background-color: #f3f4f6;
+	background-color: #f3f4f6;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
 }
@@ -116,13 +116,11 @@ td a {
     width: 100%;
     text-align: left;
     padding: 7px;
-    font-family: 'Jura', sans-serif;
 }
 
 .saveCase:hover {
     color: #333;
     background-color: #f1f1f1;
-    font-family: 'Jura', sans-serif;
 }
 
 .caseStatusOpen {

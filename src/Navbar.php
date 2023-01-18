@@ -55,9 +55,8 @@ class Navbar Extends Todo
         $html = null;
         if (isset($_SESSION['uname'])) {
             $html .= "
-                <td class='nav-item'>
-                   <a class='nav-link' href='logout.php' title='Logout'>{$GLOBALS['logOutSubmit']}</a>
-                </td>
+                <td class='nav-item'><a class='nav-link' href='logout.php' title='Logout'>{$GLOBALS['logOutSubmit']}</a></td>
+				<td class='nav-item'><a class='nav-link' href='my_page.php' title='My page'>My Page</a></td>
                 <td class='nav-item'>
                   <div class='dropdown'>
                       <div class='nav-link'>{$GLOBALS['navNew']}</div>

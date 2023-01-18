@@ -297,11 +297,12 @@ class Mailer
     */
     public function saveMail()
     {
-        $body = $_POST['body'];
+		$subject = htmlspecialchars($_POST['subject']);
+        $body = htmlspecialchars($_POST['body']);
         $dateStamp = date('Y-m-d H:i:s');
         $attachment = null;
-        $sql = $this->conn->prepare("INSERT INTO fmcm_mail (time_sent, sender, recepient, attachment, message, case_id) VALUES (:timesent, :sender, :recepient, :attachment, :body, :case_id)");
-        $sql->execute([$dateStamp, $this->getUname(), $this->getRecepient(), $attachment, $body, $this->getID()]);
+        $sql = $this->conn->prepare("INSERT INTO fmcm_mail (time_sent, sender, recepient, subject,  attachment, message, case_id) VALUES (:timesent, :sender, :recepient, :subject, :attachment, :body, :case_id)");
+        $sql->execute([$dateStamp, $this->getUname(), $this->getRecepient(), $subject, $attachment, $body, $this->getID()]);
         $pdo = null;
     }
 
@@ -345,6 +346,7 @@ class Mailer
 		INNER JOIN v_fmcm_caseinfo
 		ON fmcm_mail.case_id = v_fmcm_caseinfo.case_id
 		WHERE fmcm_mail.case_id = ?
+		ORDER BY time_sent DESC
 		");
         $sql->execute([$this->getCaseID()]);
         $val = $sql->fetchAll();
@@ -373,15 +375,19 @@ class Mailer
 	public function readMailMessage()
 	{
         $html = null;
-        $sql = $this->conn->prepare("SELECT time_sent, sender, recepient, message FROM fmcm_mail WHERE id_mail = :id_mail");
+        $sql = $this->conn->prepare("SELECT time_sent, sender, subject, recepient, message FROM fmcm_mail WHERE id_mail = :id_mail");
         $sql->execute([$this->getMailId()]);
         $val = $sql->fetchAll();
 		foreach ($val as $res) {
+		    $message = htmlspecialchars_decode($res['message']);
+			$subject = htmlspecialchars_decode($res['subject']);
 			$html .= "<td class='sender'>Sender: {$res['sender']}</td>
 				<tr>
 					<td class='sender'>To: {$res['recepient']}</td>
 				<tr>
-					<td class='sender'>Message {$res['message']}</td>
+					<td class='sender'>Subject: {$subject}</td>
+				<tr>
+					<td class='sender'>{$message}</td>
 			";
 		}
 		return $html;

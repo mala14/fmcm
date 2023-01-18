@@ -4,6 +4,6 @@
 * Font style
 */
 @font-face{
-	font-family: jura;
-	src: url('../fonts/Jura-Bold.ttf');
+	font-family: Jura-semi;
+	src: url('../fonts/Jura-SemiBold.ttf');
 }

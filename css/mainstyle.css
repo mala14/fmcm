@@ -17,7 +17,7 @@ a:hover {text-decoration:none; color:#333;}
 
 body {
 		height:100%;
-		font-family: 'Jura', sans-serif;
+		font-family: 'Jura-semi', sans-serif;
 		font-size: 0.9em;
 		background-color: #fff;
 }
@@ -95,7 +95,7 @@ p.indent {
 * Main header style
 */
 .header {
-	max-width:1024px;
+		max-width:1024px;
     height: 100px;
 }
 
@@ -103,23 +103,23 @@ p.indent {
 * Main content style
 */
 .main-data {
-	display: flex;
-	width: 100%;
-	height: 100%;
+		display: flex;
+		width: 100%;
+		height: 100%;
     padding-bottom: 10px;
-	margin-bottom: 0;
+		margin-bottom: 0;
 }
 
 .main {
-	margin: auto;
-	width: 100%;
+		margin: auto;
+		width: 100%;
 }
 
 .mainBackg {
-	margin-top: 10px;
-	height: 100%;
-	width: 100%;
-	background-color: #f3f4f6;
+		margin-top: 10px;
+		height: 100%;
+		width: 100%;
+		background-color: #f3f4f6;
 }
 
 .border {
