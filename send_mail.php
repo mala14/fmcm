@@ -17,11 +17,11 @@
     $error = null;
     if (isset($_POST['sendMail'])) {
         try {
-          $subject = $_POST['subject'];
-          $body = $_POST['body'];
+          $subject = htmlspecialchars($_POST['subject']);
+          $body = htmlspecialchars($_POST['body']);
           $mail->setFrom($admin->getSetFrom());
           $mail->addAddress($mailer->getRecepient());
-          $mail->Subject = $subject;
+          $mail->Subject = htmlspecialchars($subject);
           #$mail->Body = $body;
           $mail->MsgHTML($body);
           /* SMTP parameters. */
@@ -65,7 +65,7 @@
             </div>
             <div class="caseUpdate">
               <div class="caseUpdateTitle">Subject: </div>
-              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?>"></div>
+              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?> Case id: <?= $mailer->getID() ?>"></div>
             </div>
 
             <div class="messages">

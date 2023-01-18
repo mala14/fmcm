@@ -6,6 +6,7 @@ Editor extended with more buttons
 Style change font  
 Style change read_mail  
 Add button to "My page" to navbar  
+Add case id to mail subject  
 
 -----------------
 v03.02 (2023-01-16)  
