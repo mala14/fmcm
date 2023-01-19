@@ -258,7 +258,7 @@ tfoot {
     width: 80px;
     background-color: #e9ecef;
     border-right: 1px solid #ccc;
-    padding: 3px;
+	padding: 5px 0 5px 5px;	
 }
 
 .setCase {
@@ -278,7 +278,7 @@ tfoot {
 .udateTitle {
     width: 100%;
     margin-left: 5px;
-    padding: 3px;
+	padding: 5px 0 5px 5px;	
 }
 
 .nodata {

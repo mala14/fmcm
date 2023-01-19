@@ -1,5 +1,12 @@
 revision history
 ===================  
+
+v0.3.04 (2023-01-19)  
+Changed sorting order on closed cases  
+Minor design changes in case and mail pages  
+Removed unused code  
+
+-----------------  
 v0.3.03 (2023-01-18)  
 
 Editor extended with more buttons  

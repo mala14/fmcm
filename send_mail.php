@@ -56,6 +56,7 @@
 <?php include ("view/sidebar.php"); ?>
 
 <div class="caseTbl">
+	<div class="email-lnks paddingBottom"><?= $mailer->backToActiveCase() ?></div>
     <form method="post">
         <div class="mailForm">
             <?= $error ?>
@@ -65,7 +66,7 @@
             </div>
             <div class="caseUpdate">
               <div class="caseUpdateTitle">Subject: </div>
-              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?> Case id: <?= $mailer->getID() ?>"></div>
+              <div class="udateTitle"><input type="text" class="issueTitle" name="subject" value="<?= $mailer->getsubject() ?> Case id: <?= $mailer->getCaseID() ?>"></div>
             </div>
 
             <div class="messages">

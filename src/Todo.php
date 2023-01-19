@@ -16,14 +16,14 @@ class Todo
     }
 
     /**
-    * Get the case id.
+    * Get the user id.
     *
     * @return
     */
 
-    public function getId()
+    public function getUserId()
     {
-        $id = $_GET['id'] ?? null;
+        $id = $_GET['userId'] ?? null;
         return $id;
     }
 
@@ -197,7 +197,7 @@ class Todo
       FROM
           v_fmcm_caseinfo
       WHERE
-          status = 'Closed' ORDER BY created ASC
+          status = 'Closed' ORDER BY created DESC
       LIMIT $startPage, $this->numPerPage");
       $sql->execute();
       $res = $sql->fetchAll();
@@ -393,7 +393,7 @@ class Todo
     * @return
     */
     public function getEngineer() {
-        $id = $this->getId();
+        $id = $this->getUserId();
         $sql = $this->conn->prepare("SELECT id_user, uname FROM fmcm_users WHERE id_user = :id");
         $sql->execute([$id]);
         $res = $sql['uname'];
@@ -441,7 +441,7 @@ class Todo
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['contact']}: </div><div class='usrInfo'>{$val['con_fname']} {$val['con_lname']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userTitle']}: </div><div class='usrInfo'>{$val['con_jtitle']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['phone']}: </div><div class='usrInfo'>{$val['con_phone']}</div></div></div>
-                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['email']}: </div><div class='mailIcon'>{$val['con_email']}</div><a href='send_mail.php?id={$val['id']}'><i class='fal fa-envelope fa-2x'></i></a></div></div>
+                    <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['email']}: </div><div class='mailIcon'>{$val['con_email']}</div><a href='send_mail.php?caseId={$val['id']}'><i class='fal fa-envelope fa-2x'></i></a></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['office']}: </div><div class='usrInfo'>{$val['con_office']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['address']}: </div><div class='usrInfo'>{$val['con_address']}</div></div></div>
                     <div class='usrInfoTbl'><div class='formdata'><div class='caseInfoTitle'>{$GLOBALS['userCreated']}: </div><div class='usrInfo'>{$created}</div></div></div>
@@ -572,8 +572,7 @@ class Todo
                 $error = "{$GLOBALS['noComment']}";
             }
         }
-
-     		$html = "
+     	$html = "
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['caseTitle']}: </div><div class='udateTitle'>{$this->getCaseTitle()}</div></div>
             <div class='caseUpdate'><div class='caseUpdateTitle'>{$GLOBALS['issue']}: </div><div class='udateTitle'>{$this->getIssue()}</div></div>
     		<div class='titles'>{$GLOBALS['addComment']}</div>
@@ -583,7 +582,7 @@ class Todo
         				<input type='submit' class='submitBtn' name='comment' value='{$GLOBALS['caseUpdate']}'> {$this->caseStatus()}
             </form>
             {$this->getComment()}
-    		";
+    	";
         $pdo = null;
         return $html;
     }

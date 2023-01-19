@@ -12,16 +12,6 @@ class Mailer
     {
         $this->conn = $pdo;
     }
-    /**
-    * Get object id
-    *
-    * @return
-    */
-    public function getID()
-    {
-        $id = $_GET['id'] ?? null;
-        return $id;
-    }
 
     /**
     * Get case_id id
@@ -95,7 +85,7 @@ class Mailer
         WHERE
             fmcm_todo.id = ?
         ");
-        $sql->execute([$this->getId()]);
+        $sql->execute([$this->getCaseID()]);
   			$res = $sql->fetch();
         return $res['email'];
         $pdo = null;
@@ -121,7 +111,7 @@ class Mailer
         WHERE
             fmcm_todo.id = ?
         ");
-        $sql->execute([$this->getId()]);
+        $sql->execute([$this->getCaseID()]);
   			$res = $sql->fetch();
         return trim($res['title']);
         $pdo = null;
@@ -147,7 +137,7 @@ class Mailer
         WHERE
             fmcm_todo.id = ?
         ");
-        $sql->execute([$this->getId()]);
+        $sql->execute([$this->getCaseID()]);
   			$res = $sql->fetch();
         return trim($res['issue']);
         $pdo = null;
@@ -302,7 +292,7 @@ class Mailer
         $dateStamp = date('Y-m-d H:i:s');
         $attachment = null;
         $sql = $this->conn->prepare("INSERT INTO fmcm_mail (time_sent, sender, recepient, subject,  attachment, message, case_id) VALUES (:timesent, :sender, :recepient, :subject, :attachment, :body, :case_id)");
-        $sql->execute([$dateStamp, $this->getUname(), $this->getRecepient(), $subject, $attachment, $body, $this->getID()]);
+        $sql->execute([$dateStamp, $this->getUname(), $this->getRecepient(), $subject, $attachment, $body, $this->getCaseID()]);
         $pdo = null;
     }
 
@@ -381,13 +371,11 @@ class Mailer
 		foreach ($val as $res) {
 		    $message = htmlspecialchars_decode($res['message']);
 			$subject = htmlspecialchars_decode($res['subject']);
-			$html .= "<td class='sender'>Sender: {$res['sender']}</td>
-				<tr>
-					<td class='sender'>To: {$res['recepient']}</td>
-				<tr>
-					<td class='sender'>Subject: {$subject}</td>
-				<tr>
-					<td class='sender'>{$message}</td>
+			$html .= "
+				<div class='caseUpdate'><div class='caseUpdateTitle'>Sender: </div><div class='mail-info'>{$res['sender']}</div></div>
+				<div class='caseUpdate'><div class='caseUpdateTitle'>To: </div><div class='mail-info'>{$res['recepient']}</div></div>
+				<div class='caseUpdate'><div class='caseUpdateTitle'>Subject: </div><div class='mail-info'>{$subject}</div></div>
+				<div class='sender'>{$message}</div>
 			";
 		}
 		return $html;
