@@ -13,6 +13,19 @@ class Mailer
         $this->conn = $pdo;
     }
 
+    public function checkPHPMailerConf()
+    {
+       $html = null;
+       $sql = $this->conn->prepare("SELECT mailhost, mailuser, setfrom, mailpasswd, passkey FROM fmcm_settings");
+       $sql->execute();
+       $val = $sql->fetch();
+       if (empty($val['mailhost']) or empty($val['mailuser']) or empty($val['setfrom']) or empty($val['mailpasswd']) or empty($val['passkey'])) {
+            $html = "<div class='mail-error'>The PHPMailer is not properly configured or is not installed.</div>";
+       }
+        return $html;
+        $pdo = null;
+    }
+
     /**
     * Get case_id id
     *
@@ -58,12 +71,6 @@ class Mailer
         return $mailId;
     }
 
-
-    // public function isPhpMailer()
-    // {
-    //     $sql = $this
-    // }
-
     /**
     * Get recepient for the send mail front controller
     *
@@ -90,7 +97,6 @@ class Mailer
         return $res['email'];
         $pdo = null;
     }
-
     /**
     * Get case title for subject for mail send
     *
@@ -142,6 +148,7 @@ class Mailer
         return trim($res['issue']);
         $pdo = null;
     }
+
     /**
     * create new email templates
     *
@@ -327,9 +334,9 @@ class Mailer
         #$sql = $this->conn->prepare("SELECT id_mail, time_sent, sender  FROM fmcm_mail WHERE case_id = :case_id");
 		$sql = $this->conn->prepare("
 		SELECT
-			fmcm_mail.id_mail,
-			fmcm_mail.time_sent,
-			v_fmcm_caseinfo.title,
+		    fmcm_mail.id_mail,
+		    fmcm_mail.time_sent,
+		    v_fmcm_caseinfo.title,
 			fmcm_mail.sender,
 			v_fmcm_caseinfo.assigned
 		FROM fmcm_mail

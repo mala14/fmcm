@@ -10,55 +10,59 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
-    require 'vendor/PHPMailer/src/Exception.php';
-    require 'vendor/PHPMailer/src/PHPMailer.php';
-    require 'vendor/PHPMailer/src/SMTP.php';
-    $mail = new PHPMailer(TRUE);
-    $error = null;
-    if (isset($_POST['sendMail'])) {
-        try {
-          $subject = htmlspecialchars($_POST['subject']);
-          $body = htmlspecialchars($_POST['body']);
-          $mail->setFrom($admin->getSetFrom());
-          $mail->addAddress($mailer->getRecepient());
-          $mail->Subject = htmlspecialchars($subject);
-          #$mail->Body = $body;
-          $mail->MsgHTML($body);
-          /* SMTP parameters. */
-          /* Tells PHPMailer to use SMTP. */
-          $mail->isSMTP();
-          /* SMTP server address. */
-          $mail->Host = $admin->getMailHost();
-          /* Use SMTP authentication. */
-          $mail->SMTPAuth = TRUE;
-          /* Set the encryption system. */
-          $mail->SMTPSecure = 'tls';
-          /* SMTP authentication username. */
-          $mail->Username = $admin->getMailUser();
-          /* SMTP authentication password.*/
-          $mail->Password = $admin->getMailPass();
-          /* Set the SMTP port. */
-          $mail->Port = 587;
-          /* Finally send the mail. */
-          $mail->send();
-          $mailer->saveMail();
+    $mailerPath = 'vendor/PHPMailer/src/PHPMailer.php';
+    if (is_file($mailerPath)) {
+        require 'vendor/PHPMailer/src/Exception.php';
+        require 'vendor/PHPMailer/src/PHPMailer.php';
+        require 'vendor/PHPMailer/src/SMTP.php';
+        $mail = new PHPMailer(TRUE);
+        $error = null;
+        if (isset($_POST['sendMail'])) {
+            try {
+                $subject = htmlspecialchars($_POST['subject']);
+                $body = htmlspecialchars_decode($_POST['body']);
+                $mail->setFrom($admin->getSetFrom());
+                $mail->addAddress($mailer->getRecepient());
+                #$mail->MsgHTML($body);
+                $mail->isHTML(true);
+                $mail->Subject = htmlspecialchars($subject);
+                $mail->Body = $body;
+                /* SMTP parameters. */
+                /* Tells PHPMailer to use SMTP. */
+                $mail->isSMTP();
+                /* SMTP server address. */
+                $mail->Host = $admin->getMailHost();
+                /* Use SMTP authentication. */
+                $mail->SMTPAuth = TRUE;
+                /* Set the encryption system. */
+                $mail->SMTPSecure = 'tls';
+                /* SMTP authentication username. */
+                $mail->Username = $admin->getMailUser();
+                /* SMTP authentication password.*/
+                $mail->Password = $admin->getMailPass();
+                /* Set the SMTP port. */
+                $mail->Port = 587;
+                /* Finally send the mail. */
+                $mail->send();
+                $mailer->saveMail();
+            }
+            catch (Exception $e)
+            {
+                $error = $e->errorMessage();
+            }
+            catch (\Exception $e)
+            {
+                $error = $e->getMessage();
+            }
         }
-        catch (Exception $e)
-        {
-           $error = $e->errorMessage();
-        }
-        catch (\Exception $e)
-        {
-           $error = $e->getMessage();
-        }
-     }
+    }
 ?>
 <?php include ("view/sidebar.php"); ?>
-
 <div class="caseTbl">
 	<div class="email-lnks paddingBottom"><?= $mailer->backToActiveCase() ?></div>
     <form method="post">
         <div class="mailForm">
+            <?= $mailer->checkPHPMailerConf() ?>
             <?= $error ?>
             <div class="caseUpdate">
                 <div class="caseUpdateTitle">To: </div>

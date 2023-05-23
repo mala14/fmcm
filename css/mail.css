@@ -47,3 +47,8 @@
 .mail-info {
 	padding: 5px 0 5px 5px;	
 }
+.mail-error {
+    margin-bottom: 5px;
+    border: 1px solid #CA5276;
+    background-color: #F9DEE6;
+}

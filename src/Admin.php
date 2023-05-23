@@ -266,7 +266,7 @@ class Admin
 				$pdo = null;
 		}
 
-		/**
+	/**
   	*  Change password
     *
   	* @return
@@ -305,8 +305,7 @@ class Admin
 				";
 				return $html;
 		}
-
-		/**
+	/**
   	*  Get mailhost name
     *
   	* @return
@@ -322,18 +321,7 @@ class Admin
         $pdo = null;
     }
 
-		public function getPassKey()
-		{
-				$sql = $this->conn->prepare("SELECT passkey FROM fmcm_settings");
-				$sql->execute();
-				$val = $sql->fetch();
-				if(!empty($val['passkey'])) {
-					return $val['passkey'];
-				}
-				$pdo = null;
-		}
-
-		/**
+	/**
   	*  Get mail user name
     *
   	* @return
@@ -349,107 +337,129 @@ class Admin
         $pdo = null;
     }
 
-		/**
+	/**
   	*  Get mail set from
     *
   	* @return
   	*/
 		public function getSetFrom()
     {
-	      $sql = $this->conn->prepare("SELECT setfrom FROM fmcm_settings");
+	    $sql = $this->conn->prepare("SELECT setfrom FROM fmcm_settings");
         $sql->execute();
         $val = $sql->fetch();
-				if(!empty($val['setfrom'])) {
-					return $val['setfrom'];
-				}
+		if(!empty($val['setfrom'])) {
+			return $val['setfrom'];
+		}
         $pdo = null;
     }
-
-		/**
+	/**
   	*  Save mail user password encrypted to db
     *
   	* @return
   	*/
 		public function saveMailPasswd()
     {
-				$msg = null;
-				if(isset($_POST['chmailpasswd'])){
-						$password = strip_tags($_POST['mailpasswd']);
-						$confirmpwd = strip_tags($_POST['confmailpasswd']);
-						if(empty($password)){
-								$msg = "{$GLOBALS['emptyPassword']}";
-						}
-						if(empty($confirmpwd)){
-								$msg = "{$GLOBALS['emptyConfPassword']}";
-						}
-						if(!empty($password) && !empty($confirmpwd)){
-								if($password === $confirmpwd){
-										$encrypt = $this->encryptPassWd($password, $this->getPassKey());
-										$stmt = $this->conn->prepare("UPDATE fmcm_settings SET mailpasswd = :encrypt");
-										$stmt->execute([$encrypt]);
-										$success = "{$GLOBALS['passwordSuccess']}";
-										$pdo = null;
-								}
-								else {
-										$msg = "{$GLOBALS['passwordNoMatch']}";
-								}
-						}
+		$msg = null;
+			if(isset($_POST['chmailpasswd'])){
+				$password = strip_tags($_POST['mailpasswd']);
+				$confirmpwd = strip_tags($_POST['confmailpasswd']);
+				if(empty($password)){
+					$msg = "{$GLOBALS['emptyPassword']}";
+				}
+				if(empty($confirmpwd)){
+					$msg = "{$GLOBALS['emptyConfPassword']}";
+				}
+					if(!empty($password) && !empty($confirmpwd)){
+						if($password === $confirmpwd){
+							$encrypt = $this->encryptPassWd($password, $this->getPassKey());
+								$stmt = $this->conn->prepare("UPDATE fmcm_settings SET mailpasswd = :encrypt");
+								$stmt->execute([$encrypt]);
+								$success = "{$GLOBALS['passwordSuccess']}";
+								$pdo = null;
+							}
+							else {
+								$msg = "{$GLOBALS['passwordNoMatch']}";
+							}
+					}
 
 				}
 				return $msg;
         $pdo = null;
     }
-		public function encryptPassWd($data) {
-				$password = strip_tags($_POST['mailpasswd']);
-				$encryption_key = base64_decode($this->getPassKey());
-				$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
-				$encrypted = openssl_encrypt($password, 'aes-256-cbc', $encryption_key, 0, $iv);
-				return base64_encode($encrypted . '::' . $iv);
-		}
 
-		public function decryptPassWd($data) {
-				$encryption_key = base64_decode($this->getPassKey());
-				list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,null);
-				return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
-				}
+	/**
+  	* Used by saveMailPasswd for encrypting mail password
+  	*
+  	* @return
+  	*/
+	public function encryptPassWd($data) {
+		$password = strip_tags($_POST['mailpasswd']);
+		$encryption_key = base64_decode($this->getPassKey());
+		$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+		$encrypted = openssl_encrypt($password, 'aes-256-cbc', $encryption_key, 0, $iv);
+		return base64_encode($encrypted . '::' . $iv);
+	}
 
+	/**
+  	* Used by getMailPass() for decrypting mailpasswd
+  	*
+  	* @return
+  	*/
+	public function decryptPassWd($data) {
+		$encryption_key = base64_decode($this->getPassKey());
+		list($encrypted_data, $iv) = array_pad(explode('::', base64_decode($data), 2),2,null);
+		return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
+	}
 
-		/**
+	/**
   	* Decrypt mail pass for sending mail
   	*
   	* @return
   	*/
   	public function getMailPass()
     {
-				$stmt = $this->conn->prepare("SELECT mailpasswd FROM fmcm_settings");
-  			$stmt->execute();
-  			$res = $stmt->fetch();
-				while ($res) {
-						return $this->decryptPassWd($res['mailpasswd'], $this->getPassKey());
-				}
-				$pdo = null;
+		$stmt = $this->conn->prepare("SELECT mailpasswd FROM fmcm_settings");
+  		$stmt->execute();
+  		$res = $stmt->fetch();
+		while ($res) {
+			return $this->decryptPassWd($res['mailpasswd'], $this->getPassKey());
+		}
+		$pdo = null;
   	}
-
-		/**
+	/**
   	*  Save mail configuration changes
     *
   	* @return
   	*/
-		public function saveMailChanges()
-		{
-				$fail = null;
-				if (isset($_POST['mailsave'])) {
-						$mailhost = $_POST['mailhost'];
-						$mailuser = $_POST['mailuser'];
-						$setfrom = $_POST['setfrom'];
-						$passkey = $_POST['passkey'];
-						$sql = $this->conn->prepare("UPDATE fmcm_settings SET mailhost = :mailhost, mailuser = :mailuser, setfrom = :setfrom, passkey = :passkey");
-						$sql->execute([$mailhost, $mailuser, $setfrom, $passkey]);
-						echo "<script>window.location.href = 'settings.php';</script>";
-						exit;
-				}
-				$pdo = null;
+	public function saveMailChanges()
+	{
+		$fail = null;
+		if (isset($_POST['mailsave'])) {
+		$mailhost = $_POST['mailhost'];
+		$mailuser = $_POST['mailuser'];
+		$setfrom = $_POST['setfrom'];
+		$passkey = $_POST['passkey'];
+		$sql = $this->conn->prepare("UPDATE fmcm_settings SET mailhost = :mailhost, mailuser = :mailuser, setfrom = :setfrom, passkey = :passkey");
+		$sql->execute([$mailhost, $mailuser, $setfrom, $passkey]);
+		echo "<script>window.location.href = 'settings.php';</script>";
+		exit;
 		}
-
+		$pdo = null;
+	}
+	/**
+  	*  Get passkey for mail settings
+    *
+  	* @return
+  	*/
+	public function getPassKey()
+	{
+		$sql = $this->conn->prepare("SELECT passkey FROM fmcm_settings");
+		$sql->execute();
+		$val = $sql->fetch();
+		if(!empty($val['passkey'])) {
+			return $val['passkey'];
+		}
+		$pdo = null;
+	}
 
 }

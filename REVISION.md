@@ -1,5 +1,11 @@
 revision history
 ===================  
+v0.3.15 (2023-05-23)  
+Check if PHPMailer is installed and configured.  
+Minor css changes.  
+Test on latest PHPMailer version.
+
+-----------------  
 v0.3.05 (2023-05-23)  
 Fix css when changes in  @media width.  
 Added a javascript for substring mail template field data when in low resolution.  
