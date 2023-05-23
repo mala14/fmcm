@@ -63,7 +63,7 @@ td a {
         display:none;
     }
     .caseContactInfo {
-        width: 290px;
+        width: 290px !important;
     }
     .fulltext {
         display: none;
@@ -74,7 +74,15 @@ td a {
     .caseInfo {
         width: 290px !important;
     }
-    .caseContactInfo {
+    .mailIcon {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .navbar-row {
+        margin-left: 0;
+    }
+    .mailForm {
         width: 290px !important;
     }
 }
@@ -227,7 +235,7 @@ tfoot {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 5px;
-    width: 68%;
+    width: 66%;
 }
 
 .searchUsrInfo {

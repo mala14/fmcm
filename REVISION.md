@@ -1,6 +1,10 @@
 revision history
 ===================  
+v0.3.05 (2023-05-23)  
+Fix css when changes in  @media width.  
+Added a javascript for substring mail template field data when in low resolution.  
 
+-----------------
 v0.3.04 (2023-01-19)  
 Changed sorting order on closed cases  
 Minor design changes in case and mail pages  
