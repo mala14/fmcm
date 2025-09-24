@@ -1,5 +1,5 @@
-**NOTE**  
-A new version is under development.    
+![Note](https://img.shields.io/badge/Note-Important-blue)  
+There is a new version coming out in a near future.!  
 
 
 FreeMasons Case Management System
