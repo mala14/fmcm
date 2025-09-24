@@ -1,4 +1,4 @@
-[!NOTE]
+[!IMPORTANT]   
 There is a new version coming out in a near future.!
 
 FreeMasons Case Management System
