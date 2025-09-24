@@ -1,5 +1,6 @@
-[!IMPORTANT]   
-There is a new version coming out in a near future.!
+[!NOTE]  
+A new version is in developing.  
+
 
 FreeMasons Case Management System
 ==================
