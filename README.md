@@ -1,3 +1,6 @@
+[!NOTE]
+There is a new version coming out in a near future.!
+
 FreeMasons Case Management System
 ==================
 [![Build Status](https://api.travis-ci.com/mala14/fmcm.svg?branch=master)](https://travis-ci.com/mala14/fmcm.svg?branch=master)  
