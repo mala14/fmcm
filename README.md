@@ -1,5 +1,5 @@
 [!NOTE]  
-A new version is in developing.  
+A new version is under developement.    
 
 
 FreeMasons Case Management System
