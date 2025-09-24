@@ -1,4 +1,4 @@
-[!NOTE]  
+**NOTE**  
 A new version is under development.    
 
 
